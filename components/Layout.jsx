@@ -17,13 +17,13 @@ export default function Layout({children}) {
           <a>
             <Image
               src="/image/logo.png"
-              height={150}
-              width={150}
+              height={80}
+              width={80}
               alt="icon"
             />
           </a>
         </Link>
-      <h2>GourmetApp</h2>
+        <h2>GourmetApp</h2>
       </div>
     </header>
     <main>{children}</main>
