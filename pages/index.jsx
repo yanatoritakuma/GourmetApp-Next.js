@@ -1,11 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
 import Layout, {siteTitle} from "../components/Layout"
 
 export default function Home() {
-
-  const width = "900"
-  const height = "600"
 
   return (
     <Layout>
@@ -14,50 +11,24 @@ export default function Home() {
       </Head>
       <section className="index">
         <div class="index__imgBox">
-          <Image
-            className="index__img"
-            src="/image/coffee.jpg"
-            height={height}
-            width={width}
-            alt=""
-            layout="responsive"
-          />
-          <Image
-            className="index__img"
-            src="/image/dessert.jpg"
-            height={height}
-            width={width}
-            alt=""
-          />
-          <Image
-            className="index__img"
-            src="/image/fish.jpg"
-            height={height}
-            width={width}
-            alt=""
-          />
-          <Image
-            className="index__img"
-            src="/image/meat.jpg"
-            height={height}
-            width={width}
-            alt=""
-          />
-          <Image
-            className="index__img"
-            src="/image/ramen.jpg"
-            height={height}
-            width={width}
-            alt=""
-          />
-          <Image
-            className="index__img"
-            src="/image/salad.jpg"
-            height={height}
-            width={width}
-            alt=""
-          />
+          <h1 className="index__logo"></h1>
+          <Link href="/test">
+            <a className="index__link">Register</a>
+          </Link>
+          <span className="index__img index__img--1"></span>
+          <span className="index__img index__img--2"></span>
+          <span className="index__img index__img--3"></span>
+          <span className="index__img index__img--4"></span>
+          <span className="index__img index__img--5"></span>
+          <span className="index__img index__img--6"></span>
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </section>
     </Layout>
   )
