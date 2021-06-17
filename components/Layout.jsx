@@ -1,10 +1,25 @@
+import React, { useState } from "react";
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
+
+
 export const siteTitle = 'GourmetApp'
 
+
 export default function Layout({children}) {
+  const [openHum, setOpenHum] = useState(false);
+  const HumMen = "HumMen";
+  const closeHum = "closeHum";
+  const headerBoxSp = "header__boxSp"
+  const closeHumNone = "closeHumNone"
+
+  const onClickopenHum = () => {
+    setOpenHum(!openHum);
+    console.log("open",openHum);
+  }
+
   return(
     <>
     <Head>
@@ -24,7 +39,50 @@ export default function Layout({children}) {
           </a>
         </Link>
         <h2>GourmetApp</h2>
+        <nav>
+          <ul>
+            <li>
+              <Link href="">
+                <a>MeatDish</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a>FishDish</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a>Noodles</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a>salad</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a>Dessert</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a>Coffee</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className={openHum ? closeHum : headerBoxSp} onClick={onClickopenHum}> 
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className={openHum ? HumMen : closeHumNone}>
+          <p>test</p>
+        </div>
       </div>
+      
     </header>
     <main>{children}</main>
     </>
