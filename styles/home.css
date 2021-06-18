@@ -42,15 +42,25 @@ header {
   display: none;
 }
 
-.HumMen {
+.humMen {
   display: block;
-  width: 70%;
-  height: 300px;
-  background-color: red;
+  width: 80%;
+  height: 100vh;
+  background-color: #fdfdfd;
+  box-shadow: 4px 4px 4px #2c2c2c;
   position: fixed;
-  top: 0;
+  top: 84px;
   left: 0;
   z-index: 9999;
+  opacity: 1;
+  transition: .3s;
+}
+
+.humMen a {
+  margin: 40px 0;
+  display: block;
+  text-align: center;
+  font-size: 24px;
 }
 
 .closeHum {
@@ -87,7 +97,7 @@ header {
 }
 
 .closeHumNone {
-  display: none;
+  opacity: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -117,10 +127,13 @@ header {
   .header__box h2 {
     font-size: 20px;
   }
+  .humMen a {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 320px) {
-  .HumMen {
+  .humMen {
     width: 80%;
   }
 }
@@ -135,7 +148,7 @@ header {
 .index__imgBox {
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 100vh;
   overflow: hidden;
 }
 

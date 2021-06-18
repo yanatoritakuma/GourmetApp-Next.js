@@ -10,7 +10,7 @@ export const siteTitle = 'GourmetApp'
 
 export default function Layout({children}) {
   const [openHum, setOpenHum] = useState(false);
-  const HumMen = "HumMen";
+  const humMen = "humMen";
   const closeHum = "closeHum";
   const headerBoxSp = "header__boxSp"
   const closeHumNone = "closeHumNone"
@@ -78,8 +78,25 @@ export default function Layout({children}) {
           <span></span>
           <span></span>
         </div>
-        <div className={openHum ? HumMen : closeHumNone}>
-          <p>test</p>
+        <div className={openHum ? humMen : closeHumNone}>
+          <Link href="">
+            <a>MeatDish</a>
+          </Link>
+          <Link href="">
+            <a>FishDish</a>
+          </Link>
+          <Link href="">
+            <a>Noodles</a>
+          </Link>
+          <Link href="">
+            <a>salad</a>
+          </Link>
+          <Link href="">
+            <a>Dessert</a>
+          </Link>
+          <Link href="">
+            <a>Coffee</a>
+          </Link>
         </div>
       </div>
       
