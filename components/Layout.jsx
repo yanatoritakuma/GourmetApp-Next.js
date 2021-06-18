@@ -42,6 +42,11 @@ export default function Layout({children}) {
         <nav>
           <ul>
             <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
               <Link href="">
                 <a>MeatDish</a>
               </Link>
@@ -79,6 +84,9 @@ export default function Layout({children}) {
           <span></span>
         </div>
         <div className={openHum ? humMen : closeHumNone}>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
           <Link href="">
             <a>MeatDish</a>
           </Link>
