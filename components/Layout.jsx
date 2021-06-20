@@ -48,6 +48,11 @@ export default function Layout({children}) {
             </li>
             <li>
               <Link href="">
+                <a>AllDishes</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
                 <a>MeatDish</a>
               </Link>
             </li>
@@ -63,7 +68,7 @@ export default function Layout({children}) {
             </li>
             <li>
               <Link href="">
-                <a>salad</a>
+                <a>Salad</a>
               </Link>
             </li>
             <li>
@@ -88,6 +93,9 @@ export default function Layout({children}) {
             <a>Home</a>
           </Link>
           <Link href="">
+            <a>AllDishes</a>
+          </Link>
+          <Link href="">
             <a>MeatDish</a>
           </Link>
           <Link href="">
@@ -97,7 +105,7 @@ export default function Layout({children}) {
             <a>Noodles</a>
           </Link>
           <Link href="">
-            <a>salad</a>
+            <a>Salad</a>
           </Link>
           <Link href="">
             <a>Dessert</a>
@@ -107,7 +115,6 @@ export default function Layout({children}) {
           </Link>
         </div>
       </div>
-      
     </header>
     <main>{children}</main>
     </>

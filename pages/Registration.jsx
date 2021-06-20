@@ -13,9 +13,12 @@ export default function Registration(){
           <input placeholder="StreetAddress" />
           <select id="category" >
             <option value="">Category</option>
-            <option value="meat">肉</option>
-            <option value="fish">魚</option>
-            <option value="noodle">麺</option>
+            <option value="meatDish">MeatDish</option>
+            <option value="mishDish">FishDish</option>
+            <option value="moodles">Noodles</option>
+            <option value="salad">Salad</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Coffee">Coffee</option>
           </select>
           <textarea placeholder="メモ" ></textarea>
           <button type="button">Registration</button>
