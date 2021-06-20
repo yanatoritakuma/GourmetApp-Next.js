@@ -47,7 +47,7 @@ export default function Layout({children}) {
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/AllDishes">
                 <a>AllDishes</a>
               </Link>
             </li>
@@ -92,7 +92,7 @@ export default function Layout({children}) {
           <Link href="/">
             <a>Home</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/AllDishes">
             <a>AllDishes</a>
           </Link>
           <Link href="">
