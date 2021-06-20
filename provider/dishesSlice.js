@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const dishesSlice = createSlice({
-  name: 'todo',
+  name: 'dishes',
   initialState: {
-    todos:[],
+    allStates:[],
   },
   reducers: {
     // 登録機能
-    pushTodo(state, action) {
-      state.todos = [...state.todos, action.payload];
+    pushAllStates(state, action) {
+      state.allStates = [...state.allStates, action.payload];
     },
     // 削除機能
-    deleteTodo(state,action, i) {
+    deleteAllStates(state,action, i) {
       state.todos = [...action.payload];
     },
   }
 })
 
-export const { pushTodo, deleteTodo, } = dishesSlice.actions
+export const { pushAllStates, deleteAllStates, } = dishesSlice.actions
 
 export default dishesSlice.reducer
