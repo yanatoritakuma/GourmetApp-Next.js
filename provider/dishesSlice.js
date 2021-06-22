@@ -11,8 +11,8 @@ export const dishesSlice = createSlice({
       state.allStates = [...state.allStates, action.payload];
     },
     // 削除機能
-    deleteAllStates(state,action, i) {
-      state.todos = [...action.payload];
+    deleteAllStates(state,action) {
+      state.allStates = [...action.payload];
     },
   }
 })

@@ -15,6 +15,9 @@ export default function Registration(){
   const dispatch = useDispatch();
 
   const pushAllStates = () => {
+    if(name === ""){
+      return alert("Please enter StoreName");
+    } 
     dispatch(dishesSlice.actions.pushAllStates({
       name,
       tel,

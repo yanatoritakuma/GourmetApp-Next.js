@@ -3,11 +3,18 @@ import Layout from "../../components/Layout"
 import Image from 'next/image'
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
+import { deleteAllStates } from "../../provider/dishesSlice";
 
 
 export default function AllDishes(){
   const dispatch = useDispatch();
   const { allStates } = useSelector((state) => state.dishes);
+
+  const onClickDelete = (i) => {
+    const newAllStates = [...allStates];
+    newAllStates.splice(i,1);
+    dispatch(deleteAllStates(newAllStates));
+  }
 
   return(
     <Layout>
@@ -31,7 +38,7 @@ export default function AllDishes(){
                   <p>{allState.tel}</p>
                   <p>{allState.streetAddress}</p>
                   <p>{allState.note}</p>
-                  <button>Delete</button>
+                  <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )
             })
