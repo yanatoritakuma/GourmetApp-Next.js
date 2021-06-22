@@ -1,4 +1,4 @@
-.allDishes {
+.categorypage {
   margin: auto;
   margin-top: 84px;
   padding-bottom: 40px;
@@ -9,14 +9,18 @@
   max-width: 1200px;
 }
 
-.allDishes h2 {
+.categorypage h2 {
   padding-top: 40px;
   font-size: 32px;
   text-align: center;
   color: #f7a62e;
 }
 
-.allDishes ul {
+.categorypage .MeatDishTitle {
+  color: #a33a3a;
+}
+
+.categorypage ul {
   margin: auto;
   padding: unset;
   display: grid;
@@ -24,7 +28,7 @@
   width: 90%;
 }
 
-.allDishes li {
+.categorypage li {
   margin: 14px 0;
   display: flex;
   justify-content: space-between;
@@ -37,13 +41,13 @@
   cursor: pointer;
 }
 
-.allDishes li:hover {
+.categorypage li:hover {
   opacity: .7;
   transform: translateY(-3px);
   transition: .3s;
 }
 
-.allDishes__img {
+.categorypage__img {
   width: 90px;
   height: auto;
   min-width: 30px;

@@ -22,14 +22,26 @@ export default function Registration(){
       name,
       tel,
       streetAddress,
-      note,
+      note
     }),
       setName(""),
       setTel(""),
       setStreetAddress(""),
       setNote(""),
-      setCategory("")
+      setCategory(""),
+      pushMeatStates()
     )
+  }
+
+  const pushMeatStates = () => {
+    if(category === "meatDish"){
+      dispatch(dishesSlice.actions.pushMeatStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
   }
 
   
