@@ -8,24 +8,22 @@ import { deleteAllStates } from "../../provider/dishesSlice";
 
 export default function AllDishes(){
   const dispatch = useDispatch();
-  const { allStates } = useSelector((state) => state.dishes);
+  const { allCategoryStates } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    const newAllStates = [...allStates];
-    newAllStates.splice(i,1);
-    dispatch(deleteAllStates(newAllStates));
+    dispatch(deleteAllStates());
   }
 
   return(
     <Layout>
-      <section className={utilStyles.categorypage}>
+      <section className={utilStyles.categoryPage}>
         <h2>AllDishes</h2>
         <ul>
           {
-            allStates.map((allState, i) => {
+            allCategoryStates.map((allState, i) => {
               return(
                 <li key={i}>
-                  <div className={utilStyles.categorypage__img}>
+                  <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
                       layout='responsive'

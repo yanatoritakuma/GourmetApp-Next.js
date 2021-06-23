@@ -1,4 +1,4 @@
-.categorypage {
+.categoryPage {
   margin: auto;
   margin-top: 84px;
   padding-bottom: 40px;
@@ -9,18 +9,18 @@
   max-width: 1200px;
 }
 
-.categorypage h2 {
+.categoryPage h2 {
   padding-top: 40px;
   font-size: 32px;
   text-align: center;
   color: #f7a62e;
 }
 
-.categorypage .MeatDishTitle {
-  color: #a33a3a;
+.categoryPage .MeatDishTitle {
+  color: #a52a2a;
 }
 
-.categorypage ul {
+.categoryPage ul {
   margin: auto;
   padding: unset;
   display: grid;
@@ -28,26 +28,26 @@
   width: 90%;
 }
 
-.categorypage li {
+.categoryPage li {
   margin: 14px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   width: 90%;
-  border: 1px solid black;
-  box-shadow: 2px 4px 3px black;
+  border: 1px solid #000000;
+  box-shadow: 2px 4px 3px #000000;
   transition: .3s;
   cursor: pointer;
 }
 
-.categorypage li:hover {
+.categoryPage li:hover {
   opacity: .7;
   transform: translateY(-3px);
   transition: .3s;
 }
 
-.categorypage__img {
+.categoryPage__img {
   width: 90px;
   height: auto;
   min-width: 30px;

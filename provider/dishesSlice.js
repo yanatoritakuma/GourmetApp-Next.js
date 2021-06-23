@@ -3,23 +3,24 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    allStates:[],
-    meatStates:[],
+    allCategoryStates:[],
+    meatCategoryStates:[],
   },
   reducers: {
     // 登録機能
     pushAllStates(state, action) {
-      state.allStates = [...state.allStates, action.payload];
+      state.allCategoryStates = [...state.allCategoryStates, action.payload];
     },
     pushMeatStates(state, action) {
-      state.meatStates = [...state.meatStates, action.payload];
+      state.meatCategoryStates = [...state.meatCategoryStates, action.payload];
     },
     // 削除機能
     deleteAllStates(state,action) {
-      state.allStates = [...action.payload];
+      const newAllStates = [...state.allCategoryStates, action.payload];
+      newAllStates.splice(i,1);
     },
     deleteMeatStates(state,action) {
-      state.meatStates = [...action.payload];
+      state.meatCategoryStates = [...action.payload];
     }
   }
 })

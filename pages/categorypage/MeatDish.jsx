@@ -8,24 +8,24 @@ import { deleteMeatStates } from "../../provider/dishesSlice";
 
 export default function MeatDish(){
   const dispatch = useDispatch();
-  const { meatStates } = useSelector((state) => state.dishes);
+  const { meatCategoryStates } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    const newMeatStates = [...meatStates];
+    const newMeatStates = [...meatCategoryStates];
     newMeatStates.splice(i,1);
     dispatch(deleteMeatStates(newMeatStates));
   }
 
   return(
     <Layout>
-      <section className={utilStyles.categorypage}>
+      <section className={utilStyles.categoryPage}>
         <h2 className={utilStyles.MeatDishTitle}>MeatDish</h2>
         <ul>
           {
-            meatStates.map((allState, i) => {
+            meatCategoryStates.map((meatState, i) => {
               return(
                 <li key={i}>
-                  <div className={utilStyles.categorypage__img}>
+                  <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
                       layout='responsive'
@@ -34,10 +34,10 @@ export default function MeatDish(){
                       alt="icon"
                     />
                   </div>
-                  <h3>{allState.name}</h3>
-                  <p>{allState.tel}</p>
-                  <p>{allState.streetAddress}</p>
-                  <p>{allState.note}</p>
+                  <h3>{meatState.name}</h3>
+                  <p>{meatState.tel}</p>
+                  <p>{meatState.streetAddress}</p>
+                  <p>{meatState.note}</p>
                   <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )

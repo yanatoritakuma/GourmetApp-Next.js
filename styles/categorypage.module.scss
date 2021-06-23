@@ -1,6 +1,6 @@
 // categorypage
 
-.categorypage{
+.categoryPage{
   margin: auto;
   margin-top: 84px;
   padding-bottom: 40px;
@@ -18,7 +18,7 @@
   }
 
   .MeatDishTitle{
-    color: rgb(163, 58, 58);
+    color: #a52a2a;
   }
 
   ul{
@@ -36,8 +36,8 @@
     align-items: center;
     background-color: #fff;
     width: 90%;
-    border: 1px solid black;
-    box-shadow: 2px 4px 3px black;
+    border: 1px solid #000000;
+    box-shadow: 2px 4px 3px #000000;
     transition: .3s;
     cursor: pointer;
     &:hover{
@@ -48,7 +48,7 @@
   }
 }
 
-.categorypage__img{
+.categoryPage__img{
   width: 90px;
   height: auto;
   min-width: 30px;
