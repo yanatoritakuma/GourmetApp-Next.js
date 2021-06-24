@@ -11,7 +11,7 @@ export default function AllDishes(){
   const { allCategoryStates } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    dispatch(deleteAllStates());
+    dispatch(deleteAllStates(i));
   }
 
   return(
