@@ -3,7 +3,7 @@ import Layout from "../../components/Layout"
 import Image from 'next/image'
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
-import { deleteMeatStates } from "../../provider/dishesSlice";
+import { deleteAllStates } from "../../provider/dishesSlice";
 
 
 export default function MeatDish(){
@@ -11,9 +11,7 @@ export default function MeatDish(){
   const { meatCategoryStates } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    const newMeatStates = [...meatCategoryStates];
-    newMeatStates.splice(i,1);
-    dispatch(deleteMeatStates(newMeatStates));
+    dispatch(deleteAllStates(i));
   }
 
   return(

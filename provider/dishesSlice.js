@@ -15,13 +15,10 @@ export const dishesSlice = createSlice({
       state.meatCategoryStates = [...state.meatCategoryStates, action.payload];
     },
     // 削除機能
-    deleteAllStates(state,action,i) {
-      [...state.allCategoryStates.splice(i,1),action.payload];
+    deleteAllStates(state,action) {
+      state.allCategoryStates.splice(action.payload,1);
+      state.meatCategoryStates.splice(action.payload,1);
     },
-
-    deleteMeatStates(state,action) {
-      state.meatCategoryStates = [...action.payload];
-    }
   }
 })
 
