@@ -29,13 +29,73 @@ export default function Registration(){
       setStreetAddress(""),
       setNote(""),
       setCategory(""),
-      pushMeatStates()
+      pushMeatStates(),
+      pushFishStates(),
+      pushNoodlesStates(),
+      pushSaladStates(),
+      pushDessertStates(),
+      pushCoffeeStates()
     )
   }
 
   const pushMeatStates = () => {
     if(category === "meatDish"){
       dispatch(dishesSlice.actions.pushMeatStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
+  }
+
+  const pushFishStates = () => {
+    if(category === "fishDish"){
+      dispatch(dishesSlice.actions.pushFishStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
+  }
+
+  const pushNoodlesStates = () => {
+    if(category === "noodles"){
+      dispatch(dishesSlice.actions.pushNoodlesStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
+  }
+
+  const pushSaladStates = () => {
+    if(category === "salad"){
+      dispatch(dishesSlice.actions.pushSaladStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
+  }
+
+  const pushDessertStates = () => {
+    if(category === "dessert"){
+      dispatch(dishesSlice.actions.pushDessertStates({
+        name,
+        tel,
+        streetAddress,
+        note
+      }));
+    }
+  }
+
+  const pushCoffeeStates = () => {
+    if(category === "coffee"){
+      dispatch(dishesSlice.actions.pushCoffeeStates({
         name,
         tel,
         streetAddress,
@@ -58,7 +118,7 @@ export default function Registration(){
               <option value="">Category</option>
               <option value="meatDish">MeatDish</option>
               <option value="fishDish">FishDish</option>
-              <option value="moodles">Noodles</option>
+              <option value="noodles">Noodles</option>
               <option value="salad">Salad</option>
               <option value="dessert">Dessert</option>
               <option value="coffee">Coffee</option>

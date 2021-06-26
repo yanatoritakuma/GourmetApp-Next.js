@@ -3,24 +3,24 @@ import Layout from "../../components/Layout"
 import Image from 'next/image'
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
-import { deleteMeatStates } from "../../provider/dishesSlice";
+import { deleteCoffeeStates } from "../../provider/dishesSlice";
 
 
-export default function MeatDish(){
+export default function Coffee(){
   const dispatch = useDispatch();
-  const { meatCategoryStates } = useSelector((state) => state.dishes);
+  const { coffeeCategoryStates } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    dispatch(deleteMeatStates(i));
+    dispatch(deleteCoffeeStates(i));
   }
 
   return(
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2 className={utilStyles.meatDishTitle}>MeatDish</h2>
+        <h2 className={utilStyles.coffeeTitle}>Coffee</h2>
         <ul>
           {
-            meatCategoryStates.map((meatState, i) => {
+            coffeeCategoryStates.map((coffeeState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>
@@ -32,10 +32,10 @@ export default function MeatDish(){
                       alt="icon"
                     />
                   </div>
-                  <h3>{meatState.name}</h3>
-                  <p>{meatState.tel}</p>
-                  <p>{meatState.streetAddress}</p>
-                  <p>{meatState.note}</p>
+                  <h3>{coffeeState.name}</h3>
+                  <p>{coffeeState.tel}</p>
+                  <p>{coffeeState.streetAddress}</p>
+                  <p>{coffeeState.note}</p>
                   <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )

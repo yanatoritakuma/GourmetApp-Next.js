@@ -57,27 +57,27 @@ export default function Layout({children}) {
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/FishDish">
                 <a>FishDish</a>
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/Noodles">
                 <a>Noodles</a>
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/Salad">
                 <a>Salad</a>
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/Dessert">
                 <a>Dessert</a>
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/categorypage/Coffee">
                 <a>Coffee</a>
               </Link>
             </li>
@@ -95,22 +95,22 @@ export default function Layout({children}) {
           <Link href="/categorypage/AllDishes">
             <a>AllDishes</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/MeatDish">
             <a>MeatDish</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/FishDish">
             <a>FishDish</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/Noodles">
             <a>Noodles</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/Salad">
             <a>Salad</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/Dessert">
             <a>Dessert</a>
           </Link>
-          <Link href="">
+          <Link href="/categorypage/Coffee">
             <a>Coffee</a>
           </Link>
         </div>
