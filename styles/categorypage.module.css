@@ -55,16 +55,24 @@
   align-items: center;
   background-color: #fff;
   width: 90%;
+  max-width: 300px;
   border: 1px solid #000000;
   box-shadow: 2px 4px 3px #000000;
   transition: .3s;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 
 .categoryPage li:hover {
   opacity: .7;
   transform: translateY(-3px);
   transition: .3s;
+}
+
+.categoryPage h3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 50%;
 }
 
 .categoryPage__img {
@@ -76,7 +84,16 @@
 }
 
 @media screen and (max-width: 768px) {
-  .allDishes ul {
+  .categoryPage ul {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .categoryPage ul {
+    display: block;
+  }
+  .categoryPage li {
+    width: 100%;
   }
 }

@@ -89,4 +89,8 @@
   .registration__box {
     width: 90%;
   }
+  .registration__box button {
+    width: 50%;
+    font-size: 14px;
+  }
 }
