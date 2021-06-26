@@ -14,7 +14,7 @@ export default function Registration(){
 
   const dispatch = useDispatch();
 
-  const pushAllStates = () => {
+  const pushRegistration = () => {
     if(name === ""){
       return alert("Please enter StoreName");
     } 
@@ -23,88 +23,68 @@ export default function Registration(){
       tel,
       streetAddress,
       note
-    }),
-      setName(""),
-      setTel(""),
-      setStreetAddress(""),
-      setNote(""),
-      setCategory(""),
-      pushMeatStates(),
-      pushFishStates(),
-      pushNoodlesStates(),
-      pushSaladStates(),
-      pushDessertStates(),
-      pushCoffeeStates()
-    )
-  }
-
-  const pushMeatStates = () => {
-    if(category === "meatDish"){
+    }))
+    switch(category){
+      case "meatDish":
       dispatch(dishesSlice.actions.pushMeatStates({
         name,
         tel,
         streetAddress,
         note
       }));
-    }
-  }
+      break;
 
-  const pushFishStates = () => {
-    if(category === "fishDish"){
+      case "fishDish":
       dispatch(dishesSlice.actions.pushFishStates({
         name,
         tel,
         streetAddress,
         note
       }));
-    }
-  }
+      break;
 
-  const pushNoodlesStates = () => {
-    if(category === "noodles"){
+      case "noodles":
       dispatch(dishesSlice.actions.pushNoodlesStates({
         name,
         tel,
         streetAddress,
         note
       }));
-    }
-  }
+      break;
 
-  const pushSaladStates = () => {
-    if(category === "salad"){
+      case "salad":
       dispatch(dishesSlice.actions.pushSaladStates({
         name,
         tel,
         streetAddress,
         note
       }));
-    }
-  }
+      break;
 
-  const pushDessertStates = () => {
-    if(category === "dessert"){
+      case "dessert":
       dispatch(dishesSlice.actions.pushDessertStates({
         name,
         tel,
         streetAddress,
         note
       }));
-    }
-  }
+      break;
 
-  const pushCoffeeStates = () => {
-    if(category === "coffee"){
+      case "coffee":
       dispatch(dishesSlice.actions.pushCoffeeStates({
         name,
         tel,
         streetAddress,
         note
       }));
+      break;
     }
+    setName(""),
+    setTel(""),
+    setStreetAddress(""),
+    setNote(""),
+    setCategory("")
   }
-
-  
 
   return(
       <Layout>
@@ -124,7 +104,7 @@ export default function Registration(){
               <option value="coffee">Coffee</option>
             </select>
             <textarea placeholder="Note" value={note} onChange={(e) => {setNote(e.target.value)}}></textarea>
-            <button type="button" onClick={pushAllStates}>Registration</button>
+            <button type="button" onClick={pushRegistration}>Registration</button>
           </div>
         </section>
       </Layout>
