@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
 import { dishesSlice } from "../provider/dishesSlice";
+import {useSelector} from "react-redux";
 
 
 export default function Registration(){
@@ -13,6 +14,7 @@ export default function Registration(){
   const [category, setCategory] = useState("");
 
   const dispatch = useDispatch();
+  const { allCategoryStates } = useSelector((state) => state.dishes);
 
   const pushRegistration = () => {
     if(name === ""){
@@ -22,7 +24,8 @@ export default function Registration(){
       name,
       tel,
       streetAddress,
-      note
+      note,
+      id:allCategoryStates.length
     }))
     switch(category){
       case "meatDish":

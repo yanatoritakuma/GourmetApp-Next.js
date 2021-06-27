@@ -17,7 +17,6 @@ export default function Layout({children}) {
 
   const onClickopenHum = () => {
     setOpenHum(!openHum);
-    console.log("open",openHum);
   }
 
   return(
