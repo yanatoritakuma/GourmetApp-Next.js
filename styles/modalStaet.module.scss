@@ -1,0 +1,69 @@
+// ModalStaet
+
+.modalStaet{
+  display: none;
+}
+
+.modalStaetOpen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color:rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100vh;
+}
+
+.modalStaet__box{
+  padding: 30px 0;
+  width: 80%;
+  background-color: #fff;
+
+  h3{
+    text-align: center;
+    font-size: 24px;
+  }
+}
+
+.modalStaet__boxIn{
+  margin: auto;
+  width: 80%;
+
+  p{
+    padding-bottom: 4px;
+    border-bottom: 1px solid;
+  }
+
+  button{
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 30%;
+    border: 1px solid #b3aca7;
+    color: #726659;
+    box-shadow: 0 3px 0px 0 #726659;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+      transform: translateY(3px);
+    }
+  }
+}
+
+
+.modalStaet__boxText{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.modalStaet__boxNote{
+  height: 100px;
+  overflow-wrap:  break-word;
+  overflow: scroll;
+}
