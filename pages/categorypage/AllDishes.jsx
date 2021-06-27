@@ -51,9 +51,6 @@ export default function AllDishes(){
                     />
                   </div>
                   <h3>{allState.name}</h3>
-                  <p>{allState.tel}</p>
-                  <p>{allState.streetAddress}</p>
-                  <p>{allState.note}</p>
                   <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )

@@ -18,6 +18,7 @@
 }
 
 .modalStaet__box{
+  padding: 30px 0;
   width: 80%;
   background-color: #fff;
 
@@ -25,4 +26,44 @@
     text-align: center;
     font-size: 24px;
   }
+}
+
+.modalStaet__boxIn{
+  margin: auto;
+  width: 80%;
+
+  p{
+    padding-bottom: 4px;
+    border-bottom: 1px solid;
+  }
+
+  button{
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 30%;
+    border: 1px solid #b3aca7;
+    color: #726659;
+    box-shadow: 0 3px 0px 0 #726659;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+      transform: translateY(3px);
+    }
+  }
+}
+
+
+.modalStaet__boxText{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+.modalStaet__boxNote{
+  height: 100px;
+  overflow-wrap:  break-word;
+  overflow: scroll;
 }
