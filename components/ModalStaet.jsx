@@ -1,7 +1,7 @@
 import utilStyles from '../styles/modalStaet.module.css'
 
 export default function ModalStaet(props){
-  const { selectedState, modal } = props;
+  const { selectedState, modal, setModal } = props;
   
   return(
       <section className={modal ? utilStyles.modalStaetOpen : utilStyles.modalStaet}>
@@ -11,7 +11,7 @@ export default function ModalStaet(props){
           <p>{selectedState?.tel}</p>
           <p>{selectedState?.streetAddress}</p>
           <p>{selectedState?.note}</p>
-          <button>close</button>
+          <button onClick={()=> setModal(false)}>close</button>
         </div>
       </section>
   )

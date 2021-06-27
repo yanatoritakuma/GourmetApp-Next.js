@@ -12,9 +12,15 @@ import { useSelect } from "../../hooks/useSelectState";
 
 export default function AllDishes(){
   const [modal, setModal] = useState(false);
+  const { onSelectState, selectedState } = useSelect();
 
   const onClickModal = () => {
     setModal(!modal);
+  }
+
+  const onClickOpen = (i) => {
+    onSelectState({ allCategoryStates, i });
+    onClickModal();
   }
 
   const dispatch = useDispatch();
@@ -25,14 +31,6 @@ export default function AllDishes(){
     dispatch(deleteAllStates(i));
   }
 
-  const { onSelectState, selectedState } = useSelect();
-
-  const onClickOpen = (i) => {
-    onSelectState({ allCategoryStates, i });
-    onClickModal();
-  }
-
-  
 
   return(
     <Layout>
@@ -63,7 +61,7 @@ export default function AllDishes(){
           }
         </ul>
       </section>
-      <ModalStaet selectedState={selectedState} modal={modal} />
+      <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} onClickDelete={onClickDelete} />
     </Layout>
   )
 }
