@@ -7,26 +7,29 @@ import {useSelector} from "react-redux";
 
 
 export default function Registration(){
+  const { allCategory } = useSelector((state) => state.dishes);
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState({ 
+    name,
+    tel,
+    streetAddress,
+    note,
+    id:allCategory.length
+  });
 
   const dispatch = useDispatch();
-  const { allCategory } = useSelector((state) => state.dishes);
 
   const pushRegistration = () => {
     if(name === ""){
       return alert("Please enter StoreName");
     } 
-    dispatch(dishesSlice.actions.pushAllStates({
-      name,
-      tel,
-      streetAddress,
-      note,
-      id:allCategory.length
-    }))
+
+    dispatch(dishesSlice.actions.pushAllStates(category))
+    console.log(dispatch(dishesSlice.actions.pushAllStates(category)));
+
     switch(category){
       case "meatDish":
       dispatch(dishesSlice.actions.pushMeatStates({
