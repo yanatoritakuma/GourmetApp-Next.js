@@ -6,7 +6,7 @@ import ModalStaet from '../../components/ModalStaet'
 import Image from 'next/image'
 import { useDispatch } from "react-redux";
 import {useSelector} from "react-redux";
-import { deleteAllStates } from "../../provider/dishesSlice";
+import { deleteAllCategoryStates } from "../../provider/dishesSlice";
 import { useSelect } from "../../hooks/useSelectState";
 
 
@@ -19,16 +19,16 @@ export default function AllDishes(){
   }
 
   const onClickOpen = (i) => {
-    onSelectState({ allCategoryStates, i });
+    onSelectState({ allCategory, i });
     onClickModal();
   }
 
   const dispatch = useDispatch();
 
-  const { allCategoryStates } = useSelector((state) => state.dishes);
+  const { allCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    dispatch(deleteAllStates(i));
+    dispatch(deleteAllCategoryStates(i));
   }
 
 
@@ -38,7 +38,7 @@ export default function AllDishes(){
         <h2>AllDishes</h2>
         <ul>
           {
-            allCategoryStates.map((allState, i) => {
+            allCategory.map((allState, i) => {
               return(
                 <li key={i} onClick={() => onClickOpen(i)}>
                   <div className={utilStyles.categoryPage__img}>

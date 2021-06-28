@@ -8,7 +8,7 @@ import { deleteDessertStates } from "../../provider/dishesSlice";
 
 export default function Dessert(){
   const dispatch = useDispatch();
-  const { dessertCategoryStates } = useSelector((state) => state.dishes);
+  const { dessertCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteDessertStates(i));
@@ -20,7 +20,7 @@ export default function Dessert(){
         <h2 className={utilStyles.dessertTitle}>Dessert</h2>
         <ul>
           {
-            dessertCategoryStates.map((dessertState, i) => {
+            dessertCategory.map((dessertState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>

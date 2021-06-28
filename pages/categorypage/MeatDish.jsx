@@ -8,7 +8,7 @@ import { deleteMeatStates } from "../../provider/dishesSlice";
 
 export default function MeatDish(){
   const dispatch = useDispatch();
-  const { meatCategoryStates } = useSelector((state) => state.dishes);
+  const { meatCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteMeatStates(i));
@@ -20,7 +20,7 @@ export default function MeatDish(){
         <h2 className={utilStyles.meatDishTitle}>MeatDish</h2>
         <ul>
           {
-            meatCategoryStates.map((meatState, i) => {
+            meatCategory.map((meatState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>

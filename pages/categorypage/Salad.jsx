@@ -8,7 +8,7 @@ import { deleteSaladStates } from "../../provider/dishesSlice";
 
 export default function Salad(){
   const dispatch = useDispatch();
-  const { saladCategoryStates } = useSelector((state) => state.dishes);
+  const { saladCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteSaladStates(i));
@@ -20,7 +20,7 @@ export default function Salad(){
         <h2 className={utilStyles.saladTitle}>Salad</h2>
         <ul>
           {
-            saladCategoryStates.map((saladState, i) => {
+            saladCategory.map((saladState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>

@@ -8,7 +8,7 @@ import { deleteNoodlesStates } from "../../provider/dishesSlice";
 
 export default function Noodles(){
   const dispatch = useDispatch();
-  const { noodlesCategoryStates } = useSelector((state) => state.dishes);
+  const { noodlesCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteNoodlesStates(i));
@@ -20,7 +20,7 @@ export default function Noodles(){
         <h2 className={utilStyles.noodlesTitle}>Noodles</h2>
         <ul>
           {
-            noodlesCategoryStates.map((noodlesState, i) => {
+            noodlesCategory.map((noodlesState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>

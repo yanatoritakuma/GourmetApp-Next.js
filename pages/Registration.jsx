@@ -14,7 +14,7 @@ export default function Registration(){
   const [category, setCategory] = useState("");
 
   const dispatch = useDispatch();
-  const { allCategoryStates } = useSelector((state) => state.dishes);
+  const { allCategory } = useSelector((state) => state.dishes);
 
   const pushRegistration = () => {
     if(name === ""){
@@ -25,7 +25,7 @@ export default function Registration(){
       tel,
       streetAddress,
       note,
-      id:allCategoryStates.length
+      id:allCategory.length
     }))
     switch(category){
       case "meatDish":

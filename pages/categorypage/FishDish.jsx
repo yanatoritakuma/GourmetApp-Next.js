@@ -8,7 +8,7 @@ import { deleteFishStates } from "../../provider/dishesSlice";
 
 export default function FishDish(){
   const dispatch = useDispatch();
-  const { fishCategoryStates } = useSelector((state) => state.dishes);
+  const { fishCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteFishStates(i));
@@ -20,7 +20,7 @@ export default function FishDish(){
         <h2 className={utilStyles.fishDishTitle}>FishDish</h2>
         <ul>
           {
-            fishCategoryStates.map((fishState, i) => {
+            fishCategory.map((fishState, i) => {
               return(
                 <li key={i}>
                   <div className={utilStyles.categoryPage__img}>
