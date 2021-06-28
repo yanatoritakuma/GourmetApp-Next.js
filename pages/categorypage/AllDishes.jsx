@@ -4,8 +4,7 @@ import utilStylesModal from '../../styles/modalStaet.module.css'
 import Layout from "../../components/Layout"
 import ModalStaet from '../../components/ModalStaet'
 import Image from 'next/image'
-import { useDispatch } from "react-redux";
-import {useSelector} from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { deleteAllCategoryStates } from "../../provider/dishesSlice";
 import { useSelect } from "../../hooks/useSelectState";
 

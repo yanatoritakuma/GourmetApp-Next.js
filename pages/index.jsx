@@ -12,7 +12,7 @@ export default function Home() {
         </Head>
         <section className="index">
           <div class="index__imgBox">
-            <h1 className="index__logo"></h1>
+            <h1 className="index__logo" />
             <Link href="/Registration">
               <a className="index__link">Register</a>
             </Link>

@@ -1,8 +1,7 @@
 import utilStyles from '../../styles/categorypage.module.css'
 import Layout from "../../components/Layout"
 import Image from 'next/image'
-import { useDispatch } from "react-redux";
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteNoodlesStates } from "../../provider/dishesSlice";
 
 
