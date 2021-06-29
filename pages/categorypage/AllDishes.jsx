@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import utilStyles from '../../styles/categorypage.module.css'
-import utilStylesModal from '../../styles/modalStaet.module.css'
 import Layout from "../../components/Layout"
 import ModalStaet from '../../components/ModalStaet'
 import Image from 'next/image'

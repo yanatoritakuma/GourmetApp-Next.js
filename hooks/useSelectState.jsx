@@ -6,7 +6,6 @@ export const useSelect = () => {
     const { allCategory, i } = props;
     const targetState = allCategory.find((allState) => allState.id === i);
     setSelectedState(targetState);
-    console.log(targetState);
   },[])
   return { onSelectState, selectedState };
 }

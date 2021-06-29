@@ -13,27 +13,11 @@ export const dishesSlice = createSlice({
   },
   reducers: {
     // 登録機能
-    pushAllStates(state, action) {
+    pushRegistration(state, action) {
       state.allCategory = [...state.allCategory, action.payload];
+      console.log("slice",action.payload);
     },
-    pushMeatStates(state, action) {
-      state.meatCategory = [...state.meatCategory, action.payload];
-    },
-    pushFishStates(state, action) {
-      state.fishCategory = [...state.fishCategory, action.payload];
-    },
-    pushNoodlesStates(state, action) {
-      state.noodlesCategory = [...state.noodlesCategory, action.payload];
-    },
-    pushSaladStates(state, action) {
-      state.saladCategory = [...state.saladCategory, action.payload];
-    },
-    pushDessertStates(state, action) {
-      state.dessertCategory = [...state.dessertCategory, action.payload];
-    },
-    pushCoffeeStates(state, action) {
-      state.coffeeCategory = [...state.coffeeCategory, action.payload];
-    },
+    
 
     // 削除機能
     deleteAllCategoryStates(state,action) {
