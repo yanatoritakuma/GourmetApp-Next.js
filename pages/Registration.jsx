@@ -13,10 +13,10 @@ export default function Registration(){
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState({ 
-    name:name,
-    tel:tel,
-    streetAddress:streetAddress,
-    note:note,
+    name,
+    tel,
+    streetAddress,
+    note,
     id:allCategory.length
   });
 
@@ -28,8 +28,6 @@ export default function Registration(){
     }
 
     dispatch(dishesSlice.actions.pushRegistration(category));
-    console.log("Registration",dispatch(dishesSlice.actions.pushRegistration(category)));
-    
 
     // switch(category){
     //   case "meatDish":
