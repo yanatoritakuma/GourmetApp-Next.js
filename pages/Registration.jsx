@@ -21,6 +21,7 @@ export default function Registration(){
     note,
     category,
     id:allCategory.length
+    
   };
 
   console.log("dishesState",dishesState);
