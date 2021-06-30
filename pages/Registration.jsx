@@ -12,13 +12,18 @@ export default function Registration(){
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
-  const [category, setCategory] = useState({ 
+  const [category, setCategory] = useState("");
+
+  const dishesState = {
     name,
     tel,
     streetAddress,
     note,
+    category,
     id:allCategory.length
-  });
+  };
+
+  console.log("dishesState",dishesState);
 
   const dispatch = useDispatch();
 
@@ -27,7 +32,7 @@ export default function Registration(){
       return alert("Please enter StoreName");
     }
 
-    dispatch(dishesSlice.actions.pushRegistration(category));
+    dispatch(dishesSlice.actions.pushRegistration(dishesState));
 
     // switch(category){
     //   case "meatDish":

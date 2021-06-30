@@ -15,7 +15,12 @@ export const dishesSlice = createSlice({
     // 登録機能
     pushRegistration(state, action) {
       state.allCategory = [...state.allCategory, action.payload];
-      console.log("slice",action.payload);
+      console.log("action.payload",action.payload);
+      switch(category){
+        case "meatDish":
+        state.meatCategory = [...state.meatCategory, action.payload];
+        break;
+      }
     },
     
 
