@@ -13,7 +13,6 @@ export default function Registration(){
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-
   const dishesState = {
     name,
     tel,
@@ -21,75 +20,12 @@ export default function Registration(){
     note,
     category,
     id:allCategory.length
-    
   };
-
-  console.log("dishesState",dishesState);
 
   const dispatch = useDispatch();
 
   const onClickPushRegistration = () => {
-    if(name === ""){
-      return alert("Please enter StoreName");
-    }
-
     dispatch(dishesSlice.actions.pushRegistration(dishesState));
-
-    // switch(category){
-    //   case "meatDish":
-    //   dispatch(dishesSlice.actions.pushMeatStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-
-    //   case "fishDish":
-    //   dispatch(dishesSlice.actions.pushFishStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-
-    //   case "noodles":
-    //   dispatch(dishesSlice.actions.pushNoodlesStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-
-    //   case "salad":
-    //   dispatch(dishesSlice.actions.pushSaladStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-
-    //   case "dessert":
-    //   dispatch(dishesSlice.actions.pushDessertStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-
-    //   case "coffee":
-    //   dispatch(dishesSlice.actions.pushCoffeeStates({
-    //     name,
-    //     tel,
-    //     streetAddress,
-    //     note
-    //   }));
-    //   break;
-    // }
     setName(""),
     setTel(""),
     setStreetAddress(""),
