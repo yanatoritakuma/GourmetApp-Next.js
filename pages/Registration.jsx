@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 
 
 export default function Registration(){
-  const { allCategory } = useSelector((state) => state.dishes);
+  const { categorysState } = useSelector((state) => state.dishes);
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
@@ -19,7 +19,7 @@ export default function Registration(){
     streetAddress,
     note,
     category,
-    id:allCategory.length
+    id:categorysState.length
   };
 
   const dispatch = useDispatch();

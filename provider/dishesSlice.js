@@ -3,13 +3,23 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    allCategory:[],
-    meatCategory:[],
-    fishCategory:[],
-    noodlesCategory:[],
-    saladCategory:[],
-    dessertCategory:[],
-    coffeeCategory:[]
+    categorysState:[{
+      allCategory:[],
+      meatCategory:[],
+      fishCategory:[],
+      noodlesCategory:[],
+      saladCategory:[],
+      dessertCategory:[],
+      coffeeCategory:[]
+    }]
+
+    // allCategory:[],
+    // meatCategory:[],
+    // fishCategory:[],
+    // noodlesCategory:[],
+    // saladCategory:[],
+    // dessertCategory:[],
+    // coffeeCategory:[]
   },
   reducers: {
     // 登録機能
@@ -17,7 +27,7 @@ export const dishesSlice = createSlice({
       if(action.payload.name === ""){
         return alert("Please enter StoreName");
       }
-      state.allCategory = [...state.allCategory, action.payload];
+      state.categorysState = [...state.categorysState, action.payload];
       switch(action.payload.category){
         case "meatDish":
         state.meatCategory = [...state.meatCategory, action.payload];
@@ -48,7 +58,7 @@ export const dishesSlice = createSlice({
 
     // 削除機能
     deleteAllCategoryStates(state,action) {
-      state.allCategory.splice(action.payload,1);
+      state.categorysState.splice(action.payload,1);
     },
     deleteMeatStates(state,action) {
       state.meatCategory.splice(action.payload,1);
