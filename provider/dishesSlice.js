@@ -12,14 +12,6 @@ export const dishesSlice = createSlice({
       dessertCategory:[],
       coffeeCategory:[]
     }]
-
-    // allCategory:[],
-    // meatCategory:[],
-    // fishCategory:[],
-    // noodlesCategory:[],
-    // saladCategory:[],
-    // dessertCategory:[],
-    // coffeeCategory:[]
   },
   reducers: {
     // 登録機能

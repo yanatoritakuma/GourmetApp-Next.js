@@ -53,7 +53,6 @@ const Categorypage = ({ title }) => {
     dispatch(deleteAllCategoryStates(i));
   }
 
-  console.log("categorysState",categorysState);
   console.log("title",title);
 
   return (
