@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import utilStyles from '../../styles/categorypage.module.css'
-import Layout from "../../components/Layout"
-import ModalStaet from '../../components/ModalStaet'
+import utilStyles from '../styles/categorypage.module.css'
+import Layout from "../components/Layout"
+import ModalStaet from '../components/ModalStaet'
 import Image from 'next/image'
 import { useDispatch,useSelector } from "react-redux";
-import { deleteAllCategoryStates } from "../../provider/dishesSlice";
-import { useSelect } from "../../hooks/useSelectState";
+import { deleteCategory } from "../provider/dishesSlice";
+import { useSelect } from "../hooks/useSelectState";
 
 
 export async function getStaticPaths() {
   return {
     paths:[
-      { params: { id: 'All'} },
-      { params: { id: 'Meat'} },
-      { params: { id: 'Fish'} },
-      { params: { id: 'Noodle'} },
-      { params: { id: 'Salad'} },
-      { params: { id: 'Dessert'} },
-      { params: { id: 'Coffee'} }
+      { params: { id: 'all'} },
+      { params: { id: 'meat'} },
+      { params: { id: 'fish'} },
+      { params: { id: 'noodle'} },
+      { params: { id: 'salad'} },
+      { params: { id: 'dessert'} },
+      { params: { id: 'coffee'} }
     ],
     fallback: false
   }
@@ -25,13 +25,12 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async context => {
   const { id } = context.params 
-  const props = {
-    title: id
+  return {
+    props: {id}
   }
-  return { props }
 }
 
-const Categorypage = ({ title }) => {
+const Categorypage = ({ id }) => {
 
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -41,27 +40,27 @@ const Categorypage = ({ title }) => {
   }
 
   const onClickOpen = (i) => {
-    onSelectState({ categorysState, i });
+    onSelectState({ categoriesState, i });
     onClickModal();
   }
 
   const dispatch = useDispatch();
 
-  const { categorysState } = useSelector((state) => state.dishes);
+  const { categoriesState } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
-    dispatch(deleteAllCategoryStates(i));
+    dispatch(deleteCategory(i));
   }
 
-  console.log("title",title);
+  console.log("id",id);
 
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2>{title}Page</h2>
+        <h2>{id}Page</h2>
         <ul>
           {
-            categorysState.map((categoryState, i) => {
+            categoriesState.map((categoryState, i) => {
               return(
                 <li key={i} onClick={() => onClickOpen(i)}>
                   <div className={utilStyles.categoryPage__img}>

@@ -3,15 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    categorysState:[{
-      allCategory:[],
-      meatCategory:[],
-      fishCategory:[],
-      noodlesCategory:[],
-      saladCategory:[],
-      dessertCategory:[],
-      coffeeCategory:[]
-    }]
+    categoriesState:[]
   },
   reducers: {
     // 登録機能
@@ -19,7 +11,7 @@ export const dishesSlice = createSlice({
       if(action.payload.name === ""){
         return alert("Please enter StoreName");
       }
-      state.categorysState = [...state.categorysState, action.payload];
+      state.categoriesState = [...state.categoriesState, action.payload];
       switch(action.payload.category){
         case "meatDish":
         state.meatCategory = [...state.meatCategory, action.payload];
@@ -49,30 +41,12 @@ export const dishesSlice = createSlice({
     
 
     // 削除機能
-    deleteAllCategoryStates(state,action) {
-      state.categorysState.splice(action.payload,1);
+    deleteCategory(state,action) {
+      state.categoriesState.splice(action.payload,1);
     },
-    deleteMeatStates(state,action) {
-      state.meatCategory.splice(action.payload,1);
-    },
-    deleteFishStates(state,action) {
-      state.fishCategory.splice(action.payload,1);
-    },
-    deleteNoodlesStates(state,action) {
-      state.noodlesCategory.splice(action.payload,1);
-    },
-    deleteSaladStates(state,action) {
-      state.saladCategory.splice(action.payload,1);
-    },
-    deleteDessertStates(state,action) {
-      state.dessertCategory.splice(action.payload,1);
-    },
-    deleteCoffeeStates(state,action) {
-      state.coffeeCategory.splice(action.payload,1);
-    }
   }
 })
 
-export const { pushAllStates, deleteAllCategoryStates, deleteMeatStates, deleteFishStates, deleteNoodlesStates,deleteSaladStates,deleteDessertStates,deleteCoffeeStates } = dishesSlice.actions
+export const { pushAllStates, deleteCategory } = dishesSlice.actions
 
 export default dishesSlice.reducer

@@ -46,37 +46,37 @@ export default function Layout({children}) {
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/All">
+              <Link href="/all">
                 <a>AllDishes</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Meat">
+              <Link href="/meat">
                 <a>MeatDish</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Fish">
+              <Link href="/fish">
                 <a>FishDish</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Noodle">
+              <Link href="/noodle">
                 <a>Noodles</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Salad">
+              <Link href="/salad">
                 <a>Salad</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Dessert">
+              <Link href="/dessert">
                 <a>Dessert</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Coffee">
+              <Link href="/coffee">
                 <a>Coffee</a>
               </Link>
             </li>
