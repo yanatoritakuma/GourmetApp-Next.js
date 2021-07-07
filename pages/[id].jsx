@@ -40,19 +40,22 @@ const Categorypage = ({ id }) => {
   }
 
   const onClickOpen = (i) => {
-    onSelectState({ categoriesState, i });
+    onSelectState({ allCategory, i });
     onClickModal();
   }
 
   const dispatch = useDispatch();
 
-  const { categoriesState } = useSelector((state) => state.dishes);
+  const { allCategory,meatCategory,fishCategory } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
+  
+  const categoryName = `${id}Category`
 
   console.log("id",id);
+  console.log("categoryName",categoryName);
 
   return (
     <Layout>
@@ -60,7 +63,7 @@ const Categorypage = ({ id }) => {
         <h2>{id}Page</h2>
         <ul>
           {
-            categoriesState.map((categoryState, i) => {
+            categoryName.map((categoryState, i) => {
               return(
                 <li key={i} onClick={() => onClickOpen(i)}>
                   <div className={utilStyles.categoryPage__img}>
