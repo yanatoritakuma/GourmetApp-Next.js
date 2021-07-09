@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    allCategory:[],
-    meatCategory:[],
+    allCategory:['all000'],
+    meatCategory:['meat999'],
     fishCategory:[],
     noodleCategory:[],
     saladCategory:[],

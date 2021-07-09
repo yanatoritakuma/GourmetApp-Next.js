@@ -25,12 +25,14 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async context => {
   const { id } = context.params 
+  const categoryName = `${id}Category`
+  
   return {
-    props: {id}
+    props: { id, categoryName }
   }
 }
 
-const Categorypage = ({ id }) => {
+const Categorypage = ({ id, categoryName }) => {
 
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -51,12 +53,24 @@ const Categorypage = ({ id }) => {
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
+
+  const switchCategory = () => {
+    switch(categoryName){
+      case 'allCategory':
+      allCategory
+      break;
   
-  const categoryName = `${id}Category`
+      case 'meatCategory':
+      meatCategory
+      break;
+    } 
+  }
 
-  console.log("id",id);
-  console.log("categoryName",categoryName);
 
+  console.log('categoryName',categoryName);
+  
+
+  
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
