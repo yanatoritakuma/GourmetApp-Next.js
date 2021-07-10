@@ -25,14 +25,12 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async context => {
   const { id } = context.params 
-  const categoryName = `${id}Category`
-  
   return {
-    props: { id, categoryName }
+    props: { id }
   }
 }
 
-const Categorypage = ({ id, categoryName }) => {
+const Categorypage = ({ id }) => {
 
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -63,16 +61,16 @@ const Categorypage = ({ id, categoryName }) => {
   }
 
   const categoryMap = {
-    allCategory: allCategory,
-    meatCategory: meatCategory,
-    fishCategory: fishCategory,
-    noodleCategory: noodleCategory,
-    saladCategory: saladCategory,
-    dessertCategory: dessertCategory,
-    coffeeCategory: coffeeCategory
+    all: allCategory,
+    meat: meatCategory,
+    fish: fishCategory,
+    noodle: noodleCategory,
+    salad: saladCategory,
+    dessert: dessertCategory,
+    coffee: coffeeCategory
   };
 
-  const categoryStates = categoryMap[categoryName];
+  const categoryStates = categoryMap[id];
   
 
   
