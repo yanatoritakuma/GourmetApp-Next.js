@@ -48,26 +48,31 @@ const Categorypage = ({ id, categoryName }) => {
 
   const dispatch = useDispatch();
 
-  const { allCategory,meatCategory,fishCategory } = useSelector((state) => state.dishes);
+  const { 
+    allCategory,
+    meatCategory,
+    fishCategory,
+    noodleCategory,
+    saladCategory,
+    dessertCategory,
+    coffeeCategory
+  } = useSelector((state) => state.dishes);
 
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
 
-  const switchCategory = () => {
-    switch(categoryName){
-      case 'allCategory':
-      allCategory
-      break;
-  
-      case 'meatCategory':
-      meatCategory
-      break;
-    } 
-  }
+  const categoryMap = {
+    allCategory: allCategory,
+    meatCategory: meatCategory,
+    fishCategory: fishCategory,
+    noodleCategory: noodleCategory,
+    saladCategory: saladCategory,
+    dessertCategory: dessertCategory,
+    coffeeCategory: coffeeCategory
+  };
 
-
-  console.log('categoryName',categoryName);
+  const categoryStates = categoryMap[categoryName];
   
 
   
@@ -77,7 +82,7 @@ const Categorypage = ({ id, categoryName }) => {
         <h2>{id}Page</h2>
         <ul>
           {
-            categoryName.map((categoryState, i) => {
+            categoryStates.map((categoryState, i) => {
               return(
                 <li key={i} onClick={() => onClickOpen(i)}>
                   <div className={utilStyles.categoryPage__img}>
