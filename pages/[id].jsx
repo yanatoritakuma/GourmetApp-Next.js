@@ -71,6 +71,10 @@ const Categorypage = ({ id }) => {
   };
 
   const categoryStates = categoryMap[id];
+
+  const onClickChoice = (e) => {
+    console.log(e.target)
+  }
   
 
   
@@ -82,7 +86,7 @@ const Categorypage = ({ id }) => {
           {
             categoryStates.map((categoryState, i) => {
               return(
-                <li key={i} onClick={() => onClickOpen(i)}>
+                <li key={i} onClick={(e) => onClickChoice(e)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"

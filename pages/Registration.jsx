@@ -20,6 +20,7 @@ export default function Registration(){
     note,
     category,
     id:allCategory.length
+    // 現在はallCategoryだけのlengthしか取れていないの
   };
 
   const dispatch = useDispatch();
