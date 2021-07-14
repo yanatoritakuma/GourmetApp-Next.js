@@ -72,9 +72,10 @@ const Categorypage = ({ id }) => {
 
   const categoryStates = categoryMap[id];
 
-  const onClickChoice = (e) => {
-    console.log(e.target)
-  }
+  // const onClickChoice = (e) => {
+  //   console.log(e.target)
+  //   onClickModal()
+  // }
   
 
   
@@ -86,7 +87,7 @@ const Categorypage = ({ id }) => {
           {
             categoryStates.map((categoryState, i) => {
               return(
-                <li key={i} onClick={(e) => onClickChoice(e)}>
+                <li key={i} onClick={() => onClickOpen(i)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
