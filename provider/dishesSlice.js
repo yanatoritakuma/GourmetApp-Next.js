@@ -3,13 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    allCategory:[],
-    meatCategory:[],
-    fishCategory:[],
-    noodleCategory:[],
-    saladCategory:[],
-    dessertCategory:[],
-    coffeeCategory:[],
+    all:[
+      {id:"meat"},
+      {id:"fish"},
+      {id:"noodle"},
+      {id:"salad"},
+      {id:"dessert"},
+      {id:"coffee"}
+    ],
   },
   reducers: {
     // 登録機能
@@ -17,32 +18,35 @@ export const dishesSlice = createSlice({
       if(action.payload.name === ""){
         return alert("Please enter StoreName");
       }
-      state.allCategory = [...state.allCategory, action.payload];
-      switch(action.payload.category){
-        case "meatDish":
-        state.meatCategory = [...state.meatCategory, action.payload];
-        break;
+      state.all = [...state.all, action.payload];
 
-        case "fishDish":
-        state.fishCategory = [...state.fishCategory, action.payload];
-        break;
+      console.log("category",action.payload);
 
-        case "noodles":
-        state.noodleCategory = [...state.noodleCategory, action.payload];
-        break;
+      // switch(action.payload.category){
+      //   case "meat":
+      //   state.all = [...state.all, action.payload];
+      //   break;
 
-        case "salad":
-        state.saladCategory = [...state.saladCategory, action.payload];
-        break;
+      //   case "fish":
+      //   state.all = [...state.fish, action.payload];
+      //   break;
 
-        case "dessert":
-        state.dessertCategory = [...state.dessertCategory, action.payload];
-        break;
+      //   case "noodle":
+      //   state.all = [...state.noodle, action.payload];
+      //   break;
 
-        case "coffee":
-        state.coffeeCategory = [...state.coffeeCategory, action.payload];
-        break;
-      }
+      //   case "salad":
+      //   state.all = [...state.salad, action.payload];
+      //   break;
+
+      //   case "dessert":
+      //   state.all = [...state.dessert, action.payload];
+      //   break;
+
+      //   case "coffee":
+      //   state.all = [...state.coffee, action.payload];
+      //   break;
+      // }
     },
     
 
@@ -53,6 +57,6 @@ export const dishesSlice = createSlice({
   }
 })
 
-export const { pushAllStates, deleteCategory } = dishesSlice.actions
+export const { pushRegistration, deleteCategory } = dishesSlice.actions
 
 export default dishesSlice.reducer

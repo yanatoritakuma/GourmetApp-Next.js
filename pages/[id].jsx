@@ -46,38 +46,14 @@ const Categorypage = ({ id }) => {
 
   const dispatch = useDispatch();
 
-  const { 
-    allCategory,
-    meatCategory,
-    fishCategory,
-    noodleCategory,
-    saladCategory,
-    dessertCategory,
-    coffeeCategory
-  } = useSelector((state) => state.dishes);
+  const { all } = useSelector((state) => state.dishes);
+
+  const categoryStates = id === "all" ? all : all.filter((v) => v.id === id);
+  console.log("categoryStates",categoryStates[0]);
 
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
-
-  const categoryMap = {
-    all: allCategory,
-    meat: meatCategory,
-    fish: fishCategory,
-    noodle: noodleCategory,
-    salad: saladCategory,
-    dessert: dessertCategory,
-    coffee: coffeeCategory
-  };
-
-  const categoryStates = categoryMap[id];
-
-  // const onClickChoice = (e) => {
-  //   console.log(e.target)
-  //   onClickModal()
-  // }
-  
-
   
   return (
     <Layout>

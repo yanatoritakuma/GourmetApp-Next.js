@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
-import { dishesSlice } from "../provider/dishesSlice";
+import { pushRegistration } from "../provider/dishesSlice";
 import {useSelector} from "react-redux";
 
 
@@ -19,13 +19,13 @@ export default function Registration(){
     streetAddress,
     note,
     category,
-    id:allCategory.length
+    // id:allCategory.length
   };
 
   const dispatch = useDispatch();
 
   const onClickPushRegistration = () => {
-    dispatch(dishesSlice.actions.pushRegistration(dishesState));
+    dispatch(pushRegistration(dishesState));
     setName(""),
     setTel(""),
     setStreetAddress(""),
@@ -42,10 +42,10 @@ export default function Registration(){
             <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
             <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
             <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
-              <option value="">Category</option>
-              <option value="meatDish">MeatDish</option>
-              <option value="fishDish">FishDish</option>
-              <option value="noodles">Noodles</option>
+              <option value="all">Category</option>
+              <option value="meat">MeatDish</option>
+              <option value="fish">FishDish</option>
+              <option value="noodle">Noodles</option>
               <option value="salad">Salad</option>
               <option value="dessert">Dessert</option>
               <option value="coffee">Coffee</option>
