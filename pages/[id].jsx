@@ -31,7 +31,8 @@ export const getStaticProps = async context => {
 }
 
 const Categorypage = ({ id }) => {
-
+  const { all } = useSelector((state) => state.dishes);
+  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
 
@@ -40,13 +41,9 @@ const Categorypage = ({ id }) => {
   }
 
   const onClickOpen = (i) => {
-    onSelectState({ allCategory, i });
+    onSelectState({ all,i });
     onClickModal();
   }
-
-  const dispatch = useDispatch();
-
-  const { all } = useSelector((state) => state.dishes);
 
   const categoryStates = id === "all" ? all : all.filter((v) => v.id === id);
   console.log("categoryStates",categoryStates[0]);

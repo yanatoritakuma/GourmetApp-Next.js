@@ -1,25 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
 import { pushRegistration } from "../provider/dishesSlice";
-import {useSelector} from "react-redux";
 
 
 export default function Registration(){
-  const { allCategory } = useSelector((state) => state.dishes);
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
+
+  const getUnique = useCallback(
+    (unique) => {
+      let stong = 1000;
+      if(unique) stong = unique;
+      return new Date().getTime().toString(16) + Math.floor(stong*Math.random()).toString(16)
+    }, []
+  );
+
+  const uuid = getUnique();
+
+  console.log(uuid);
+
   const dishesState = {
     name,
     tel,
     streetAddress,
     note,
-    category,
-    // id:allCategory.length
+    id:category,
+    uuid:uuid
   };
 
   const dispatch = useDispatch();
