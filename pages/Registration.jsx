@@ -45,26 +45,26 @@ export default function Registration(){
   }
 
   return(
-      <Layout>
-        <section className={utilStyles.registration}>
-          <h2>Registration</h2>
-          <div className={utilStyles.registration__box}>
-            <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
-            <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
-            <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
-            <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
-              <option value="all">Category</option>
-              <option value="meat">MeatDish</option>
-              <option value="fish">FishDish</option>
-              <option value="noodle">Noodles</option>
-              <option value="salad">Salad</option>
-              <option value="dessert">Dessert</option>
-              <option value="coffee">Coffee</option>
-            </select>
-            <textarea placeholder="Note" value={note} onChange={(e) => {setNote(e.target.value)}}></textarea>
-            <button type="button" onClick={onClickPushRegistration}>Registration</button>
-          </div>
-        </section>
-      </Layout>
+    <Layout>
+      <section className={utilStyles.registration}>
+        <h2>Registration</h2>
+        <div className={utilStyles.registration__box}>
+          <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
+          <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
+          <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
+          <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
+            <option value="all">Category</option>
+            <option value="meat">MeatDish</option>
+            <option value="fish">FishDish</option>
+            <option value="noodle">Noodles</option>
+            <option value="salad">Salad</option>
+            <option value="dessert">Dessert</option>
+            <option value="coffee">Coffee</option>
+          </select>
+          <textarea placeholder="Note" value={note} onChange={(e) => {setNote(e.target.value)}}></textarea>
+          <button type="button" onClick={onClickPushRegistration}>Registration</button>
+        </div>
+      </section>
+    </Layout>
   )
 }

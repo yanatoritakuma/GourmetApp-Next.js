@@ -40,18 +40,17 @@ const Categorypage = ({ id }) => {
     setModal(!modal);
   }
 
-  const onClickOpen = (i) => {
-    onSelectState({ all,i });
+  const onClickOpen = (categoryState) => {
+    onSelectState({ all,categoryState });
     onClickModal();
   }
 
   const categoryStates = id === "all" ? all : all.filter((v) => v.id === id);
-  console.log("categoryStates",categoryStates[0]);
-
+  
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
-  
+
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
@@ -60,7 +59,7 @@ const Categorypage = ({ id }) => {
           {
             categoryStates.map((categoryState, i) => {
               return(
-                <li key={i} onClick={() => onClickOpen(i)}>
+                <li key={i} onClick={() => onClickOpen(categoryState)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
