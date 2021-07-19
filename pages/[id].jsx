@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useDispatch,useSelector } from "react-redux";
 import { deleteCategory } from "../provider/dishesSlice";
 import { useSelect } from "../hooks/useSelectState";
+import clsx from 'clsx'; 
 
 
 export async function getStaticPaths() {
@@ -51,10 +52,29 @@ const Categorypage = ({ id }) => {
     dispatch(deleteCategory(i));
   }
 
+  const activeTitle = () =>{
+    if(id === "meat"){
+      return utilStyles.meat
+    }else if(id === "fish"){
+      return utilStyles.fish
+    }else if(id === "noodle"){
+      return utilStyles.noodle
+    }else if(id === "salad"){
+      return utilStyles.salad
+    }else if(id === "dessert"){
+      return utilStyles.dessert
+    }else if(id === "coffee"){
+      return utilStyles.coffee
+    }
+  }
+
+  
+
+  
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2>{id}Page</h2>
+        <h2 className={clsx(activeTitle())}>{id}Page</h2>
         <ul>
           {
             categoryStates.map((categoryState, i) => {
@@ -82,3 +102,4 @@ const Categorypage = ({ id }) => {
   )
 }
 export default Categorypage
+
