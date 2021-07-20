@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
 import { pushRegistration } from "../provider/dishesSlice";
+import { useUuId } from "../hooks/useUuId";
 
 
 export default function Registration(){
@@ -11,26 +12,17 @@ export default function Registration(){
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
+  const { getUnique } = useUuId();
 
-  const getUnique = useCallback(
-    (unique) => {
-      let stong = 1000;
-      if(unique) stong = unique;
-      return new Date().getTime().toString(16) + Math.floor(stong*Math.random()).toString(16)
-    }, []
-  );
-
-  const uuid = getUnique();
-
-  console.log(uuid);
+  console.log(getUnique);
 
   const dishesState = {
     name,
     tel,
     streetAddress,
     note,
-    id:category,
-    uuid:uuid
+    category,
+    id:getUnique
   };
 
   const dispatch = useDispatch();

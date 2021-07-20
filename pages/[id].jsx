@@ -32,7 +32,7 @@ export const getStaticProps = async context => {
 }
 
 const Categorypage = ({ id }) => {
-  const { all } = useSelector((state) => state.dishes);
+  const { allCategory } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -41,12 +41,12 @@ const Categorypage = ({ id }) => {
     setModal(!modal);
   }
 
-  const onClickOpen = (categoryState) => {
-    onSelectState({ all,categoryState });
+  const onClickOpen = (categoryValue) => {
+    onSelectState({ allCategory,categoryValue });
     onClickModal();
   }
 
-  const categoryStates = id === "all" ? all : all.filter((v) => v.id === id);
+  const categoryStates = id === "all" ? allCategory : allCategory.filter((v) => v.category === id);
   
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
@@ -77,9 +77,9 @@ const Categorypage = ({ id }) => {
         <h2 className={clsx(activeTitle())}>{id}Page</h2>
         <ul>
           {
-            categoryStates.map((categoryState, i) => {
+            categoryStates.map((categoryValue, i) => {
               return(
-                <li key={i} onClick={() => onClickOpen(categoryState)}>
+                <li key={i} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
@@ -89,7 +89,7 @@ const Categorypage = ({ id }) => {
                       alt="icon"
                     />
                   </div>
-                  <h3>{categoryState.name}</h3>
+                  <h3>{categoryValue.name}</h3>
                   <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )
