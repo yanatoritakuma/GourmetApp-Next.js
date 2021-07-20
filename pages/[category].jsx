@@ -12,27 +12,27 @@ import clsx from 'clsx';
 export async function getStaticPaths() {
   return {
     paths:[
-      { params: { id: 'all'} },
-      { params: { id: 'meat'} },
-      { params: { id: 'fish'} },
-      { params: { id: 'noodle'} },
-      { params: { id: 'salad'} },
-      { params: { id: 'dessert'} },
-      { params: { id: 'coffee'} }
+      { params: { category: 'all'} },
+      { params: { category: 'meat'} },
+      { params: { category: 'fish'} },
+      { params: { category: 'noodle'} },
+      { params: { category: 'salad'} },
+      { params: { category: 'dessert'} },
+      { params: { category: 'coffee'} }
     ],
     fallback: false
   }
 }
 
 export const getStaticProps = async context => {
-  const { id } = context.params 
+  const { category } = context.params 
   return {
-    props: { id }
+    props: { category }
   }
 }
 
-const Categorypage = ({ id }) => {
-  const { allCategory } = useSelector((state) => state.dishes);
+const Categorypage = ({ category }) => {
+  const { categories } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -42,42 +42,39 @@ const Categorypage = ({ id }) => {
   }
 
   const onClickOpen = (categoryValue) => {
-    onSelectState({ allCategory,categoryValue });
+    onSelectState({ categories,categoryValue });
     onClickModal();
   }
 
-  const categoryStates = id === "all" ? allCategory : allCategory.filter((v) => v.category === id);
+  const categoryArray = category === "all" ? categories : categories.filter((v) => v.category === category);
   
   const onClickDelete = (i) => {
     dispatch(deleteCategory(i));
   }
 
   const activeTitle = () =>{
-    if(id === "meat"){
+    if(category === "meat"){
       return utilStyles.meat
-    }else if(id === "fish"){
+    }else if(category === "fish"){
       return utilStyles.fish
-    }else if(id === "noodle"){
+    }else if(category === "noodle"){
       return utilStyles.noodle
-    }else if(id === "salad"){
+    }else if(category === "salad"){
       return utilStyles.salad
-    }else if(id === "dessert"){
+    }else if(category === "dessert"){
       return utilStyles.dessert
-    }else if(id === "coffee"){
+    }else if(category === "coffee"){
       return utilStyles.coffee
     }
   }
-
-  
-
   
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2 className={clsx(activeTitle())}>{id}Page</h2>
+        <h2 className={utilStyles.category}>{category}Page</h2>
         <ul>
           {
-            categoryStates.map((categoryValue, i) => {
+            categoryArray.map((categoryValue, i) => {
               return(
                 <li key={i} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>

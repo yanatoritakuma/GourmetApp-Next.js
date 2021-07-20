@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
-    allCategory:[],
+    categories:[],
   },
   reducers: {
     // 登録機能
@@ -11,13 +11,13 @@ export const dishesSlice = createSlice({
       if(action.payload.name === ""){
         return alert("Please enter StoreName");
       }
-      state.allCategory = [...state.allCategory, action.payload];
+      state.categories = [...state.categories, action.payload];
     },
     
 
     // 削除機能
     deleteCategory(state,action) {
-      state.allCategory.splice(action.payload,1);
+      state.categories.splice(action.payload,1);
     },
   }
 })
