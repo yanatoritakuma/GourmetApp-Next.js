@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
@@ -6,7 +6,7 @@ import { pushRegistration } from "../provider/dishesSlice";
 import { useUuId } from "../hooks/useUuId";
 
 
-export default function Registration(){
+  const  Registration = memo(() => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
@@ -59,4 +59,5 @@ export default function Registration(){
       </section>
     </Layout>
   )
-}
+})
+export default Registration

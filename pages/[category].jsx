@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import utilStyles from '../styles/categorypage.module.css'
 import Layout from "../components/Layout"
 import ModalStaet from '../components/ModalStaet'
@@ -31,7 +31,7 @@ export const getStaticProps = async context => {
   }
 }
 
-const Categorypage = ({ category }) => {
+const Categorypage = memo(({ category }) => {
   const { categories } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -67,6 +67,8 @@ const Categorypage = ({ category }) => {
       return utilStyles.coffee
     }
   }
+
+  console.log("レンダリング");
   
   return (
     <Layout>
@@ -97,6 +99,6 @@ const Categorypage = ({ category }) => {
       <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} onClickDelete={onClickDelete} />
     </Layout>
   )
-}
+})
 export default Categorypage
 
