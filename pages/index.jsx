@@ -24,6 +24,7 @@ export default function Home() {
             <span className="index__img index__img--6"></span>
           </div>
         </section>
+        
       </Layout>
     
   )
