@@ -14,8 +14,6 @@ import { useUuId } from "../hooks/useUuId";
   const [category, setCategory] = useState("");
   const { getUnique } = useUuId();
 
-  console.log(getUnique);
-
   const dishesState = {
     name,
     tel,

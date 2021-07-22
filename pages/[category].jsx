@@ -73,7 +73,7 @@ const Categorypage = memo(({ category }) => {
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2 className={utilStyles.category}>{category}Page</h2>
+        <h2>{category}Page</h2>
         <ul>
           {
             categoryArray.map((categoryValue, i) => {
