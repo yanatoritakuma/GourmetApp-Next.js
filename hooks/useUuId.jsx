@@ -1,8 +1,8 @@
-export const useUuId = () => {
-  const getUnique = (uuId) => {
+export const useUUID = () => {
+  const createUUID = (uuid) => {
     let stong = 1000;
-    if(uuId) stong = uuId;
+    if(uuid) stong = uuId;
     new Date().getTime().toString(16) + Math.floor(stong*Math.random()).toString(16)
   };
-  return { getUnique };
+  return { createUUID };
 }

@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, useMemo } from "react";
 import utilStyles from '../styles/categorypage.module.css'
 import Layout from "../components/Layout"
 import ModalStaet from '../components/ModalStaet'
@@ -31,7 +31,7 @@ export const getStaticProps = async context => {
   }
 }
 
-const Categorypage = memo(({ category }) => {
+const Categorypage = ({ category }) => {
   const { categories } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -70,15 +70,15 @@ const Categorypage = memo(({ category }) => {
 
   console.log("レンダリング");
   
-  return (
+  return useMemo(() =>
     <Layout>
       <section className={utilStyles.categoryPage}>
-        <h2>{category}Page</h2>
+        <h2 className={activeTitle()}>{category}Page</h2>
         <ul>
           {
             categoryArray.map((categoryValue, i) => {
               return(
-                <li key={i} onClick={() => onClickOpen(categoryValue)}>
+                <li key={categoryValue} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
@@ -99,6 +99,6 @@ const Categorypage = memo(({ category }) => {
       <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} onClickDelete={onClickDelete} />
     </Layout>
   )
-})
+}
 export default Categorypage
 

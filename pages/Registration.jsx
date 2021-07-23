@@ -1,18 +1,17 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
 import { pushRegistration } from "../provider/dishesSlice";
-import { useUuId } from "../hooks/useUuId";
+import { useUUID } from "../hooks/useUUID";
 
-
-  const  Registration = memo(() => {
+  const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const { getUnique } = useUuId();
+  const { createUUID } = useUUID();
 
   const dishesState = {
     name,
@@ -20,7 +19,7 @@ import { useUuId } from "../hooks/useUuId";
     streetAddress,
     note,
     category,
-    id:getUnique
+    id:createUUID
   };
 
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ import { useUuId } from "../hooks/useUuId";
     setCategory("")
   }
 
-  return(
+  return useMemo(() =>
     <Layout>
       <section className={utilStyles.registration}>
         <h2>Registration</h2>
@@ -57,5 +56,5 @@ import { useUuId } from "../hooks/useUuId";
       </section>
     </Layout>
   )
-})
+}
 export default Registration
