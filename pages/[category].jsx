@@ -6,8 +6,6 @@ import Image from 'next/image'
 import { useDispatch,useSelector } from "react-redux";
 import { deleteCategory } from "../provider/dishesSlice";
 import { useSelect } from "../hooks/useSelectState";
-import clsx from 'clsx'; 
-
 
 export async function getStaticPaths() {
   return {
@@ -67,8 +65,6 @@ const Categorypage = ({ category }) => {
       return utilStyles.coffee
     }
   }
-
-  console.log("レンダリング");
   
   return useMemo(() =>
     <Layout>
@@ -78,6 +74,7 @@ const Categorypage = ({ category }) => {
           {
             categoryArray.map((categoryValue, i) => {
               return(
+                // keyをcategoryValueにするとエラーでる
                 <li key={categoryValue} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
@@ -98,7 +95,7 @@ const Categorypage = ({ category }) => {
       </section>
       <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} onClickDelete={onClickDelete} />
     </Layout>
-  )
+  ,[onClickOpen])
 }
 export default Categorypage
 

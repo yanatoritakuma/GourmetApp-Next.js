@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
 import { pushRegistration } from "../provider/dishesSlice";
-import { useUUID } from "../hooks/useUUID";
+import { genRandSt } from "../components/genRandSt";
 
-  const  Registration = () => {
+const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const { createUUID } = useUUID();
 
   const dishesState = {
     name,
@@ -19,7 +18,7 @@ import { useUUID } from "../hooks/useUUID";
     streetAddress,
     note,
     category,
-    id:createUUID
+    id:genRandSt()
   };
 
   const dispatch = useDispatch();
@@ -55,6 +54,6 @@ import { useUUID } from "../hooks/useUUID";
         </div>
       </section>
     </Layout>
-  )
+  ,[name,tel,streetAddress,category,note])
 }
 export default Registration
