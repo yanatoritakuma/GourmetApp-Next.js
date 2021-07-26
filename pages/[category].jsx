@@ -3,8 +3,7 @@ import utilStyles from '../styles/categorypage.module.css'
 import Layout from "../components/Layout"
 import ModalStaet from '../components/ModalStaet'
 import Image from 'next/image'
-import { useDispatch,useSelector } from "react-redux";
-import { deleteCategory } from "../provider/dishesSlice";
+import { useSelector } from "react-redux";
 import { useSelect } from "../hooks/useSelectState";
 
 export async function getStaticPaths() {
@@ -31,7 +30,6 @@ export const getStaticProps = async context => {
 
 const Categorypage = ({ category }) => {
   const { categories } = useSelector((state) => state.dishes);
-  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
 
@@ -45,10 +43,6 @@ const Categorypage = ({ category }) => {
   }
 
   const categoryArray = category === "all" ? categories : categories.filter((v) => v.category === category);
-  
-  const onClickDelete = (i) => {
-    dispatch(deleteCategory(i));
-  }
 
   const activeTitle = () =>{
     if(category === "meat"){
@@ -74,8 +68,7 @@ const Categorypage = ({ category }) => {
           {
             categoryArray.map((categoryValue, i) => {
               return(
-                // keyをcategoryValueにするとエラーでる
-                <li key={categoryValue} onClick={() => onClickOpen(categoryValue)}>
+                <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
                     <Image
                       src="/image/logo.png"
@@ -86,14 +79,13 @@ const Categorypage = ({ category }) => {
                     />
                   </div>
                   <h3>{categoryValue.name}</h3>
-                  <button onClick={() => onClickDelete(i)}>Delete</button>
                 </li>
               )
             })
           }
         </ul>
       </section>
-      <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} onClickDelete={onClickDelete} />
+      <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} />
     </Layout>
   ,[onClickOpen])
 }

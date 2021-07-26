@@ -17,8 +17,13 @@ export const dishesSlice = createSlice({
 
     // 削除機能
     deleteCategory(state,action) {
-      state.categories.splice(action.payload,1);
-    },
+      // const targetDelete = state.categories.filter((state) => state.id === action.payload)
+      state.categories = [...state.categories, action.payload];
+      const test = state.categories.filter(state => state.id !== action.payload);
+      console.log("test",test);
+      console.log("action.payload",action.payload);
+      
+    }
   }
 })
 
