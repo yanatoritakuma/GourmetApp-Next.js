@@ -17,12 +17,10 @@ export const dishesSlice = createSlice({
 
     // 削除機能
     deleteCategory(state,action) {
-      // const targetDelete = state.categories.filter((state) => state.id === action.payload)
-      state.categories = [...state.categories, action.payload];
-      const test = state.categories.filter(state => state.id !== action.payload);
-      console.log("test",test);
-      console.log("action.payload",action.payload);
-      
+      const targetDelete = state.categories.filter(v => {
+        return v.id !== action.payload
+      })
+      state.categories = [...targetDelete];
     }
   }
 })

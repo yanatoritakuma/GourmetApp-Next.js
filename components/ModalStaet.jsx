@@ -9,7 +9,6 @@ export default function ModalStaet(props){
   const onClickDelete = (selectedState) => {
     dispatch(deleteCategory(selectedState));
     setModal(!modal);
-    console.log("selectedState",selectedState);
   }
   
   return(
