@@ -16,27 +16,27 @@
   color: #f7a62e;
 }
 
-.categoryPage .meatDishTitle {
+.categoryPage .meat {
   color: #e2041b;
 }
 
-.categoryPage .fishDishTitle {
+.categoryPage .fish {
   color: #00afcc;
 }
 
-.categoryPage .noodlesTitle {
-  color: #e2041b;
+.categoryPage .noodle {
+  color: #fcc800;
 }
 
-.categoryPage .saladTitle {
+.categoryPage .salad {
   color: #00947a;
 }
 
-.categoryPage .dessertTitle {
+.categoryPage .dessert {
   color: #eb6ea0;
 }
 
-.categoryPage .coffeeTitle {
+.categoryPage .coffee {
   color: #96514d;
 }
 

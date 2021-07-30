@@ -1,87 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout"
 import utilStyles from '../styles/registration.module.css'
-import { dishesSlice } from "../provider/dishesSlice";
-import {useSelector} from "react-redux";
+import { pushRegistration } from "../provider/dishesSlice";
+import { genRandSt } from "../components/genRandSt";
 
-
-export default function Registration(){
+const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
+  const [photo,setPhoto] = useState("");
+
+  const dishesState = {
+    name,
+    tel,
+    streetAddress,
+    note,
+    category,
+    photo,
+    id:genRandSt()
+  };
 
   const dispatch = useDispatch();
-  const { allCategoryStates } = useSelector((state) => state.dishes);
 
-  const pushRegistration = () => {
-    if(name === ""){
-      return alert("Please enter StoreName");
-    } 
-    dispatch(dishesSlice.actions.pushAllStates({
-      name,
-      tel,
-      streetAddress,
-      note,
-      id:allCategoryStates.length
-    }))
-    switch(category){
-      case "meatDish":
-      dispatch(dishesSlice.actions.pushMeatStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-
-      case "fishDish":
-      dispatch(dishesSlice.actions.pushFishStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-
-      case "noodles":
-      dispatch(dishesSlice.actions.pushNoodlesStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-
-      case "salad":
-      dispatch(dishesSlice.actions.pushSaladStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-
-      case "dessert":
-      dispatch(dishesSlice.actions.pushDessertStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-
-      case "coffee":
-      dispatch(dishesSlice.actions.pushCoffeeStates({
-        name,
-        tel,
-        streetAddress,
-        note
-      }));
-      break;
-    }
+  const onClickPushRegistration = () => {
+    dispatch(pushRegistration(dishesState));
     setName(""),
     setTel(""),
     setStreetAddress(""),
@@ -89,27 +34,45 @@ export default function Registration(){
     setCategory("")
   }
 
-  return(
-      <Layout>
-        <section className={utilStyles.registration}>
-          <h2>Registration</h2>
-          <div className={utilStyles.registration__box}>
-            <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
-            <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
-            <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
-            <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
-              <option value="">Category</option>
-              <option value="meatDish">MeatDish</option>
-              <option value="fishDish">FishDish</option>
-              <option value="noodles">Noodles</option>
-              <option value="salad">Salad</option>
-              <option value="dessert">Dessert</option>
-              <option value="coffee">Coffee</option>
-            </select>
-            <textarea placeholder="Note" value={note} onChange={(e) => {setNote(e.target.value)}}></textarea>
-            <button type="button" onClick={pushRegistration}>Registration</button>
-          </div>
-        </section>
-      </Layout>
-  )
+  const onChangePhoto = (event, cb) => {
+    cb(event);
+    const targetName = event.target.files.item(0).name;
+    setPhoto(targetName);
+  };
+
+  console.log("photo",photo);
+
+  return useMemo(() =>
+    <Layout>
+      <section className={utilStyles.registration}>
+        <h2>Registration</h2>
+        <div className={utilStyles.registration__box}>
+          <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
+          <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
+          <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
+          <input 
+            type="file" 
+            value={photo} 
+            name="upfile" 
+            id="upfile" 
+            accept=".png, .jpg, .jpeg"
+            // onChange={(e) => {setPhoto(e.target.value)}} 
+            onChange={e => onChangePhoto(e, onChange, setFileName)}
+          />
+          <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
+            <option value="all">Category</option>
+            <option value="meat">MeatDish</option>
+            <option value="fish">FishDish</option>
+            <option value="noodle">Noodles</option>
+            <option value="salad">Salad</option>
+            <option value="dessert">Dessert</option>
+            <option value="coffee">Coffee</option>
+          </select>
+          <textarea placeholder="Note" value={note} onChange={(e) => {setNote(e.target.value)}}></textarea>
+          <button type="button" onClick={onClickPushRegistration}>Registration</button>
+        </div>
+      </section>
+    </Layout>
+  ,[name,tel,streetAddress,category,note])
 }
+export default Registration

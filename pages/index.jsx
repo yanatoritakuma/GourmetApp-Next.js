@@ -11,8 +11,8 @@ export default function Home() {
           <title>{siteTitle}</title>
         </Head>
         <section className="index">
-          <div class="index__imgBox">
-            <h1 className="index__logo"></h1>
+          <div className="index__imgBox">
+            <h1 className="index__logo" />
             <Link href="/Registration">
               <a className="index__link">Register</a>
             </Link>
@@ -24,6 +24,7 @@ export default function Home() {
             <span className="index__img index__img--6"></span>
           </div>
         </section>
+        
       </Layout>
     
   )

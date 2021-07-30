@@ -1,4 +1,4 @@
-import '../styles/home.css'
+import '../styles/global.css'
 import store from '../app/store'
 import { Provider } from 'react-redux'
 

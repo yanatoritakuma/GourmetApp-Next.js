@@ -46,37 +46,37 @@ export default function Layout({children}) {
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/AllDishes">
+              <Link href="/all">
                 <a>AllDishes</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/MeatDish">
+              <Link href="/meat">
                 <a>MeatDish</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/FishDish">
+              <Link href="/fish">
                 <a>FishDish</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Noodles">
+              <Link href="/noodle">
                 <a>Noodles</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Salad">
+              <Link href="/salad">
                 <a>Salad</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Dessert">
+              <Link href="/dessert">
                 <a>Dessert</a>
               </Link>
             </li>
             <li>
-              <Link href="/categorypage/Coffee">
+              <Link href="/coffee">
                 <a>Coffee</a>
               </Link>
             </li>
@@ -91,16 +91,16 @@ export default function Layout({children}) {
           <Link href="/">
             <a>Home</a>
           </Link>
-          <Link href="/categorypage/AllDishes">
+          <Link href="/categorypage/AllD">
             <a>AllDishes</a>
           </Link>
-          <Link href="/categorypage/MeatDish">
+          <Link href="/categorypage/Meat">
             <a>MeatDish</a>
           </Link>
-          <Link href="/categorypage/FishDish">
+          <Link href="/categorypage/Fish">
             <a>FishDish</a>
           </Link>
-          <Link href="/categorypage/Noodles">
+          <Link href="/categorypage/Noodle">
             <a>Noodles</a>
           </Link>
           <Link href="/categorypage/Salad">

@@ -1,12 +1,10 @@
-import { useCallback, useState } from "react"
+import { useState } from "react"
 
 export const useSelect = () => {
   const [selectedState, setSelectedState] = useState("");
-  const onSelectState = useCallback((props) => {
-    const { allCategoryStates, i } = props;
-    const targetState = allCategoryStates.find((allState) => allState.id === i);
+  const onSelectState = ({ categories,categoryValue }) => {
+    const targetState = categories.find((state) => state.id === categoryValue.id);
     setSelectedState(targetState);
-    console.log(targetState);
-  },[])
+  }
   return { onSelectState, selectedState };
 }
