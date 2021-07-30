@@ -54,6 +54,12 @@
   transform: translateY(3px);
 }
 
+.modalStaet__boxIn .deleteBtn {
+  background-color: #d70035;
+  box-shadow: 0 3px 0px 0 #942343;
+  color: #fff;
+}
+
 .modalStaet__boxText {
   text-overflow: ellipsis;
   overflow: hidden;

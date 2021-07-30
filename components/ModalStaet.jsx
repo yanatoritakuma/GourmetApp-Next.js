@@ -14,7 +14,7 @@ export default function ModalStaet(props){
   return(
     <section className={modal ? utilStyles.modalStaetOpen : utilStyles.modalStaet}>
       <div className={utilStyles.modalStaet__box}>
-        <h3>詳細</h3>
+        <h3>Detail</h3>
         <div className={utilStyles.modalStaet__boxIn}>
           <h4>StoreName</h4>
           <p className={utilStyles.modalStaet__boxText}>{selectedState?.name}</p>
@@ -25,7 +25,7 @@ export default function ModalStaet(props){
           <h4>Note</h4>
           <p className={utilStyles.modalStaet__boxNote}>{selectedState?.note}</p>
           <button onClick={()=> setModal(false)}>close</button>
-          <button onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
+          <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
           </div>
       </div>
     </section>

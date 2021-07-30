@@ -11,6 +11,7 @@ const  Registration = () => {
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
+  const [photo,setPhoto] = useState("");
 
   const dishesState = {
     name,
@@ -18,6 +19,7 @@ const  Registration = () => {
     streetAddress,
     note,
     category,
+    photo,
     id:genRandSt()
   };
 
@@ -32,6 +34,14 @@ const  Registration = () => {
     setCategory("")
   }
 
+  const onChangePhoto = (event, cb) => {
+    cb(event);
+    const targetName = event.target.files.item(0).name;
+    setPhoto(targetName);
+  };
+
+  console.log("photo",photo);
+
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.registration}>
@@ -40,6 +50,15 @@ const  Registration = () => {
           <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
           <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
           <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
+          <input 
+            type="file" 
+            value={photo} 
+            name="upfile" 
+            id="upfile" 
+            accept=".png, .jpg, .jpeg"
+            // onChange={(e) => {setPhoto(e.target.value)}} 
+            onChange={e => onChangePhoto(e, onChange, setFileName)}
+          />
           <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
             <option value="all">Category</option>
             <option value="meat">MeatDish</option>
