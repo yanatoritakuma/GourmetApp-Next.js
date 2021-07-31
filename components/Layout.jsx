@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,13 +10,17 @@ export const siteTitle = 'GourmetApp'
 
 export default function Layout({children}) {
   const [openHum, setOpenHum] = useState(false);
-  const humMen = "humMen";
-  const closeHum = "closeHum";
-  const headerBoxSp = "header__boxSp"
-  const closeHumNone = "closeHumNone"
+  const menuRef = useRef(null);
+  
+  // useEffect(() => {
+  //   openHum && menuRef.current.focus();
+  // }, [openHum]);
+  // const onClickopenHum = () => {
+  //   setOpenHum(!openHum)
+  // }
 
   const onClickopenHum = () => {
-    setOpenHum(!openHum);
+    setOpenHum(!openHum)
   }
 
   return(
@@ -82,35 +86,35 @@ export default function Layout({children}) {
             </li>
           </ul>
         </nav>
-        <div className={openHum ? closeHum : headerBoxSp} onClick={onClickopenHum}> 
+        <div className={openHum ? 'closeHum' : 'header__boxSp'} onClick={onClickopenHum}> 
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <div className={openHum ? humMen : closeHumNone}>
+        <div className={`humMen ${openHum ? 'shown' : ''}`}>
           <Link href="/">
             <a>Home</a>
           </Link>
           <Link href="/all">
-            <a>AllDishes</a>
+            <a onClick={onClickopenHum}>AllDishes</a>
           </Link>
           <Link href="/meat">
-            <a>MeatDish</a>
+            <a onClick={onClickopenHum}>MeatDish</a>
           </Link>
           <Link href="/fish">
-            <a>FishDish</a>
+            <a onClick={onClickopenHum}>FishDish</a>
           </Link>
           <Link href="/noodle">
-            <a>Noodles</a>
+            <a onClick={onClickopenHum}>Noodles</a>
           </Link>
           <Link href="/salad">
-            <a>Salad</a>
+            <a onClick={onClickopenHum}>Salad</a>
           </Link>
           <Link href="/dessert">
-            <a>Dessert</a>
+            <a onClick={onClickopenHum}>Dessert</a>
           </Link>
           <Link href="/coffee">
-            <a>Coffee</a>
+            <a onClick={onClickopenHum}>Coffee</a>
           </Link>
         </div>
       </div>
@@ -119,3 +123,50 @@ export default function Layout({children}) {
     </>
   )
 }
+
+
+// const { useState } = React;
+
+// const App = () => {
+//   const [isShow, setIsShow] = useState(false);
+
+//   const closeWithClickOutSideMethod = (e, setter) => {
+//     console.log("e.target", e.target);
+//     console.log("e.currentTarget", e.currentTarget);
+//     if (e.target === e.currentTarget) {
+//       //メニューの外側をクリックしたときだけメニューを閉じる
+//       console.log("メニューの外側をクリックした");
+//       setter(false);
+//     } else {
+//       console.log("メニューの内側をクリックした");
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <button
+//         onClick={() => {
+//           setIsShow(!isShow);
+//         }}
+//       >
+//         toggle menu
+//       </button>
+//       <div
+//         className={`menuWrapper ${isShow ? "menuWrapper__active" : ""}`}
+//         onClick={(e) => {
+//           closeWithClickOutSideMethod(e, setIsShow);
+//         }}
+//       >
+//         <div className="menu">
+//           <ul className="menuList">
+//             <li>ここを押しても閉じない</li>
+//             <li>でも枠外のグレーを押すと</li>
+//             <li>閉じるよ</li>
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// ReactDOM.render(<App />, document.getElementById("root"));

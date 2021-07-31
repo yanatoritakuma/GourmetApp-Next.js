@@ -396,17 +396,22 @@ header{
 }
 
 .humMen{
-  display: block;
+  display: none;
   width: 80%;
   height: 100vh;
   background-color: #fff;
   box-shadow: 4px 4px 4px #000000;
   position: fixed;
   top: 84px;
-  left: 0;
+  left: -1000px;
   z-index: 9999;
   opacity: 1;
   transition: .3s;
+  transition: .5s;
+  &.shown {
+    left: 0px;
+    transition: .5s;
+  }
 
   a{
     margin: 40px 0;
@@ -446,9 +451,6 @@ header{
   }
 }
 
-.closeHumNone{
-  display: none;
-}
 
 // レスポンシブ Layout.jsx
 @media screen and (max-width: 768px){
@@ -456,6 +458,10 @@ header{
     nav{
       display: none;
     }
+  }
+
+  .humMen {
+    display: block;
   }
 
   .header__boxSp{
