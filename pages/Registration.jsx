@@ -11,7 +11,7 @@ const  Registration = () => {
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const [photo,setPhoto] = useState("");
+  const [photo, setPhoto] = useState(null);
 
   const dishesState = {
     name,
@@ -31,13 +31,14 @@ const  Registration = () => {
     setTel(""),
     setStreetAddress(""),
     setNote(""),
-    setCategory("")
+    setCategory(""),
+    setPhoto("")
   }
 
-  const onChangePhoto = (event, cb) => {
-    cb(event);
-    const targetName = event.target.files.item(0).name;
-    setPhoto(targetName);
+  const onChangePhoto = (e) => {
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setPhoto(imageUrl)
   };
 
   console.log("photo",photo);
@@ -52,13 +53,10 @@ const  Registration = () => {
           <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
           <input 
             type="file" 
-            value={photo} 
-            name="upfile" 
-            id="upfile" 
             accept=".png, .jpg, .jpeg"
-            // onChange={(e) => {setPhoto(e.target.value)}} 
-            onChange={e => onChangePhoto(e, onChange, setFileName)}
+            onChange={onChangePhoto}
           />
+          <img src={photo} />
           <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
             <option value="all">Category</option>
             <option value="meat">MeatDish</option>
@@ -73,6 +71,6 @@ const  Registration = () => {
         </div>
       </section>
     </Layout>
-  ,[name,tel,streetAddress,category,note])
+  ,[name,tel,streetAddress,category,note,photo])
 }
 export default Registration

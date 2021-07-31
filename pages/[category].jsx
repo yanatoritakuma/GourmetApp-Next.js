@@ -78,6 +78,7 @@ const Categorypage = ({ category }) => {
                       alt="icon"
                     />
                   </div>
+                  <img src={categoryValue.photo} alt="" />
                   <h3>{categoryValue.name}</h3>
                 </li>
               )
