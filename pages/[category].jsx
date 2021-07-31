@@ -70,15 +70,8 @@ const Categorypage = ({ category }) => {
               return(
                 <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
-                    <Image
-                      src="/image/logo.png"
-                      layout='responsive'
-                      width={100}
-                      height={100}
-                      alt="icon"
-                    />
+                    <img src={categoryValue.photo} alt="" />
                   </div>
-                  <img src={categoryValue.photo} alt="" />
                   <h3>{categoryValue.name}</h3>
                 </li>
               )

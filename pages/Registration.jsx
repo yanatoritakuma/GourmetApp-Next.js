@@ -56,7 +56,7 @@ const  Registration = () => {
             accept=".png, .jpg, .jpeg"
             onChange={onChangePhoto}
           />
-          <img src={photo} />
+          <img src={photo} alt="プレビュー画像" />
           <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
             <option value="all">Category</option>
             <option value="meat">MeatDish</option>
