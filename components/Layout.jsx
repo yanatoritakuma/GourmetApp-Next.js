@@ -3,25 +3,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-
-
 export const siteTitle = 'GourmetApp'
 
-
 export default function Layout({children}) {
-  const [openHum, setOpenHum] = useState(false);
+  const [openHam, setOpenHam] = useState(false);
   const menuRef = useRef(null);
-  
-  // useEffect(() => {
-  //   openHum && menuRef.current.focus();
-  // }, [openHum]);
-  // const onClickopenHum = () => {
-  //   setOpenHum(!openHum)
-  // }
 
-  const onClickopenHum = () => {
-    setOpenHum(!openHum)
-  }
+  useEffect(() => {
+    openHam && menuRef.current.focus();
+  }, [openHam]);
+  const onClickopenHam = () => () => {
+    setOpenHam(!openHam);
+  };
 
   return(
     <>
@@ -34,9 +27,9 @@ export default function Layout({children}) {
         <Link href="/">
           <a>
             <Image
-              src="/image/logo.png"
-              height={80}
-              width={80}
+              src="/image/logo.JPG"
+              height={50}
+              width={50}
               alt="icon"
             />
           </a>
@@ -86,35 +79,41 @@ export default function Layout({children}) {
             </li>
           </ul>
         </nav>
-        <div className={openHum ? 'closeHum' : 'header__boxSp'} onClick={onClickopenHum}> 
+        <div 
+          className={openHam ? 'closeHum' : 'header__boxSp'} 
+          onClick={() => setOpenHam(!openHam)} 
+          onBlur={() => setOpenHam(false)} 
+          ref={menuRef} 
+          tabIndex={0}
+        > 
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <div className={`humMen ${openHum ? 'shown' : ''}`}>
+        <div className={`hamMenu ${openHam ? 'shown' : ''}`}>
           <Link href="/">
-            <a>Home</a>
+            <a onClick={onClickopenHam()}>Home</a>
           </Link>
           <Link href="/all">
-            <a onClick={onClickopenHum}>AllDishes</a>
+            <a onClick={onClickopenHam()}>AllDishes</a>
           </Link>
           <Link href="/meat">
-            <a onClick={onClickopenHum}>MeatDish</a>
+            <a onClick={onClickopenHam()}>MeatDish</a>
           </Link>
           <Link href="/fish">
-            <a onClick={onClickopenHum}>FishDish</a>
+            <a onClick={onClickopenHam()}>FishDish</a>
           </Link>
           <Link href="/noodle">
-            <a onClick={onClickopenHum}>Noodles</a>
+            <a onClick={onClickopenHam()}>Noodles</a>
           </Link>
           <Link href="/salad">
-            <a onClick={onClickopenHum}>Salad</a>
+            <a onClick={onClickopenHam()}>Salad</a>
           </Link>
           <Link href="/dessert">
-            <a onClick={onClickopenHum}>Dessert</a>
+            <a onClick={onClickopenHam()}>Dessert</a>
           </Link>
           <Link href="/coffee">
-            <a onClick={onClickopenHum}>Coffee</a>
+            <a onClick={onClickopenHam()}>Coffee</a>
           </Link>
         </div>
       </div>
@@ -123,50 +122,3 @@ export default function Layout({children}) {
     </>
   )
 }
-
-
-// const { useState } = React;
-
-// const App = () => {
-//   const [isShow, setIsShow] = useState(false);
-
-//   const closeWithClickOutSideMethod = (e, setter) => {
-//     console.log("e.target", e.target);
-//     console.log("e.currentTarget", e.currentTarget);
-//     if (e.target === e.currentTarget) {
-//       //メニューの外側をクリックしたときだけメニューを閉じる
-//       console.log("メニューの外側をクリックした");
-//       setter(false);
-//     } else {
-//       console.log("メニューの内側をクリックした");
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <button
-//         onClick={() => {
-//           setIsShow(!isShow);
-//         }}
-//       >
-//         toggle menu
-//       </button>
-//       <div
-//         className={`menuWrapper ${isShow ? "menuWrapper__active" : ""}`}
-//         onClick={(e) => {
-//           closeWithClickOutSideMethod(e, setIsShow);
-//         }}
-//       >
-//         <div className="menu">
-//           <ul className="menuList">
-//             <li>ここを押しても閉じない</li>
-//             <li>でも枠外のグレーを押すと</li>
-//             <li>閉じるよ</li>
-//           </ul>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// ReactDOM.render(<App />, document.getElementById("root"));

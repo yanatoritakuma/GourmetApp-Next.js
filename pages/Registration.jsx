@@ -11,7 +11,7 @@ const  Registration = () => {
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const [photo, setPhoto] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
 
   const dishesState = {
     name,
@@ -19,7 +19,7 @@ const  Registration = () => {
     streetAddress,
     note,
     category,
-    photo,
+    photoUrl,
     id:genRandSt()
   };
 
@@ -32,16 +32,14 @@ const  Registration = () => {
     setStreetAddress(""),
     setNote(""),
     setCategory(""),
-    setPhoto("")
+    setPhotoUrl("")
   }
 
   const onChangePhoto = (e) => {
-    const imageFile = e.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setPhoto(imageUrl)
+    const photoFile = e.target.files[0];
+    const photoFileUrl = URL.createObjectURL(photoFile);
+    setPhotoUrl(photoFileUrl);
   };
-
-  console.log("photo",photo);
 
   return useMemo(() =>
     <Layout>
@@ -56,7 +54,7 @@ const  Registration = () => {
             accept=".png, .jpg, .jpeg"
             onChange={onChangePhoto}
           />
-          <img src={photo} alt="プレビュー画像" />
+          <img src={photoUrl} alt="プレビュー画像" />
           <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
             <option value="all">Category</option>
             <option value="meat">MeatDish</option>
@@ -71,6 +69,6 @@ const  Registration = () => {
         </div>
       </section>
     </Layout>
-  ,[name,tel,streetAddress,category,note,photo])
+  ,[name,tel,streetAddress,category,note,photoUrl])
 }
 export default Registration

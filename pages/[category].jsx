@@ -70,7 +70,7 @@ const Categorypage = ({ category }) => {
               return(
                 <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
-                    <img src={categoryValue.photo} alt="" />
+                    <img src={categoryValue.photoUrl} alt="" />
                   </div>
                   <h3>{categoryValue.name}</h3>
                 </li>

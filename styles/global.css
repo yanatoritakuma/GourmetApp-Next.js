@@ -344,6 +344,7 @@ header {
 }
 
 .header__box {
+  padding: 8px 0;
   position: fixed;
   z-index: 999;
   top: 0;
@@ -381,7 +382,7 @@ header {
   display: none;
 }
 
-.humMen {
+.hamMenu {
   display: none;
   width: 80%;
   height: 100vh;
@@ -396,12 +397,12 @@ header {
   transition: .5s;
 }
 
-.humMen.shown {
+.hamMenu.shown {
   left: 0px;
   transition: .5s;
 }
 
-.humMen a {
+.hamMenu a {
   margin: 40px 0;
   display: block;
   text-align: center;
@@ -445,7 +446,7 @@ header {
   .header__box nav {
     display: none;
   }
-  .humMen {
+  .hamMenu {
     display: block;
   }
   .header__boxSp {
@@ -471,13 +472,13 @@ header {
   .header__box h2 {
     font-size: 20px;
   }
-  .humMen a {
+  .hamMenu a {
     font-size: 18px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .humMen {
+  .hamMenu {
     width: 80%;
   }
 }

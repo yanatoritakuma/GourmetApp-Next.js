@@ -16,7 +16,7 @@ export default function ModalStaet(props){
       <div className={utilStyles.modalStaet__box}>
         <h3>Detail</h3>
         <div className={utilStyles.modalStaet__boxIn}>
-          <img src={selectedState?.photo} />
+          <img src={selectedState?.photoUrl} />
           <h4>StoreName</h4>
           <p className={utilStyles.modalStaet__boxText}>{selectedState?.name}</p>
           <h4>PhoneNumber</h4>
