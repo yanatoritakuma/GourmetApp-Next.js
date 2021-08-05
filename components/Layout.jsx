@@ -92,28 +92,28 @@ export default function Layout({children}) {
         </div>
         <div className={`hamMenu ${openHam ? 'shown' : ''}`}>
           <Link href="/">
-            <a onClick={onClickopenHam()}>Home</a>
+            <a onClick={onClickopenHam}>Home</a>
           </Link>
           <Link href="/all">
-            <a onClick={onClickopenHam()}>AllDishes</a>
+            <a>AllDishes</a>
           </Link>
           <Link href="/meat">
-            <a onClick={onClickopenHam()}>MeatDish</a>
+            <a>MeatDish</a>
           </Link>
           <Link href="/fish">
-            <a onClick={onClickopenHam()}>FishDish</a>
+            <a>FishDish</a>
           </Link>
           <Link href="/noodle">
-            <a onClick={onClickopenHam()}>Noodles</a>
+            <a>Noodles</a>
           </Link>
           <Link href="/salad">
-            <a onClick={onClickopenHam()}>Salad</a>
+            <a>Salad</a>
           </Link>
           <Link href="/dessert">
-            <a onClick={onClickopenHam()}>Dessert</a>
+            <a>Dessert</a>
           </Link>
           <Link href="/coffee">
-            <a onClick={onClickopenHam()}>Coffee</a>
+            <a>Coffee</a>
           </Link>
         </div>
       </div>

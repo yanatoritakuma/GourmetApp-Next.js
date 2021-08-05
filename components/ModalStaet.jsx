@@ -14,7 +14,10 @@ export default function ModalStaet(props){
   return(
     <section className={modal ? utilStyles.modalStaetOpen : utilStyles.modalStaet}>
       <div className={utilStyles.modalStaet__box}>
-        <h3>Detail</h3>
+        <h3>
+          
+          Detail
+        </h3>
         <div className={utilStyles.modalStaet__boxIn}>
           <img src={selectedState?.photoUrl} />
           <h4>StoreName</h4>
