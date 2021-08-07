@@ -394,9 +394,6 @@ header{
 
 .header__boxSp{
   display: none;
-  &:focus {
-    outline: none;
-  }
 }
 
 .hamMenu{
@@ -433,6 +430,10 @@ header{
   display: block;
   width: 30px;
   height: 60px;
+  &:focus {
+    outline: none;
+  }
+
   span {
     margin: 10px 0;
     display: block;
@@ -451,6 +452,10 @@ header{
     &:nth-child(3){
       display: none;
       transition: .3s;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }
@@ -487,9 +492,6 @@ header{
       height: 2px;
       background-color:#000000;
       transition: .3s;
-      &:focus {
-        outline: none;
-      }
     }
   }
 }

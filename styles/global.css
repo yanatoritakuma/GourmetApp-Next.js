@@ -382,10 +382,6 @@ header {
   display: none;
 }
 
-.header__boxSp:focus {
-  outline: none;
-}
-
 .hamMenu {
   display: none;
   width: 80%;
@@ -423,6 +419,10 @@ header {
   height: 60px;
 }
 
+.closeHum:focus {
+  outline: none;
+}
+
 .closeHum span {
   margin: 10px 0;
   display: block;
@@ -444,6 +444,10 @@ header {
 .closeHum span:nth-child(3) {
   display: none;
   transition: .3s;
+}
+
+.closeHum span:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -472,9 +476,6 @@ header {
     height: 2px;
     background-color: #000000;
     transition: .3s;
-  }
-  .header__boxSp span:focus {
-    outline: none;
   }
 }
 
