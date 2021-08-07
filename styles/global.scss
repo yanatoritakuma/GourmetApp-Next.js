@@ -476,6 +476,9 @@ header{
     display: block;
     width: 30px;
     height: 60px;
+    &:focus {
+      outline: none;
+    }
 
     span{
       margin: 10px 0;
@@ -484,6 +487,9 @@ header{
       height: 2px;
       background-color:#000000;
       transition: .3s;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

@@ -462,6 +462,9 @@ header {
     width: 30px;
     height: 60px;
   }
+  .header__boxSp:focus {
+    outline: none;
+  }
   .header__boxSp span {
     margin: 10px 0;
     display: block;
@@ -469,6 +472,9 @@ header {
     height: 2px;
     background-color: #000000;
     transition: .3s;
+  }
+  .header__boxSp span:focus {
+    outline: none;
   }
 }
 
