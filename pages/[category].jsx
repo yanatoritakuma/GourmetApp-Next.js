@@ -66,7 +66,7 @@ const Categorypage = ({ category }) => {
         <h2 className={activeTitle()}>{category}Page</h2>
         <ul>
           {
-            categoryArray.map((categoryValue, i) => {
+            categoryArray.map((categoryValue) => {
               return(
                 <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
