@@ -394,6 +394,9 @@ header{
 
 .header__boxSp{
   display: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .hamMenu{
