@@ -68,41 +68,6 @@ export default function Layout({children}) {
                 </Link>
               </div>
             </li>
-            {/* <li>
-              <Link href="/all">
-                <a>AllDishes</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/meat">
-                <a>MeatDish</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/fish">
-                <a>FishDish</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/noodle">
-                <a>Noodles</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/salad">
-                <a>Salad</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/dessert">
-                <a>Dessert</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/coffee">
-                <a>Coffee</a>
-              </Link>
-            </li> */}
           </ul>
         </nav>
         <div 
