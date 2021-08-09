@@ -39,10 +39,36 @@ export default function Layout({children}) {
           <ul>
             <li>
               <Link href="/">
-                <a>Home</a>
+                <a className="header__boxLink">Home</a>
               </Link>
             </li>
             <li>
+              <a className="header__boxLink">Category</a>
+              <div className="header__hover">
+                <Link href="/all">
+                  <a><span data-text="AllDishes">AllDishes</span></a>
+                </Link>
+                <Link href="/meat">
+                  <a><span data-text="MeatDish">MeatDish</span></a>
+                </Link>
+                <Link href="/fish">
+                  <a><span data-text="FishDish">FishDish</span></a>
+                </Link>
+                <Link href="/noodle">
+                  <a><span data-text="Noodles">Noodles</span></a>
+                </Link>
+                <Link href="/salad">
+                  <a><span data-text="Salad">Salad</span></a>
+                </Link>
+                <Link href="/dessert">
+                  <a><span data-text="Dessert">Dessert</span></a>
+                </Link>
+                <Link href="/coffee">
+                  <a><span data-text="Coffee">Coffee</span></a>
+                </Link>
+              </div>
+            </li>
+            {/* <li>
               <Link href="/all">
                 <a>AllDishes</a>
               </Link>
@@ -76,7 +102,7 @@ export default function Layout({children}) {
               <Link href="/coffee">
                 <a>Coffee</a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
         <div 
