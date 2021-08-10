@@ -380,8 +380,10 @@ header{
   }
   ul{
     display: flex;
+    align-items: center;
     list-style: none;
     width: 80%;
+    position: relative;
   }
 
   li{
@@ -468,6 +470,15 @@ header{
     font-size: 12px;
   }
 
+  .header__boxIi{
+    position: absolute;
+    right: 0;
+  }
+
+  .header__boxIcon{
+    font-size: 30px;
+    color: #c13584;
+  }
 }
 
 .header__boxSp{

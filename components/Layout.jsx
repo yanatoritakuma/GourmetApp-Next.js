@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -67,6 +69,9 @@ export default function Layout({children}) {
                   <a><span data-text="Coffee">Coffee</span></a>
                 </Link>
               </div>
+            </li>
+            <li className="header__boxIi">
+                <a className="header__boxIcon" href="https://www.instagram.com/gourmet126527/"><FontAwesomeIcon icon={faInstagram} /></a>
             </li>
           </ul>
         </nav>

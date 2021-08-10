@@ -366,8 +366,10 @@ header {
 
 .header__box ul {
   display: flex;
+  align-items: center;
   list-style: none;
   width: 80%;
+  position: relative;
 }
 
 .header__box li {
@@ -452,6 +454,16 @@ header {
   color: #000000;
   font-weight: bold;
   font-size: 12px;
+}
+
+.header__box .header__boxIi {
+  position: absolute;
+  right: 0;
+}
+
+.header__box .header__boxIcon {
+  font-size: 30px;
+  color: #c13584;
 }
 
 .header__boxSp {
