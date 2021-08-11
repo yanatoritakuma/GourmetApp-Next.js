@@ -111,6 +111,7 @@ export default function Layout({children}) {
           <Link href="/coffee">
             <a>Coffee</a>
           </Link>
+          <a className="header__boxIcon" href="https://www.instagram.com/gourmet126527/"><FontAwesomeIcon icon={faInstagram} /></a>
         </div>
       </div>
     </header>
