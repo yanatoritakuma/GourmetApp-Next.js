@@ -5,14 +5,10 @@ import utilStyles from '../styles/login.module.css'
 
 const  Login = () => {
   const [ userID, setUserID ] = useState("");
-  const [ disabled, setDisabled ] = useState(true);
+  const disabled = true;
   const { login } = useAuth();
   const onClickLogin = () => login(userID);
   const onChangeUserID = (e) => setUserID(e.target.value);
-
-  
-
-  console.log("disabled",disabled);
 
   return useMemo(() =>
     <Layout>

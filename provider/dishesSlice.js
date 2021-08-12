@@ -12,10 +12,8 @@ export const dishesSlice = createSlice({
         return alert("Please enter StoreName");
       }
       state.categories = [...state.categories, action.payload];
-      console.log("action.payload",action.payload);
     },
     
-
     // 削除機能
     deleteCategory(state,action) {
       const targetDelete = state.categories.filter(v => v.id !== action.payload);
