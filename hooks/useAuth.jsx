@@ -14,6 +14,6 @@ export const useAuth = () => {
         alert("パスワードが違います");
       }
     }).catch(() => alert("ログインできません"));
-  },[]);
+  },[router]);
   return { login };
 }
