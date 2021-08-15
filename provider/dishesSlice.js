@@ -4,6 +4,7 @@ export const dishesSlice = createSlice({
   name: 'dishes',
   initialState: {
     categories:[],
+    loginID:[],
   },
   reducers: {
     // 登録機能
@@ -18,10 +19,15 @@ export const dishesSlice = createSlice({
     deleteCategory(state,action) {
       const targetDelete = state.categories.filter(v => v.id !== action.payload);
       state.categories = [...targetDelete];
+    },
+
+    // ログインID保持
+    loginIDStates(state,action){
+      state.loginID = action.payload;
     }
   }
 })
 
-export const { pushRegistration, deleteCategory } = dishesSlice.actions
+export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions
 
 export default dishesSlice.reducer

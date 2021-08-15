@@ -2,7 +2,6 @@ import React, { useState, useMemo } from "react";
 import utilStyles from '../styles/categorypage.module.css'
 import Layout from "../components/Layout"
 import ModalStaet from '../components/ModalStaet'
-import Image from 'next/image'
 import { useSelector } from "react-redux";
 import { useSelect } from "../hooks/useSelectState";
 
