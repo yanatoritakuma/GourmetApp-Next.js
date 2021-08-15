@@ -14,9 +14,6 @@ export default function Layout({children}) {
   useEffect(() => {
     openHam && menuRef.current.focus();
   }, [openHam]);
-  const onClickopenHam = () => () => {
-    setOpenHam(!openHam);
-  };
 
   return(
     <>
@@ -29,7 +26,7 @@ export default function Layout({children}) {
         <Link href="/">
           <a>
             <Image
-              src="/image/logo.JPG"
+              src="/image/logo.jpg"
               height={50}
               width={50}
               alt="icon"
@@ -45,7 +42,7 @@ export default function Layout({children}) {
               </Link>
             </li>
             <li>
-              <a className="header__boxLink">Category</a>
+              <span className="header__boxLink">Category</span>
               <div className="header__hover">
                 <Link href="/all">
                   <a><span data-text="AllDishes">AllDishes</span></a>
@@ -88,7 +85,7 @@ export default function Layout({children}) {
         </div>
         <div className={`hamMenu ${openHam ? 'shown' : ''}`}>
           <Link href="/">
-            <a onClick={onClickopenHam}>Home</a>
+            <a>Home</a>
           </Link>
           <Link href="/all">
             <a>AllDishes</a>

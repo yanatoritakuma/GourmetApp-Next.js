@@ -1,13 +1,12 @@
-import React, { useState, useMemo } from 'react'
-import Layout from "../components/Layout"
+import React, { useState, useMemo } from 'react';
+import Layout from "../components/Layout";
 import { useAuth } from '../hooks/useAuth';
-import utilStyles from '../styles/login.module.css'
+import utilStyles from '../styles/login.module.css';
 import { useDispatch } from "react-redux";
 import { loginIDStates } from "../provider/dishesSlice";
 
-const  Login = () => {
+const Login = () => {
   const [ userID, setUserID ] = useState("");
-  const disabled = true;
   const { login } = useAuth();
   const dispatch = useDispatch();
   const onChangeUserID = (e) => setUserID(e.target.value);
@@ -27,7 +26,7 @@ const  Login = () => {
             3でログインをすると管理者としてログインでき削除機能が使用可能です。
           </p>
           <input placeholder="PassWord" value={userID} onChange={onChangeUserID} />
-          <button type="button" disabled={userID === "" ? disabled : !disabled} onClick={onClickLogin}>Login</button>
+          <button type="button" disabled={userID === "" ? true : false} onClick={onClickLogin}>Login</button>
         </div>
       </section>
     </Layout>

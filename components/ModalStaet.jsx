@@ -15,12 +15,6 @@ export default function ModalStaet(props){
     setModal(!modal);
   }
 
-  const switchDelete = () => {
-    if (checkLoginID.payload === "3") {
-      return <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
-    } 
-  }
-
   return(
     <section className={modal ? utilStyles.modalStaetOpen : utilStyles.modalStaet}>
       <div className={utilStyles.modalStaet__box}>
@@ -38,7 +32,15 @@ export default function ModalStaet(props){
           <p className={utilStyles.modalStaet__boxText}>{selectedState?.streetAddress}</p>
           <h4>Note</h4>
           <p className={utilStyles.modalStaet__boxNote}>{selectedState?.note}</p>
-          {switchDelete()}
+          {
+           (() => {
+            if (checkLoginID.payload === "3") {
+              return(
+                <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
+              )
+            }
+          })()
+          }
           </div>
       </div>
     </section>
