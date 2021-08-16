@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import Head from 'next/head'
@@ -10,10 +10,6 @@ export const siteTitle = 'GourmetApp'
 export default function Layout({children}) {
   const [openHam, setOpenHam] = useState(false);
   const menuRef = useRef(null);
-
-  useEffect(() => {
-    openHam && menuRef.current.focus();
-  }, [openHam]);
 
   return(
     <>
