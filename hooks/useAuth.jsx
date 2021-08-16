@@ -1,14 +1,14 @@
 import { useCallback } from "react";
 import { useRouter } from 'next/router';
-import axios from "axios";
-
 
 export const useAuth = () => {
   const router = useRouter();
 
   const login = useCallback((id) => {
-    axios.get(`https://jsonplaceholder.typicode.com/users/${id}`).then((res) => {
-      if(res.data){
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+    .then(res => res.json())
+    .then(josn => {
+      if(josn.id){
         router.push("/Registration");
       }else{
         alert("パスワードが違います");
