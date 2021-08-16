@@ -1,6 +1,6 @@
 import utilStyles from '../styles/modalStaet.module.css'
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCategory, loginIDStates } from "../provider/dishesSlice";
+import { deleteCategory } from "../provider/dishesSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,7 +8,6 @@ export default function ModalStaet(props){
   const { selectedState, modal, setModal } = props;
   const { loginID } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
-  const checkLoginID = dispatch(loginIDStates(loginID));
 
   const onClickDelete = (selectedState) => {
     dispatch(deleteCategory(selectedState));
@@ -34,7 +33,7 @@ export default function ModalStaet(props){
           <p className={utilStyles.modalStaet__boxNote}>{selectedState?.note}</p>
           {
            (() => {
-            if (checkLoginID.payload === "3") {
+            if (loginID === "3") {
               return(
                 <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
               )
