@@ -1,4 +1,4 @@
-import utilStyles from '../styles/modalStaet.module.css'
+import utilStyles from '../styles/modalStaet.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory } from "../provider/dishesSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,13 +32,7 @@ export default function ModalStaet(props){
           <h4>Note</h4>
           <p className={utilStyles.modalStaet__boxNote}>{selectedState?.note}</p>
           {
-           (() => {
-            if (loginID === "3") {
-              return(
-                <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button>
-              )
-            }
-          })()
+            loginID === "3" ? <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button> : ""
           }
           </div>
       </div>

@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react';
 import { useDispatch } from "react-redux";
-import Layout from "../components/Layout"
-import utilStyles from '../styles/registration.module.css'
+import Layout from "../components/Layout";
+import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
 
