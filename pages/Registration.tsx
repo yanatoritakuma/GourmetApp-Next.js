@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from '../app/hooks';
 import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
@@ -21,9 +21,9 @@ const  Registration = () => {
     category,
     photoUrl,
     id:genRandSt()
-  };
-
-  const dispatch = useDispatch();
+  }
+  
+  const dispatch = useAppDispatch()
 
   const onClickPushRegistration = () => {
     dispatch(pushRegistration(dishesState));
