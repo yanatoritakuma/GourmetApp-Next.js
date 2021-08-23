@@ -6,7 +6,7 @@ import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function ModalStaet(props){
   const { selectedState, modal, setModal } = props;
-  const { loginID } = useSelector((state) => state.dishes);
+  const { loginIDs } = useSelector((state) => state.dishes);
   const dispatch = useDispatch();
 
   const onClickDelete = (selectedState) => {
@@ -32,7 +32,7 @@ export default function ModalStaet(props){
           <h4>Note</h4>
           <p className={utilStyles.modalStaet__boxNote}>{selectedState?.note}</p>
           {
-            loginID === "3" ? <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button> : ""
+            loginIDs === "3" ? <button className={utilStyles.deleteBtn} onClick={()=> onClickDelete(selectedState.id)}>Delete</button> : ""
           }
           </div>
       </div>

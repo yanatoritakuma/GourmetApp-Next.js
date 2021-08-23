@@ -443,7 +443,7 @@ header {
   left: 0;
   top: 0;
   content: attr(data-text);
-  padding: 0 .3em;
+  padding: 0 4px;
   color: #fff;
   background-color: #ffa500;
   transform-origin: 50% 0%;

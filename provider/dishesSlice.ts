@@ -3,12 +3,12 @@ import type { RootState } from '../app/store';
 
 interface DishesState {
   categories: string[]
-  loginID: string[]
+  loginIDs: string[]
 }
 
 const initialState: DishesState = {
   categories: [],
-  loginID:[]
+  loginIDs:[]
 }
 
 export const dishesSlice = createSlice({
@@ -24,18 +24,18 @@ export const dishesSlice = createSlice({
     },
     
     // 削除機能
-    deleteCategory(state,action:PayloadAction<any>) {
+    deleteCategory(state,action:PayloadAction<number>) {
       const targetDelete = state.categories.filter(v => v.id !== action.payload);
       state.categories = [...targetDelete];
     },
 
     // ログインID保持
     loginIDStates(state,action){
-      state.loginID = action.payload;
+      state.loginIDs = action.payload;
     }
   }
 })
 
-export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions
-export const selectCount = (state: RootState) => state.dishes.categories
-export default dishesSlice.reducer
+export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions;
+export const selectDishes = (state: RootState) => state.dishes.categories;
+export default dishesSlice.reducer;
