@@ -1,23 +1,15 @@
-import React, { useState } from "react";
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-
-
+import React, { useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const siteTitle = 'GourmetApp'
 
-
 export default function Layout({children}) {
-  const [openHum, setOpenHum] = useState(false);
-  const humMen = "humMen";
-  const closeHum = "closeHum";
-  const headerBoxSp = "header__boxSp"
-  const closeHumNone = "closeHumNone"
-
-  const onClickopenHum = () => {
-    setOpenHum(!openHum);
-  }
+  const [openHam, setOpenHam] = useState(false);
+  const menuRef = useRef(null);
 
   return(
     <>
@@ -30,9 +22,9 @@ export default function Layout({children}) {
         <Link href="/">
           <a>
             <Image
-              src="/image/logo.png"
-              height={80}
-              width={80}
+              src="/image/logoTop.jpg"
+              height={50}
+              width={50}
               alt="icon"
             />
           </a>
@@ -42,52 +34,52 @@ export default function Layout({children}) {
           <ul>
             <li>
               <Link href="/">
-                <a>Home</a>
+                <a className="header__boxLink">Home</a>
               </Link>
             </li>
             <li>
-              <Link href="/all">
-                <a>AllDishes</a>
-              </Link>
+              <span className="header__boxLink">Category</span>
+              <div className="header__hover">
+                <Link href="/all">
+                  <a><span data-text="AllDishes">AllDishes</span></a>
+                </Link>
+                <Link href="/meat">
+                  <a><span data-text="MeatDish">MeatDish</span></a>
+                </Link>
+                <Link href="/fish">
+                  <a><span data-text="FishDish">FishDish</span></a>
+                </Link>
+                <Link href="/noodle">
+                  <a><span data-text="Noodles">Noodles</span></a>
+                </Link>
+                <Link href="/salad">
+                  <a><span data-text="Salad">Salad</span></a>
+                </Link>
+                <Link href="/dessert">
+                  <a><span data-text="Dessert">Dessert</span></a>
+                </Link>
+                <Link href="/coffee">
+                  <a><span data-text="Coffee">Coffee</span></a>
+                </Link>
+              </div>
             </li>
-            <li>
-              <Link href="/meat">
-                <a>MeatDish</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/fish">
-                <a>FishDish</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/noodle">
-                <a>Noodles</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/salad">
-                <a>Salad</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/dessert">
-                <a>Dessert</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/coffee">
-                <a>Coffee</a>
-              </Link>
+            <li className="header__boxIi">
+                <a className="header__boxIcon" href="https://www.instagram.com/gourmet126527/"><FontAwesomeIcon icon={faInstagram} /></a>
             </li>
           </ul>
         </nav>
-        <div className={openHum ? closeHum : headerBoxSp} onClick={onClickopenHum}> 
+        <div 
+          className={openHam ? 'closeHum' : 'header__boxSp'} 
+          onClick={() => setOpenHam(!openHam)} 
+          onBlur={() => setOpenHam(false)} 
+          ref={menuRef} 
+          tabIndex={0}
+        > 
           <span></span>
           <span></span>
           <span></span>
         </div>
-        <div className={openHum ? humMen : closeHumNone}>
+        <div className={`hamMenu ${openHam ? 'shown' : ''}`}>
           <Link href="/">
             <a>Home</a>
           </Link>
@@ -112,6 +104,7 @@ export default function Layout({children}) {
           <Link href="/coffee">
             <a>Coffee</a>
           </Link>
+          <a className="header__boxIcon" href="https://www.instagram.com/gourmet126527/"><FontAwesomeIcon icon={faInstagram} /></a>
         </div>
       </div>
     </header>

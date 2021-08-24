@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from "react";
-import utilStyles from '../styles/categorypage.module.css'
-import Layout from "../components/Layout"
-import ModalStaet from '../components/ModalStaet'
-import Image from 'next/image'
+import utilStyles from '../styles/categorypage.module.css';
+import Layout from "../components/Layout";
+import ModalStaet from '../components/ModalStaet';
 import { useSelector } from "react-redux";
 import { useSelect } from "../hooks/useSelectState";
 
@@ -66,17 +65,11 @@ const Categorypage = ({ category }) => {
         <h2 className={activeTitle()}>{category}Page</h2>
         <ul>
           {
-            categoryArray.map((categoryValue, i) => {
+            categoryArray.map((categoryValue) => {
               return(
                 <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
                   <div className={utilStyles.categoryPage__img}>
-                    <Image
-                      src="/image/logo.png"
-                      layout='responsive'
-                      width={100}
-                      height={100}
-                      alt="icon"
-                    />
+                    <img src={categoryValue.photoUrl} alt="" />
                   </div>
                   <h3>{categoryValue.name}</h3>
                 </li>

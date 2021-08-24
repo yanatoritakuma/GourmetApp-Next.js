@@ -344,6 +344,7 @@ header {
 }
 
 .header__box {
+  padding: 8px 0;
   position: fixed;
   z-index: 999;
   top: 0;
@@ -365,9 +366,88 @@ header {
 
 .header__box ul {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   list-style: none;
   width: 80%;
+  position: relative;
+}
+
+.header__box li {
+  margin: 0 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.header__box li:hover .header__hover {
+  opacity: 1;
+  visibility: visible;
+  transition: .3s;
+  top: 24px;
+}
+
+.header__box .header__boxLink {
+  font-size: 14px;
+  font-weight: bold;
+  background-image: linear-gradient(to right, transparent 50%, #ffa500 50%);
+  background-position: 0 0;
+  background-size: 200% auto;
+  transition: .3s;
+}
+
+.header__box .header__boxLink:hover {
+  background-position: -100% 0;
+  color: #fff;
+}
+
+.header__box .header__hover {
+  padding: 20px 40px;
+  position: absolute;
+  top: 0px;
+  left: -62%;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+  background-color: #fff;
+  box-shadow: 2px 2px 4px #faebd7;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.header__box .header__hover a {
+  margin: 10px auto;
+  display: inline-block;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  vertical-align: bottom;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.header__box .header__hover a:hover span {
+  background-color: #ffa500;
+  transform: translate3d(0, 0, -30px) rotateX(90deg);
+}
+
+.header__box .header__hover a span {
+  display: inline-block;
+  position: relative;
+  padding: 0 .3em;
+  transition: .4s;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+}
+
+.header__box .header__hover a span::after {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: attr(data-text);
+  padding: 0 4px;
+  color: #fff;
+  background-color: #ffa500;
+  transform-origin: 50% 0%;
+  transform: translate3d(0, 105%, 0) rotateX(-90deg);
 }
 
 .header__box a {
@@ -377,25 +457,41 @@ header {
   font-size: 12px;
 }
 
+.header__box .header__boxIi {
+  position: absolute;
+  right: 0;
+}
+
+.header__box .header__boxIcon {
+  font-size: 30px;
+  color: #c13584;
+}
+
 .header__boxSp {
   display: none;
 }
 
-.humMen {
-  display: block;
+.hamMenu {
+  display: none;
   width: 80%;
   height: 100vh;
   background-color: #fff;
   box-shadow: 4px 4px 4px #000000;
   position: fixed;
-  top: 84px;
-  left: 0;
+  top: 78px;
+  left: -1000px;
   z-index: 9999;
   opacity: 1;
   transition: .3s;
+  transition: .5s;
 }
 
-.humMen a {
+.hamMenu.shown {
+  left: 0px;
+  transition: .5s;
+}
+
+.hamMenu a {
   margin: 40px 0;
   display: block;
   text-align: center;
@@ -410,6 +506,10 @@ header {
   display: block;
   width: 30px;
   height: 60px;
+}
+
+.closeHum:focus {
+  outline: none;
 }
 
 .closeHum span {
@@ -435,13 +535,16 @@ header {
   transition: .3s;
 }
 
-.closeHumNone {
-  display: none;
+.closeHum span:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 768px) {
   .header__box nav {
     display: none;
+  }
+  .hamMenu {
+    display: block;
   }
   .header__boxSp {
     display: block;
@@ -451,6 +554,9 @@ header {
     display: block;
     width: 30px;
     height: 60px;
+  }
+  .header__boxSp:focus {
+    outline: none;
   }
   .header__boxSp span {
     margin: 10px 0;
@@ -466,13 +572,13 @@ header {
   .header__box h2 {
     font-size: 20px;
   }
-  .humMen a {
+  .hamMenu a {
     font-size: 18px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .humMen {
+  .hamMenu {
     width: 80%;
   }
 }
@@ -597,7 +703,7 @@ header {
   17% {
     opacity: 1;
   }
-  25% {
+  30% {
     opacity: 0;
     transform: scale(1.2);
     z-index: 9;

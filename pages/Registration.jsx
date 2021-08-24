@@ -1,27 +1,26 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react';
 import { useDispatch } from "react-redux";
-import Layout from "../components/Layout"
-import utilStyles from '../styles/registration.module.css'
+import Layout from "../components/Layout";
+import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
-
+ 
 const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const [photo,setPhoto] = useState("");
-
+  const [photoUrl, setPhotoUrl] = useState(null);
   const dishesState = {
     name,
     tel,
     streetAddress,
     note,
     category,
-    photo,
+    photoUrl,
     id:genRandSt()
-  };
+  }
 
   const dispatch = useDispatch();
 
@@ -31,17 +30,14 @@ const  Registration = () => {
     setTel(""),
     setStreetAddress(""),
     setNote(""),
-    setCategory("")
+    setCategory(""),
+    setPhotoUrl("")
   }
-
-  const onChangePhoto = (event, cb) => {
-    cb(event);
-    const targetName = event.target.files.item(0).name;
-    setPhoto(targetName);
+  const onChangePhoto = (e) => {
+    const photoFile = e.target.files[0];
+    const photoFileUrl = URL.createObjectURL(photoFile);
+    setPhotoUrl(photoFileUrl);
   };
-
-  console.log("photo",photo);
-
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.registration}>
@@ -52,13 +48,10 @@ const  Registration = () => {
           <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
           <input 
             type="file" 
-            value={photo} 
-            name="upfile" 
-            id="upfile" 
             accept=".png, .jpg, .jpeg"
-            // onChange={(e) => {setPhoto(e.target.value)}} 
-            onChange={e => onChangePhoto(e, onChange, setFileName)}
+            onChange={onChangePhoto}
           />
+          <img src={photoUrl} alt="プレビュー画像" />
           <select id="category" value={category} onChange={(e) => {setCategory(e.target.value)}} >
             <option value="all">Category</option>
             <option value="meat">MeatDish</option>
@@ -73,6 +66,6 @@ const  Registration = () => {
         </div>
       </section>
     </Layout>
-  ,[name,tel,streetAddress,category,note])
+  ,[name,tel,streetAddress,category,note,photoUrl])
 }
 export default Registration
