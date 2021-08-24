@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { useAppDispatch } from '../app/hooks';
+import { useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
-
+ 
 const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
@@ -12,7 +12,6 @@ const  Registration = () => {
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
   const [photoUrl, setPhotoUrl] = useState(null);
-
   const dishesState = {
     name,
     tel,
@@ -22,8 +21,8 @@ const  Registration = () => {
     photoUrl,
     id:genRandSt()
   }
-  
-  const dispatch = useAppDispatch()
+
+  const dispatch = useDispatch();
 
   const onClickPushRegistration = () => {
     dispatch(pushRegistration(dishesState));
@@ -34,13 +33,11 @@ const  Registration = () => {
     setCategory(""),
     setPhotoUrl("")
   }
-
   const onChangePhoto = (e) => {
     const photoFile = e.target.files[0];
     const photoFileUrl = URL.createObjectURL(photoFile);
     setPhotoUrl(photoFileUrl);
   };
-
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.registration}>
