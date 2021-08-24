@@ -22,7 +22,7 @@ export default function Layout({children}) {
         <Link href="/">
           <a>
             <Image
-              src="/image/logo.jpg"
+              src="/image/logoTop.jpg"
               height={50}
               width={50}
               alt="icon"
