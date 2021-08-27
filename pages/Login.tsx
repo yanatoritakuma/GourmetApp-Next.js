@@ -1,21 +1,21 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, FC, ChangeEvent } from 'react';
 import Layout from "../components/Layout";
 import { useAuth } from '../hooks/useAuth';
 import utilStyles from '../styles/login.module.css';
 import { useDispatch } from "react-redux";
 import { loginIDStates } from "../provider/dishesSlice";
 
-const Login = () => {
+const Login:FC = () => {
   const [ userID, setUserID ] = useState("");
   const { login } = useAuth();
   const dispatch = useDispatch();
-  const onChangeUserID = (e) => setUserID(e.target.value);
+  const onChangeUserID = (e: ChangeEvent<HTMLInputElement>) => setUserID(e.target.value);
 
   const onClickLogin = () => {
     login(userID);
     dispatch(loginIDStates(userID));
   }
-    
+
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.login}>

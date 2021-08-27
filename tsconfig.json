@@ -1,41 +1,34 @@
 {
-  // コンパイルに関するオプションを設定
   "compilerOptions": {
-    // ECMAScript target versionを指定
-    "target": "es6",
-    // ビルドする際に含めるlibraryファイル
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    //JSファイルのビルドを可能に
-    "allowJs": true,
-    //暗黙のany型をエラーに
-    "noImplicitAny": false,
-    //型宣言ファイルの型チェックをスキップする
-    "skipLibCheck": true,
-    // CommonJSモジュールとESモジュール間の相互運用性を,すべてのインポート用に名前空間オブジェクトを作成することで可能に
-    "esModuleInterop": true,
-    //エキスポートしないモジュールからのインポートを許可するか（型チェックのみに影響）
-    "allowSyntheticDefaultImports": true,
-    //厳密な型チェックオプションを有効に
-    "strict": true,
-    //大文字小文字を区別して参照を解決するようにする
-    "forceConsistentCasingInFileNames": true,
-    //生成されるモジュールコードを指定
+    "target": "es2020",
     "module": "esnext",
-    //モジュール解決戦略を指定する: 'node'（Node.js）または 'classic'
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "jsx": "preserve",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
     "moduleResolution": "node",
-    //自分で型定義を行う必要なく json ファイルを扱うことを可能に
-    "resolveJsonModule": true,
-    //各々のファイルを別のモジュールとして変換
-    "isolatedModules": true,
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
     "noEmit": true,
-    //tsx拡張子においてJSXサポートを行うか
-    "jsx": "preserve"
+    "resolveJsonModule": true,
+    "isolatedModules": true,
   },
   "include": [
-    "src"
-  ]
+    "src/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "compileOnSave": false
 }
