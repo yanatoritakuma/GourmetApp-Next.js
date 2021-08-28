@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
- 
+
 const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
@@ -46,8 +46,8 @@ const  Registration = () => {
           <input placeholder="StoreName" value={name} onChange={(e) => {setName(e.target.value )}} />
           <input placeholder="PhoneNumber" value={tel} onChange={(e) => {setTel(e.target.value)}} />
           <input placeholder="StreetAddress" value={streetAddress} onChange={(e) => {setStreetAddress(e.target.value)}} />
-          <input 
-            type="file" 
+          <input
+            type="file"
             accept=".png, .jpg, .jpeg"
             onChange={onChangePhoto}
           />
