@@ -1,11 +1,11 @@
-import React, { useState, useMemo, ChangeEvent } from 'react';
+import React, { useState, useMemo, ChangeEvent, FC, HTMLAttributes } from 'react';
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
 
-const  Registration = () => {
+const  Registration:FC = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");
@@ -42,11 +42,12 @@ const  Registration = () => {
     setPhotoUrl(null);
   }
 
-  const onChangePhoto = (e:ChangeEvent<HTMLInputElement>) => {
-    const photoFile = e.target.files[0];
-    const photoFileUrl = URL.createObjectURL(photoFile);
-    setPhotoUrl(photoFileUrl);
-    console.log("photoFile",photoFile);
+  const onChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const photoFile = e.target.files[0];
+      const photoFileUrl = URL.createObjectURL(photoFile);
+      setPhotoUrl(photoFileUrl);
+    }
   };
 
   return useMemo(() =>
