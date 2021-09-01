@@ -1,12 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../app/store';
+
+interface DishesType {
+  categories: string[],
+  loginIDs: string[],
+}
+
+const initialState: DishesType = {
+  categories:[],
+  loginIDs:[],
+}
 
 export const dishesSlice = createSlice({
   name: 'dishes',
-  initialState: {
-    categories:[],
-    loginIDs:[],
-  },
-
+  initialState,
   reducers: {
     // 登録機能
     pushRegistration(state, action) {
@@ -21,7 +28,7 @@ export const dishesSlice = createSlice({
       const targetDelete = state.categories.filter(v => v.id !== action.payload);
       state.categories = [...targetDelete];
     },
-    
+
     // ログインID保持
     loginIDStates(state,action){
       state.loginIDs = action.payload;
@@ -30,5 +37,7 @@ export const dishesSlice = createSlice({
 })
 
 export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions
+
+export const selectDishes = (state: RootState) => state.dishes.categories
 
 export default dishesSlice.reducer

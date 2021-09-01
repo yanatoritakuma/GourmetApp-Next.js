@@ -20,8 +20,8 @@ export async function getStaticPaths() {
   }
 }
 
-export const getStaticProps = async context => {
-  const { category } = context.params 
+export const getStaticProps = async (context: { params: { category: string; }; }) => {
+  const { category } = context.params
   return {
     props: { category }
   }
@@ -58,7 +58,7 @@ const Categorypage = ({ category }) => {
       return utilStyles.coffee
     }
   }
-  
+
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.categoryPage}>
@@ -83,4 +83,3 @@ const Categorypage = ({ category }) => {
   ,[onClickOpen])
 }
 export default Categorypage
-

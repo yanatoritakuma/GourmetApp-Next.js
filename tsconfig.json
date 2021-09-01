@@ -1,45 +1,3 @@
-// {
-//   "compilerOptions": {
-//     "target": "es2020",
-//     "module": "esnext",
-//     "lib": [
-//       "es2020",
-//       "dom"
-//     ],
-//     "jsx": "preserve",
-//     "sourceMap": true,
-//     "outDir": "./dist",
-//     "rootDir": "./src",
-//     "strict": true,
-//     "moduleResolution": "node",
-//     "baseUrl": "src",
-//     "esModuleInterop": true,
-//     "experimentalDecorators": true,
-//     "emitDecoratorMetadata": true,
-//     "skipLibCheck": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "allowJs": true,
-//     "noEmit": true,
-//     "resolveJsonModule": true,
-//     "isolatedModules": true,
-//     "noImplicitAny":false,
-//     "typeRoots": [
-//       "node_modules/@types",
-//       "src/types/"
-//     ]
-//   },
-//   "include": [
-//     "src/**/*"
-//   ],
-//   "exclude": [
-//     "dist",
-//     "node_modules"
-//   ],
-//   "compileOnSave": false
-// }
-
-
-
 {
   "compilerOptions": {
     "target": "es2020",
@@ -50,7 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    // "strict": true,
+    // "strict": true, 最終的にはtrueに戻す
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,

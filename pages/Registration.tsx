@@ -1,4 +1,4 @@
-import React, { useState, useMemo, ChangeEvent, FC, HTMLAttributes } from 'react';
+import React, { useState, useMemo, ChangeEvent, FC } from 'react';
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
