@@ -1,13 +1,20 @@
 import utilStyles from '../styles/modalStaet.module.css';
-import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory } from "../provider/dishesSlice";
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { FC } from 'react';
 
-export default function ModalStaet(props){
+type Props = {
+  selectedState: any;
+  modal: any;
+  setModal: any;
+};
+
+export const ModalStaet:FC<Props> = (props) => {
   const { selectedState, modal, setModal } = props;
-  const { loginIDs } = useSelector((state) => state.dishes);
-  const dispatch = useDispatch();
+  const { loginIDs } = useAppSelector((state) => state.dishes);
+  const dispatch = useAppDispatch();
 
   const onClickDelete = (selectedState) => {
     dispatch(deleteCategory(selectedState));

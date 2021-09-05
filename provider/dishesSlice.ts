@@ -3,12 +3,12 @@ import type { RootState } from '../app/store';
 
 interface DishesType {
   categories: string[],
-  loginIDs: string[],
+  loginIDs: string,
 }
 
 const initialState: DishesType = {
   categories:[],
-  loginIDs:[],
+  loginIDs:"",
 }
 
 export const dishesSlice = createSlice({

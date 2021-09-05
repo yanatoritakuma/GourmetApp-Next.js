@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import utilStyles from '../styles/categorypage.module.css';
 import Layout from "../components/Layout";
-import ModalStaet from '../components/ModalStaet';
-import { useSelector } from "react-redux";
+import { ModalStaet } from '../components/ModalStaet';
+import { useAppSelector } from '../app/hooks';
 import { useSelect } from "../hooks/useSelectState";
 
 export async function getStaticPaths() {
@@ -28,7 +28,7 @@ export const getStaticProps = async (context: { params: { category: string; }; }
 }
 
 const Categorypage = ({ category }) => {
-  const { categories } = useSelector((state) => state.dishes);
+  const { categories } = useAppSelector((state) => state.dishes);
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
 
@@ -40,6 +40,14 @@ const Categorypage = ({ category }) => {
     onSelectState({ categories,categoryValue });
     onClickModal();
   }
+
+  type TypeCategory = {
+    category: string;
+    id: string;
+    photoUrl: string;
+    name: string;
+
+  };
 
   const categoryArray = category === "all" ? categories : categories.filter((v) => v.category === category);
 
@@ -58,6 +66,8 @@ const Categorypage = ({ category }) => {
       return utilStyles.coffee
     }
   }
+
+  console.log(categoryArray);
 
   return useMemo(() =>
     <Layout>
