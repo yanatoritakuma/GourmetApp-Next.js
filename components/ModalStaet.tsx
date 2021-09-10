@@ -3,12 +3,19 @@ import { deleteCategory } from "../provider/dishesSlice";
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import { FC } from 'react';
 
 type Props = {
-  selectedState: any;
-  modal: any;
-  setModal: any;
+  selectedState: {
+    category: ""
+    id: string
+    name: string
+    note: string
+    photoUrl: null
+    streetAddress: string
+    tel: string
+  };
+  modal: boolean;
+  setModal: any
 };
 
 export const ModalStaet = (props: Props) => {
@@ -16,9 +23,11 @@ export const ModalStaet = (props: Props) => {
   const { loginIDs } = useAppSelector((state) => state.dishes);
   const dispatch = useAppDispatch();
 
-  const onClickDelete = (selectedState) => {
+  const onClickDelete = (selectedState: string) => {
     dispatch(deleteCategory(selectedState));
+    console.log("selectedState", selectedState);
     setModal(!modal);
+    console.log("setModal", setModal);
   }
 
   return(

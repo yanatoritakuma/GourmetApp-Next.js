@@ -67,8 +67,6 @@ const Categorypage = ({ category }) => {
     }
   }
 
-  console.log(categoryArray);
-
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.categoryPage}>
