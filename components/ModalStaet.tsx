@@ -11,7 +11,7 @@ type Props = {
   setModal: any;
 };
 
-export const ModalStaet:FC<Props> = (props) => {
+export const ModalStaet = (props: Props) => {
   const { selectedState, modal, setModal } = props;
   const { loginIDs } = useAppSelector((state) => state.dishes);
   const dispatch = useAppDispatch();

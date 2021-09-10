@@ -1,11 +1,11 @@
-import React, { useState, useMemo, ChangeEvent, FC } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 import { useDispatch } from "react-redux";
 import Layout from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
 
-const  Registration:FC = () => {
+const  Registration = () => {
   const [ name, setName ] = useState("");
   const [ tel, setTel ] = useState("");
   const [ streetAddress, setStreetAddress ] = useState("");

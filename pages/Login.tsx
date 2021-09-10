@@ -1,11 +1,11 @@
-import React, { useState, useMemo, FC, ChangeEvent } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 import Layout from "../components/Layout";
 import { useAuth } from '../hooks/useAuth';
 import utilStyles from '../styles/login.module.css';
 import { useDispatch } from "react-redux";
 import { loginIDStates } from "../provider/dishesSlice";
 
-const Login:FC = () => {
+const Login = () => {
   const [ userID, setUserID ] = useState("");
   const { login } = useAuth();
   const dispatch = useDispatch();
