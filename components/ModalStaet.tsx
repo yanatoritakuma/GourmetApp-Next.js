@@ -25,9 +25,7 @@ export const ModalStaet = (props: Props) => {
 
   const onClickDelete = (selectedState: string) => {
     dispatch(deleteCategory(selectedState));
-    console.log("selectedState", selectedState);
     setModal(!modal);
-    console.log("setModal", setModal);
   }
 
   return(

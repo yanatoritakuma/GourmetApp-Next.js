@@ -41,14 +41,6 @@ const Categorypage = ({ category }) => {
     onClickModal();
   }
 
-  type TypeCategory = {
-    category: string;
-    id: string;
-    photoUrl: string;
-    name: string;
-
-  };
-
   const categoryArray = category === "all" ? categories : categories.filter((v) => v.category === category);
 
   const activeTitle = () =>{
@@ -74,14 +66,18 @@ const Categorypage = ({ category }) => {
         <ul>
           {
             categoryArray.map((categoryValue) => {
-              return(
-                <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
-                  <div className={utilStyles.categoryPage__img}>
-                    <img src={categoryValue.photoUrl} alt="" />
-                  </div>
-                  <h3>{categoryValue.name}</h3>
-                </li>
-              )
+              if (categoryValue.name === "") {
+                return []
+              } else {
+                return(
+                  <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
+                    <div className={utilStyles.categoryPage__img}>
+                      <img src={categoryValue.photoUrl} alt="" />
+                    </div>
+                    <h3>{categoryValue.name}</h3>
+                  </li>
+                )
+              }
             })
           }
         </ul>

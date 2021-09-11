@@ -2,12 +2,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
 
 interface DishesType {
-  categories: string[],
+  categories: [{
+    category: string
+    id: string
+    name: string
+    note: string
+    photoUrl: string
+    streetAddress: string
+  }],
   loginIDs: string,
 }
 
 const initialState: DishesType = {
-  categories:[],
+  categories: [{
+    category: "",
+    id: "",
+    name: "",
+    note: "",
+    photoUrl: "",
+    streetAddress: ""
+  }],
   loginIDs:"",
 }
 
@@ -36,8 +50,8 @@ export const dishesSlice = createSlice({
   }
 })
 
-export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions
+export const { pushRegistration, deleteCategory, loginIDStates } = dishesSlice.actions;
 
-export const selectDishes = (state: RootState) => state.dishes.categories
+export const selectDishes = (state: RootState) => state.dishes.categories;
 
-export default dishesSlice.reducer
+export default dishesSlice.reducer;
