@@ -1,15 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
 
 interface DishesType {
-  categories: [{
+  categories: {
     category: string
     id: string
     name: string
     note: string
     photoUrl: string
     streetAddress: string
-  }],
+  }[],
   loginIDs: string,
 }
 
