@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, FC } from "react";
 import utilStyles from '../styles/categorypage.module.css';
-import Layout from "../components/Layout";
+import { Layout } from "../components/Layout";
 import { ModalStaet } from '../components/ModalStaet';
 import { useAppSelector } from '../app/hooks';
 import { useSelect } from "../hooks/useSelectState";
@@ -27,7 +27,20 @@ export const getStaticProps = async (context: { params: { category: string; }; }
   }
 }
 
-const Categorypage = ({ category }) => {
+type Props = {
+  category: string
+};
+
+type CategoryValueType = {
+  category: string;
+  id: string;
+  name: string;
+  note: string;
+  photoUrl: string;
+  streetAddress: string;
+};
+
+const Categorypage: FC<Props> = ({ category }) => {
   const { categories } = useAppSelector((state) => state.dishes);
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
@@ -36,7 +49,7 @@ const Categorypage = ({ category }) => {
     setModal(!modal);
   }
 
-  const onClickOpen = (categoryValue) => {
+  const onClickOpen = (categoryValue: CategoryValueType) => {
     onSelectState({ categories,categoryValue });
     onClickModal();
   }

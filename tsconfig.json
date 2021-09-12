@@ -16,9 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "strict": false
+    "strict": true
   },
-  // "strict": true, 最終的にはtrueに戻す
   "include": [
     "next-env.d.ts",
     "**/*.ts",

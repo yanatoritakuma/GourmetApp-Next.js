@@ -1,6 +1,6 @@
 import React, { useState, useMemo, ChangeEvent } from 'react';
 import { useDispatch } from "react-redux";
-import Layout from "../components/Layout";
+import { Layout } from "../components/Layout";
 import utilStyles from '../styles/registration.module.css';
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
@@ -11,7 +11,7 @@ const  Registration = () => {
   const [ streetAddress, setStreetAddress ] = useState("");
   const [note, setNote] = useState("");
   const [category, setCategory] = useState("");
-  const [photoUrl, setPhotoUrl] = useState<null | string>(null);
+  const [photoUrl, setPhotoUrl] = useState("");
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const onChangeTel = (e: ChangeEvent<HTMLInputElement>) => setTel(e.target.value);
@@ -39,7 +39,7 @@ const  Registration = () => {
     setStreetAddress(""),
     setNote(""),
     setCategory(""),
-    setPhotoUrl(null);
+    setPhotoUrl("");
   }
 
   const onChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {

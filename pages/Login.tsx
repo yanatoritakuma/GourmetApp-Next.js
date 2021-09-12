@@ -1,5 +1,5 @@
 import React, { useState, useMemo, ChangeEvent } from 'react';
-import Layout from "../components/Layout";
+import { Layout } from "../components/Layout";
 import { useAuth } from '../hooks/useAuth';
 import utilStyles from '../styles/login.module.css';
 import { useDispatch } from "react-redux";

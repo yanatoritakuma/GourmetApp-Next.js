@@ -10,7 +10,7 @@ type Props = {
     id: string
     name: string
     note: string
-    photoUrl: null
+    photoUrl: string
     streetAddress: string
     tel: string
   };
