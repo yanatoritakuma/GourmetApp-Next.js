@@ -13,7 +13,7 @@ type Props = {
     photoUrl: string
     streetAddress: string
     tel: string
-  };
+  } | any;
   modal: boolean;
   setModal: any
 };
