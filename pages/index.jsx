@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Layout, {siteTitle} from "../components/Layout"
 
 export default function Home() {
+  // 全てのファイルがjsで書いてある
   return (
       <Layout>
         <Head>
