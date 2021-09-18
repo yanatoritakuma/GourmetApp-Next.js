@@ -1,8 +1,8 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, FC } from "react";
 import utilStyles from '../styles/categorypage.module.css';
-import Layout from "../components/Layout";
-import ModalStaet from '../components/ModalStaet';
-import { useSelector } from "react-redux";
+import { Layout } from "../components/Layout";
+import { ModalStaet } from '../components/ModalStaet';
+import { useAppSelector } from '../app/hooks';
 import { useSelect } from "../hooks/useSelectState";
 
 export async function getStaticPaths() {
@@ -20,15 +20,28 @@ export async function getStaticPaths() {
   }
 }
 
-export const getStaticProps = async context => {
-  const { category } = context.params 
+export const getStaticProps = async (context: { params: { category: string; }; }) => {
+  const { category } = context.params
   return {
     props: { category }
   }
 }
 
-const Categorypage = ({ category }) => {
-  const { categories } = useSelector((state) => state.dishes);
+type Props = {
+  category: string
+};
+
+type CategoryValueType = {
+  category: string;
+  id: string;
+  name: string;
+  note: string;
+  photoUrl: string;
+  streetAddress: string;
+};
+
+const Categorypage: FC<Props> = ({ category }) => {
+  const { categories } = useAppSelector((state) => state.dishes);
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelect();
 
@@ -36,7 +49,7 @@ const Categorypage = ({ category }) => {
     setModal(!modal);
   }
 
-  const onClickOpen = (categoryValue) => {
+  const onClickOpen = (categoryValue: CategoryValueType) => {
     onSelectState({ categories,categoryValue });
     onClickModal();
   }
@@ -58,7 +71,7 @@ const Categorypage = ({ category }) => {
       return utilStyles.coffee
     }
   }
-  
+
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.categoryPage}>
@@ -66,14 +79,18 @@ const Categorypage = ({ category }) => {
         <ul>
           {
             categoryArray.map((categoryValue) => {
-              return(
-                <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
-                  <div className={utilStyles.categoryPage__img}>
-                    <img src={categoryValue.photoUrl} alt="" />
-                  </div>
-                  <h3>{categoryValue.name}</h3>
-                </li>
-              )
+              if (categoryValue.name === "") {
+                return []
+              } else {
+                return(
+                  <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
+                    <div className={utilStyles.categoryPage__img}>
+                      <img src={categoryValue.photoUrl} alt="" />
+                    </div>
+                    <h3>{categoryValue.name}</h3>
+                  </li>
+                )
+              }
             })
           }
         </ul>
@@ -83,4 +100,3 @@ const Categorypage = ({ category }) => {
   ,[onClickOpen])
 }
 export default Categorypage
-

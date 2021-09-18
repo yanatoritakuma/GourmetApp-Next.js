@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import Layout from "../components/Layout";
+import React, { useState, useMemo, ChangeEvent } from 'react';
+import { Layout } from "../components/Layout";
 import { useAuth } from '../hooks/useAuth';
 import utilStyles from '../styles/login.module.css';
 import { useDispatch } from "react-redux";
@@ -9,13 +9,13 @@ const Login = () => {
   const [ userID, setUserID ] = useState("");
   const { login } = useAuth();
   const dispatch = useDispatch();
-  const onChangeUserID = (e) => setUserID(e.target.value);
+  const onChangeUserID = (e: ChangeEvent<HTMLInputElement>) => setUserID(e.target.value);
 
   const onClickLogin = () => {
     login(userID);
     dispatch(loginIDStates(userID));
   }
-    
+
   return useMemo(() =>
     <Layout>
       <section className={utilStyles.login}>

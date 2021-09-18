@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FC } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import Head from 'next/head';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export const siteTitle = 'GourmetApp'
 
-export default function Layout({children}) {
+export const Layout: FC = ({ children }) => {
   const [openHam, setOpenHam] = useState(false);
   const menuRef = useRef(null);
 
@@ -68,13 +68,13 @@ export default function Layout({children}) {
             </li>
           </ul>
         </nav>
-        <div 
-          className={openHam ? 'closeHum' : 'header__boxSp'} 
-          onClick={() => setOpenHam(!openHam)} 
-          onBlur={() => setOpenHam(false)} 
-          ref={menuRef} 
+        <div
+          className={openHam ? 'closeHum' : 'header__boxSp'}
+          onClick={() => setOpenHam(!openHam)}
+          onBlur={() => setOpenHam(false)}
+          ref={menuRef}
           tabIndex={0}
-        > 
+        >
           <span></span>
           <span></span>
           <span></span>
