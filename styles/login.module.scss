@@ -1,22 +1,28 @@
 // Login.jsx
-.login{
+.login {
   margin: 100px auto;
   padding: 50px 0;
   background-color: #e2dedb;
   width: 100%;
   max-width: 1200px;
 
-  h2{
+  h2 {
     padding: 20px 0;
     font-size: 26px;
     text-align: center;
     color: #b3aca7;
   }
+
+  h3 {
+    font-size: 24px;
+    text-align: center;
+    color: #b3aca7;
+  }
 }
 
-.login__box{
-  input{
-    margin: 0 auto;
+.login__box {
+  input {
+    margin: 10px auto;
     padding: 10px 10px;
     display: block;
     width: 260px;
@@ -28,11 +34,11 @@
     }
   }
 
-  p{
+  p {
     text-align: center;
   }
 
-  button{
+  button {
     margin: 10px auto;
     padding: 10px 10px;
     display: block;
@@ -44,8 +50,18 @@
     &:focus {
       outline: none;
     }
-    &:hover{
-      opacity: .7;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.login__boxIn {
+  margin-top: 30px;
+  p {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
     }
   }
 }

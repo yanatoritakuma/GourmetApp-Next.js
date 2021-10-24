@@ -13,8 +13,14 @@
   color: #b3aca7;
 }
 
+.login h3 {
+  font-size: 24px;
+  text-align: center;
+  color: #b3aca7;
+}
+
 .login__box input {
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 10px 10px;
   display: block;
   width: 260px;
@@ -47,5 +53,17 @@
 }
 
 .login__box button:hover {
-  opacity: .7;
+  opacity: 0.7;
+}
+
+.login__boxIn {
+  margin-top: 30px;
+}
+
+.login__boxIn p {
+  cursor: pointer;
+}
+
+.login__boxIn p:hover {
+  opacity: 0.7;
 }
