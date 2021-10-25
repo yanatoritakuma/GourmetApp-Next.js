@@ -127,7 +127,7 @@ export const Layout: FC = ({ children }) => {
             <Link href="/coffee">
               <a>Coffee</a>
             </Link>
-            <button onClick={() => auth.signOut()}>LogOut</button>
+            <button onClick={() => auth.signOut()}>LogOut；</button>
             <a
               className="header__boxIcon"
               href="https://www.instagram.com/gourmet126527/"
