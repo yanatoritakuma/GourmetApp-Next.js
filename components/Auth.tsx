@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
 import { Layout } from "../components/Layout";
-import utilStyles from "../styles/login.module.css";
+import utilStyles from "../styles/Auth.module.css";
 import { useDispatch } from "react-redux";
 import { updeteUserProfile } from "../provider/userSlice";
 import { auth, storage } from "../firebas/initFirebase";
@@ -144,25 +144,27 @@ export const Auth: FC = () => {
             </p>
           </div>
         </div>
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
-          <div>
-            <div>
-              <TextField
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                type="email"
-                name="email"
-                label="Reset E-mail"
-                value={resetEmail}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setResetEmail(e.target.value);
-                }}
-              />
-              <IconButton onClick={sendResetEmail}>
-                <SendIcon />
-              </IconButton>
-            </div>
+        <Modal
+          className={utilStyles.Modal}
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+        >
+          <div className={utilStyles.Modal__box}>
+            <TextField
+              InputLabelProps={{
+                shrink: true,
+              }}
+              type="email"
+              name="email"
+              label="Reset E-mail"
+              value={resetEmail}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setResetEmail(e.target.value);
+              }}
+            />
+            <IconButton onClick={sendResetEmail}>
+              <SendIcon />
+            </IconButton>
           </div>
         </Modal>
       </section>
