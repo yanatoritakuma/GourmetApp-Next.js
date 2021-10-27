@@ -27,7 +27,6 @@ const Login = () => {
       unSub();
     };
   }, [dispatch]);
-
   return <>{user.uid ? <Registration /> : <Auth />}</>;
 };
 export default Login;
