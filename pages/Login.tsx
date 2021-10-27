@@ -28,6 +28,6 @@ const Login = () => {
     };
   }, [dispatch]);
 
-  return <>{user.uid ? <Registration /> : "<Auth />"}</>;
+  return <>{user.uid ? <Registration /> : <Auth />}</>;
 };
 export default Login;
