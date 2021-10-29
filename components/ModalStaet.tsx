@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
-import { Avatar } from "@material-ui/core";
+// import { Avatar } from "@material-ui/core";
 
 type Props = {
   selectedState:
@@ -75,7 +75,7 @@ export const ModalStaet = (props: Props) => {
           )}
         </div>
 
-        <Avatar src={user.photoUrl} />
+        {/* <Avatar src={user.photoUrl} /> */}
       </div>
     </section>
   );
