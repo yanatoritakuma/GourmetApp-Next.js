@@ -5,6 +5,11 @@ import utilStyles from "../styles/registration.module.css";
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
 
+import { storage, db, auth } from "../firebas/initFirebase";
+import { Avatar, Button, IconButton } from "@material-ui/core";
+import firebase from "firebase/app";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+
 const Registration = () => {
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
