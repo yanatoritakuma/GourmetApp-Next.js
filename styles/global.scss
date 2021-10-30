@@ -8,7 +8,11 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+* {
+  box-sizing: border-box;
+}
+
+html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -174,7 +178,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -184,7 +189,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
@@ -348,18 +354,14 @@ template {
   display: none;
 }
 
-
-
-
-
 // Layout.jsx
-header{
+header {
   margin: 0 auto;
   width: 100%;
   max-width: 1200px;
 }
 
-.header__box{
+.header__box {
   padding: 8px 0;
   position: fixed;
   z-index: 999;
@@ -369,16 +371,16 @@ header{
   width: 100%;
   max-width: 1200px;
   background-color: #fff;
-  
-  img{
+
+  img {
     min-width: 60px;
     border-radius: 50%;
   }
 
-  nav{
+  nav {
     width: 100%;
   }
-  ul{
+  ul {
     display: flex;
     align-items: center;
     list-style: none;
@@ -386,47 +388,51 @@ header{
     position: relative;
   }
 
-  li{
+  li {
     margin: 0 20px;
     cursor: pointer;
     position: relative;
-    &:hover{
-      .header__hover{
+    &:hover {
+      .header__hover {
         opacity: 1;
         visibility: visible;
-        transition: .3s;
+        transition: 0.3s;
         top: 24px;
       }
     }
   }
 
-  .header__boxLink{
+  .header__boxLink {
     font-size: 14px;
     font-weight: bold;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, #ffa500 50%);
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 50%,
+      #ffa500 50%
+    );
     background-position: 0 0;
     background-size: 200% auto;
-    transition: .3s;
-    &:hover{
+    transition: 0.3s;
+    &:hover {
       background-position: -100% 0;
       color: #fff;
     }
   }
 
-  .header__hover{
+  .header__hover {
     padding: 20px 40px;
     position: absolute;
     top: 0px;
     left: -62%;
     opacity: 0;
     visibility: hidden;
-    transition: .3s;
+    transition: 0.3s;
     background-color: #fff;
     box-shadow: 2px 2px 4px #faebd7;
     border-radius: 10px;
     width: 100%;
 
-    a{
+    a {
       margin: 10px auto;
       display: inline-block;
       perspective: 1000px;
@@ -434,21 +440,21 @@ header{
       vertical-align: bottom;
       overflow: hidden;
       font-size: 14px;
-      &:hover{
-        span{
+      &:hover {
+        span {
           background-color: #ffa500;
           transform: translate3d(0, 0, -30px) rotateX(90deg);
         }
       }
-      
-      span{
+
+      span {
         display: inline-block;
         position: relative;
-        padding: 0 .3em;
-        transition: .4s;
+        padding: 0 0.3em;
+        transition: 0.4s;
         transform-origin: 50% 0%;
         transform-style: preserve-3d;
-        &::after{
+        &::after {
           display: inline-block;
           position: absolute;
           left: 0;
@@ -464,29 +470,29 @@ header{
     }
   }
 
-  a{
+  a {
     text-decoration: none;
     color: #000000;
     font-weight: bold;
     font-size: 12px;
   }
 
-  .header__boxIi{
+  .header__boxIi {
     position: absolute;
     right: 0;
   }
 
-  .header__boxIcon{
+  .header__boxIcon {
     font-size: 30px;
     color: #c13584;
   }
 }
 
-.header__boxSp{
+.header__boxSp {
   display: none;
 }
 
-.hamMenu{
+.hamMenu {
   display: none;
   width: 80%;
   height: 100vh;
@@ -497,14 +503,14 @@ header{
   left: -1000px;
   z-index: 9999;
   opacity: 1;
-  transition: .3s;
-  transition: .5s;
+  transition: 0.3s;
+  transition: 0.5s;
   &.shown {
     left: 0px;
-    transition: .5s;
+    transition: 0.5s;
   }
 
-  a{
+  a {
     margin: 40px 0;
     display: block;
     text-align: center;
@@ -512,7 +518,7 @@ header{
   }
 }
 
-.closeHum{
+.closeHum {
   display: block;
   position: absolute;
   top: 30px;
@@ -529,8 +535,8 @@ header{
     display: block;
     width: 100%;
     height: 2px;
-    background-color:#000000;
-    transition: .3s;
+    background-color: #000000;
+    transition: 0.3s;
 
     &:first-child {
       transform: translateY(6px) rotate(150deg);
@@ -539,9 +545,9 @@ header{
       transform: translateY(-6px) rotate(-150deg);
       margin-bottom: 0;
     }
-    &:nth-child(3){
+    &:nth-child(3) {
       display: none;
-      transition: .3s;
+      transition: 0.3s;
     }
 
     &:focus {
@@ -550,11 +556,10 @@ header{
   }
 }
 
-
 // レスポンシブ Layout.jsx
-@media screen and (max-width: 768px){
-  .header__box{
-    nav{
+@media screen and (max-width: 768px) {
+  .header__box {
+    nav {
       display: none;
     }
   }
@@ -563,7 +568,7 @@ header{
     display: block;
   }
 
-  .header__boxSp{
+  .header__boxSp {
     display: block;
     position: absolute;
     top: 20px;
@@ -575,40 +580,39 @@ header{
       outline: none;
     }
 
-    span{
+    span {
       margin: 10px 0;
       display: block;
       width: 100%;
       height: 2px;
-      background-color:#000000;
-      transition: .3s;
+      background-color: #000000;
+      transition: 0.3s;
     }
   }
 }
 
-
-@media screen and (max-width: 425px){
-  .header__box{
-    h2{
+@media screen and (max-width: 425px) {
+  .header__box {
+    h2 {
       font-size: 20px;
     }
   }
 
-  .hamMenu{
-    a{
+  .hamMenu {
+    a {
       font-size: 18px;
     }
   }
 }
 
-@media screen and (max-width: 320px){
-  .hamMenu{
+@media screen and (max-width: 320px) {
+  .hamMenu {
     width: 80%;
   }
 }
 
 // index.jsx
-.index{
+.index {
   margin: auto;
   margin-top: 84px;
   max-width: 1200px;
@@ -616,15 +620,15 @@ header{
 }
 
 .index__imgBox {
-  position: relative; 
+  position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.index__logo{
+.index__logo {
   position: absolute;
-  z-index:99;
+  z-index: 99;
   top: 24%;
   left: 27%;
   width: 80%;
@@ -638,10 +642,10 @@ header{
   opacity: 1;
 }
 
-.index__link{
+.index__link {
   padding: 12px 0;
   position: absolute;
-  z-index:99;
+  z-index: 99;
   top: 58%;
   left: 39%;
   width: 20%;
@@ -655,15 +659,15 @@ header{
   text-align: center;
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     transform: translateY(3px);
     box-shadow: none;
-    transition: .3;
+    transition: 0.3;
   }
 }
 
 .index__img {
-  z-index:10;
+  z-index: 10;
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -676,15 +680,15 @@ header{
   left: 0;
   top: 0;
   animation: anime 36s 0s infinite;
-  &::before{
-    content: '';
+  &::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: #474b42;
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 .index__img--1 {
@@ -714,7 +718,6 @@ header{
   animation-delay: 28s;
 }
 
-
 @keyframes anime {
   0% {
     opacity: 0;
@@ -728,41 +731,38 @@ header{
   30% {
     opacity: 0;
     transform: scale(1.2);
-    z-index:9;
+    z-index: 9;
   }
-  100% { 
-    opacity: 0 
+  100% {
+    opacity: 0;
   }
 }
 
 // レスポンシブ index.jsx
-@media screen and (max-width: 768px){
-  .index__link{
+@media screen and (max-width: 768px) {
+  .index__link {
     left: 35%;
     width: 30%;
     font-size: 18px;
   }
 }
 
-@media screen and (max-width: 425px){
-  .index__logo{
+@media screen and (max-width: 425px) {
+  .index__logo {
     left: 20%;
   }
 }
 
-@media screen and (max-width: 320px){
-  .index__logo{
+@media screen and (max-width: 320px) {
+  .index__logo {
     top: 18%;
     left: 10%;
   }
 
-  .index__link{
+  .index__link {
     top: 47%;
     left: 32%;
     width: 36%;
     font-size: 16px;
   }
 }
-
-
-

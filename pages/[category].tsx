@@ -149,8 +149,9 @@ const Categorypage: FC<Props> = ({ category }) => {
   return (
     <Layout>
       <section className={utilStyles.categoryPage}>
+        <h2 className={activeTitle()}>{category}Page</h2>
         {posts[0]?.id && (
-          <>
+          <section className={utilStyles.categoryPage}>
             {posts.map((post) => (
               <Post
                 key={post.id}
@@ -162,7 +163,7 @@ const Categorypage: FC<Props> = ({ category }) => {
                 username={post.username}
               />
             ))}
-          </>
+          </section>
         )}
       </section>
     </Layout>

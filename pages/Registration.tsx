@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, useMemo, ChangeEvent } from "react";
+import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { Layout } from "../components/Layout";
 import utilStyles from "../styles/registration.module.css";
@@ -168,28 +170,113 @@ const Registration = () => {
 
   return (
     <Layout>
-      <section className={utilStyles.registration}>
+      <section css={registration}>
         <h2>Registration</h2>
         <form onSubmit={onClickRegistration}>
-          <input
-            placeholder="StoreName"
-            type="text"
-            autoFocus
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <IconButton>
-            <label>
-              <AddAPhotoIcon />
-            </label>
-            <input type="file" onChange={onChangeImageHandler} />
-          </IconButton>
-          <Button type="submit" disabled={!name}>
-            Register
-          </Button>
+          <div css={registration__box}>
+            <input
+              placeholder="StoreName"
+              type="text"
+              autoFocus
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <IconButton>
+              <label>
+                <AddAPhotoIcon />
+              </label>
+              <input type="file" onChange={onChangeImageHandler} />
+            </IconButton>
+            <Button type="submit" disabled={!name}>
+              Register
+            </Button>
+          </div>
         </form>
       </section>
     </Layout>
   );
 };
+
+const registration = css`
+  margin: auto;
+  margin-top: 84px;
+  padding-bottom: 20px;
+  background-color: #e2dedb;
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  max-width: 1200px;
+
+  h2 {
+    padding-top: 40px;
+    font-size: 32px;
+    text-align: center;
+    color: #b3aca7;
+  }
+
+  img {
+    width: 50%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+  }
+`;
+
+const registration__box = css`
+  margin: auto;
+  margin-top: 100px;
+  width: 56%;
+  color: #726659;
+
+  input {
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 100%;
+    border: 1px solid #b3aca7;
+    font-size: 12px;
+  }
+
+  select {
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 30%;
+    border: 1px solid #b3aca7;
+    color: #726659;
+    font-size: 12px;
+  }
+
+  textarea {
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #b3aca7;
+    font-size: 12px;
+  }
+
+  button {
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px 0;
+    display: block;
+    background-color: #e2dedb;
+    width: 30%;
+    border: 1px solid #b3aca7;
+    color: #726659;
+    box-shadow: 0 3px 0px 0 #726659;
+    cursor: pointer;
+    &:hover {
+      box-shadow: none;
+      transform: translateY(3px);
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+`;
+
 export default Registration;

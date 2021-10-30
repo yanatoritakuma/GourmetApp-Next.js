@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, FC } from "react";
+import { css } from "@emotion/react";
 import styles from "./Post.module.css";
 import { db } from "../firebas/initFirebase";
 import firebase from "firebase/app";
@@ -20,24 +22,57 @@ interface PROPS {
 
 export const Post: FC<PROPS> = (props) => {
   return (
-    <div>
-      <Avatar src={props.avatar} />
-      <div>
-        <div>
-          <h3>
-            <span>@{props.username}</span>
-            <span>{new Date(props.timestamp?.toDate()).toLocaleString()}</span>
-          </h3>
-        </div>
-        <div>
-          <p>{props.text}</p>
-        </div>
-        {props.image && (
-          <div>
-            <img src={props.image} alt="img" />
-          </div>
-        )}
+    <section css={post}>
+      <div css={post__contents}>
+        <h3>{props.text}</h3>
       </div>
-    </div>
+      {props.image && (
+        <div css={post__img}>
+          <img src={props.image} alt="img" />
+        </div>
+      )}
+      <div css={post__contributor}>
+        <Avatar src={props.avatar} />
+        <h3>@{props.username}</h3>
+        <span>{new Date(props.timestamp?.toDate()).toLocaleString()}</span>
+      </div>
+    </section>
   );
 };
+
+const post = css`
+  margin: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 4px 3px #000;
+  width: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const post__contributor = css`
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+`;
+
+const post__img = css`
+  img {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+  }
+`;
+
+const post__contents = css`
+  h3 {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 26px;
+    width: 100%;
+  }
+`;
