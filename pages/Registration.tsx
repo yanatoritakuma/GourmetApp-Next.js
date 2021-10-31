@@ -81,6 +81,7 @@ const Registration = () => {
     setStreetAddress("");
     setCategory("");
     setNote("");
+    alert("登録完了しました。");
   };
 
   return (
@@ -126,8 +127,7 @@ const Registration = () => {
             ></textarea>
             <IconButton className="registration__boxImgBtn">
               <label>
-                <AddAPhotoIcon />
-                <p>Image</p>
+                <AddAPhotoIcon className="registration__boxImgBtnIcon" />
                 <input type="file" onChange={onChangeImageHandler} />
               </label>
             </IconButton>
@@ -221,12 +221,21 @@ const registration__box = css`
   .registration__boxImgBtn {
     width: 30%;
     min-width: 120px;
+
+    label {
+      padding: 20px 0;
+      width: 100%;
+      /* background-color: skyblue; */
+      cursor: pointer;
+    }
+
     input {
       display: none;
     }
 
-    p {
-      margin: 0px;
+    .registration__boxImgBtnIcon {
+      display: block;
+      width: 100%;
     }
   }
 
