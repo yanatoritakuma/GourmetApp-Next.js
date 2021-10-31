@@ -2,9 +2,6 @@
 import React, { useState, useEffect, useMemo, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import { ModalStaet } from "../components/ModalStaet";
-import { useAppSelector } from "../app/hooks";
-import { useSelect } from "../hooks/useSelectState";
 import { db } from "../firebas/initFirebase";
 import { Post } from "../components/Post";
 
@@ -36,26 +33,17 @@ type Props = {
   category: string;
 };
 
-type CategoryValueType = {
-  category: string;
-  id: string;
-  name: string;
-  note: string;
-  photoUrl: string;
-  streetAddress: string;
-};
-
 const Categorypage: FC<Props> = ({ category }) => {
-  const { categories } = useAppSelector((state) => state.dishes);
-  const [modal, setModal] = useState(false);
-  const { onSelectState, selectedState } = useSelect();
-
   const [posts, setPosts] = useState([
     {
       id: "",
       avatar: "",
       image: "",
-      text: "",
+      storeName: "",
+      storeTel: "",
+      streetAddress: "",
+      note: "",
+      category: "",
       timestamp: null,
       username: "",
     },
@@ -71,7 +59,11 @@ const Categorypage: FC<Props> = ({ category }) => {
             id: doc.id,
             avatar: doc.data().avatar,
             image: doc.data().image,
-            text: doc.data().text,
+            storeName: doc.data().storeName,
+            storeTel: doc.data().storeTel,
+            streetAddress: doc.data().streetAddress,
+            note: doc.data().note,
+            category: doc.data().category,
             timestamp: doc.data().timestamp,
             username: doc.data().username,
           }))
@@ -82,84 +74,42 @@ const Categorypage: FC<Props> = ({ category }) => {
     };
   }, []);
 
-  const onClickModal = () => {
-    setModal(!modal);
-  };
-
-  const onClickOpen = (categoryValue: CategoryValueType) => {
-    onSelectState({ categories, categoryValue });
-    onClickModal();
-  };
-
   const categoryArray =
-    category === "all"
-      ? categories
-      : categories.filter((v) => v.category === category);
+    category === "all" ? posts : posts.filter((v) => v.category === category);
 
-  // const activeTitle = () => {
-  //   if (category === "meat") {
-  //     return meat;
-  //   } else if (category === "fish") {
-  //     return fish;
-  //   } else if (category === "noodle") {
-  //     return noodle;
-  //   } else if (category === "salad") {
-  //     return salad;
-  //   } else if (category === "dessert") {
-  //     return dessert;
-  //   } else if (category === "coffee") {
-  //     return coffee;
-  //   }
-  // };
-
-  // return useMemo(
-  //   () => (
-  //     <Layout>
-  //       <section className={utilStyles.categoryPage}>
-  //         <h2 className={activeTitle()}>{category}Page</h2>
-  //         <ul>
-  //           {categoryArray.map((categoryValue) => {
-  //             if (categoryValue.name === "") {
-  //               return [];
-  //             } else {
-  //               return (
-  //                 <li
-  //                   key={categoryValue.id}
-  //                   onClick={() => onClickOpen(categoryValue)}
-  //                 >
-  //                   <div className={utilStyles.categoryPage__img}>
-  //                     <img src={categoryValue.photoUrl} alt="" />
-  //                   </div>
-  //                   <h3>{categoryValue.name}</h3>
-  //                 </li>
-  //               );
-  //             }
-  //           })}
-  //         </ul>
-  //       </section>
-  //       <ModalStaet
-  //         selectedState={selectedState}
-  //         modal={modal}
-  //         setModal={setModal}
-  //       />
-  //     </Layout>
-  //   ),
-  //   [onClickOpen]
-  // );
+  const activeTitle = () => {
+    if (category === "meat") {
+      return { color: "#e2041b" };
+    } else if (category === "fish") {
+      return { color: "#00afcc" };
+    } else if (category === "noodle") {
+      return { color: "#fcc800" };
+    } else if (category === "salad") {
+      return { color: "#00947a" };
+    } else if (category === "dessert") {
+      return { color: "#eb6ea0" };
+    } else if (category === "coffee") {
+      return { color: "#96514d" };
+    }
+  };
 
   return (
     <Layout>
       <section css={categoryPage}>
-        <h2>{category}Page</h2>
+        <h2 style={activeTitle()}>{category}Page</h2>
         {posts[0]?.id && (
           <div className="categoryPage__box">
-            {posts.map((post) => (
+            {categoryArray.map((post) => (
               <Post
                 key={post.id}
                 postId={post.id}
                 avatar={post.avatar}
                 image={post.image}
-                text={post.text}
+                storeName={post.storeName}
+                storeTel={post.storeTel}
+                streetAddress={post.streetAddress}
+                note={post.note}
+                category={post.category}
                 timestamp={post.timestamp}
                 username={post.username}
               />
@@ -186,59 +136,6 @@ const categoryPage = css`
     font-size: 32px;
     text-align: center;
     color: #f7a62e;
-  }
-
-  .meat {
-    color: #e2041b;
-  }
-
-  .fish {
-    color: #00afcc;
-  }
-
-  .noodle {
-    color: #fcc800;
-  }
-
-  .salad {
-    color: #00947a;
-  }
-
-  .dessert {
-    color: #eb6ea0;
-  }
-
-  .coffee {
-    color: #96514d;
-  }
-
-  ul {
-    margin: auto;
-    padding: unset;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 90%;
-  }
-
-  li {
-    margin: 14px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    width: 90%;
-    height: 160px;
-    border: 1px solid #000000;
-    box-shadow: 2px 4px 3px #000000;
-    transition: 0.3s;
-    cursor: pointer;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    &:hover {
-      opacity: 0.7;
-      transform: translateY(-3px);
-      transition: 0.3s;
-    }
   }
 
   .categoryPage__box {

@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, FC } from "react";
 import { css } from "@emotion/react";
-import styles from "./Post.module.css";
 import { db } from "../firebas/initFirebase";
 import firebase from "firebase/app";
 import { useSelector } from "react-redux";
@@ -15,7 +14,11 @@ interface PROPS {
   postId: string;
   avatar: string;
   image: string;
-  text: string;
+  storeName: string;
+  storeTel: string;
+  streetAddress: string;
+  note: string;
+  category: string;
   timestamp: any;
   username: string;
 }
@@ -24,7 +27,11 @@ export const Post: FC<PROPS> = (props) => {
   return (
     <section css={post}>
       <div css={post__contents}>
-        <h3>{props.text}</h3>
+        <h3>{props.storeName}</h3>
+        <p>{props.storeTel}</p>
+        <p>{props.streetAddress}</p>
+        <p>{props.note}</p>
+        <p>{props.category}</p>
       </div>
       {props.image && (
         <div css={post__img}>
@@ -61,10 +68,13 @@ const post__contributor = css`
 `;
 
 const post__img = css`
+  display: block;
   img {
     margin: 0 auto;
     display: block;
     width: 100%;
+    max-height: 380px;
+    object-fit: cover;
   }
 `;
 
@@ -74,5 +84,14 @@ const post__contents = css`
     text-align: center;
     font-size: 26px;
     width: 100%;
+    max-width: 320px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 320px;
   }
 `;

@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useMemo, ChangeEvent } from "react";
 import { css } from "@emotion/react";
-import { useDispatch } from "react-redux";
 import { Layout } from "../components/Layout";
-import { pushRegistration } from "../provider/dishesSlice";
-import { genRandSt } from "../components/genRandSt";
-
 import { storage, db, auth } from "../firebas/initFirebase";
 import { Avatar, Button, IconButton } from "@material-ui/core";
 import firebase from "firebase/app";
@@ -14,54 +10,13 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
 
 const Registration = () => {
-  const [name, setName] = useState("");
-  // const [tel, setTel] = useState("");
-  // const [streetAddress, setStreetAddress] = useState("");
-  // const [note, setNote] = useState("");
-  // const [category, setCategory] = useState("");
+  const [storeName, setStoreName] = useState("");
+  const [storeTel, setStoreTel] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [note, setNote] = useState("");
+  const [category, setCategory] = useState("");
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   const user = useSelector(selectUser);
-
-  // const onChangeName = (e: ChangeEvent<HTMLInputElement>) =>
-  //   setName(e.target.value);
-  // const onChangeTel = (e: ChangeEvent<HTMLInputElement>) =>
-  //   setTel(e.target.value);
-  // const onChangeStreetAddress = (e: ChangeEvent<HTMLInputElement>) =>
-  //   setStreetAddress(e.target.value);
-  // const onChangeNote = (e: ChangeEvent<HTMLTextAreaElement>) =>
-  //   setNote(e.target.value);
-  // const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) =>
-  //   setCategory(e.target.value);
-
-  // const dishesState = {
-  //   name,
-  //   tel,
-  //   streetAddress,
-  //   note,
-  //   category,
-  //   photoUrl,
-  //   id: genRandSt(),
-  // };
-
-  // const dispatch = useDispatch();
-
-  // const onClickPushRegistration = () => {
-  //   dispatch(pushRegistration(dishesState));
-  //   setName(""),
-  //     setTel(""),
-  //     setStreetAddress(""),
-  //     setNote(""),
-  //     setCategory(""),
-  //     setPhotoUrl("");
-  // };
-
-  // const onChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files !== null) {
-  //     const photoFile = e.target.files[0];
-  //     const photoFileUrl = URL.createObjectURL(photoFile);
-  //     setPhotoUrl(photoFileUrl);
-  //   }
-  // };
 
   const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files![0]) {
@@ -96,7 +51,11 @@ const Registration = () => {
               await db.collection("posts").add({
                 avatar: user.photoUrl,
                 image: url,
-                text: name,
+                storeName: storeName,
+                storeTel: storeTel,
+                streetAddress: streetAddress,
+                note: note,
+                category: category,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 username: user.dispalayName,
               });
@@ -107,65 +66,22 @@ const Registration = () => {
       db.collection("posts").add({
         avatar: user.photoUrl,
         image: "",
-        text: name,
+        storeName: storeName,
+        storeTel: storeTel,
+        streetAddress: streetAddress,
+        note: note,
+        category: category,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         username: user.dispalayName,
       });
     }
-    setName("");
+    setStoreName("");
     setPhotoUrl(null);
+    setStoreTel("");
+    setStreetAddress("");
+    setCategory("");
+    setNote("");
   };
-
-  // return useMemo(
-  //   () => (
-  //     <Layout>
-  //       <section className={utilStyles.registration}>
-  //         <h2>Registration</h2>
-  //         <div className={utilStyles.registration__box}>
-  //           <input
-  //             placeholder="StoreName"
-  //             value={name}
-  //             onChange={onChangeName}
-  //           />
-  //           <input
-  //             placeholder="PhoneNumber"
-  //             value={tel}
-  //             onChange={onChangeTel}
-  //           />
-  //           <input
-  //             placeholder="StreetAddress"
-  //             value={streetAddress}
-  //             onChange={onChangeStreetAddress}
-  //           />
-  //           <input
-  //             type="file"
-  //             accept=".png, .jpg, .jpeg"
-  //             onChange={onChangePhoto}
-  //           />
-  //           <img src={photoUrl} alt="プレビュー画像" />
-  //           <select id="category" value={category} onChange={onChangeCategory}>
-  //             <option value="all">Category</option>
-  //             <option value="meat">MeatDish</option>
-  //             <option value="fish">FishDish</option>
-  //             <option value="noodle">Noodles</option>
-  //             <option value="salad">Salad</option>
-  //             <option value="dessert">Dessert</option>
-  //             <option value="coffee">Coffee</option>
-  //           </select>
-  //           <textarea
-  //             placeholder="Note"
-  //             value={note}
-  //             onChange={onChangeNote}
-  //           ></textarea>
-  //           <button type="button" onClick={onClickPushRegistration}>
-  //             Registration
-  //           </button>
-  //         </div>
-  //       </section>
-  //     </Layout>
-  //   ),
-  //   [name, tel, streetAddress, category, note, photoUrl]
-  // );
 
   return (
     <Layout>
@@ -177,9 +93,37 @@ const Registration = () => {
               placeholder="StoreName"
               type="text"
               autoFocus
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={storeName}
+              onChange={(e) => setStoreName(e.target.value)}
             />
+            <input
+              placeholder="PhoneNumber"
+              value={storeTel}
+              onChange={(e) => setStoreTel(e.target.value)}
+            />
+            <input
+              placeholder="StreetAddress"
+              value={streetAddress}
+              onChange={(e) => setStreetAddress(e.target.value)}
+            />
+            <select
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="all">Category</option>
+              <option value="meat">MeatDish</option>
+              <option value="fish">FishDish</option>
+              <option value="noodle">Noodles</option>
+              <option value="salad">Salad</option>
+              <option value="dessert">Dessert</option>
+              <option value="coffee">Coffee</option>
+            </select>
+            <textarea
+              placeholder="Note"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            ></textarea>
             <IconButton className="registration__boxImgBtn">
               <label>
                 <AddAPhotoIcon />
@@ -187,7 +131,7 @@ const Registration = () => {
                 <input type="file" onChange={onChangeImageHandler} />
               </label>
             </IconButton>
-            <Button type="submit" disabled={!name}>
+            <Button type="submit" disabled={!storeName}>
               Register
             </Button>
           </div>
