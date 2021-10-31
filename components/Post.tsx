@@ -41,12 +41,12 @@ export const Post: FC<PROPS> = (props) => {
 };
 
 const post = css`
-  margin: 20px;
+  margin: 20px auto;
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 2px 4px 3px #000;
-  width: 50%;
+  width: 95%;
   cursor: pointer;
   transition: 0.3s;
   &:hover {

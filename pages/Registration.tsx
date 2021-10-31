@@ -3,7 +3,6 @@ import React, { useState, useMemo, ChangeEvent } from "react";
 import { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { Layout } from "../components/Layout";
-import utilStyles from "../styles/registration.module.css";
 import { pushRegistration } from "../provider/dishesSlice";
 import { genRandSt } from "../components/genRandSt";
 
@@ -181,11 +180,12 @@ const Registration = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <IconButton>
+            <IconButton className="registration__boxImgBtn">
               <label>
                 <AddAPhotoIcon />
+                <p>Image</p>
+                <input type="file" onChange={onChangeImageHandler} />
               </label>
-              <input type="file" onChange={onChangeImageHandler} />
             </IconButton>
             <Button type="submit" disabled={!name}>
               Register
@@ -223,9 +223,9 @@ const registration = css`
 `;
 
 const registration__box = css`
-  margin: auto;
-  margin-top: 100px;
+  margin: 20px auto;
   width: 56%;
+  min-width: 300px;
   color: #726659;
 
   input {
@@ -272,9 +272,23 @@ const registration__box = css`
       box-shadow: none;
       transform: translateY(3px);
     }
+  }
 
-    @media screen and (max-width: 768px) {
-      width: 100%;
+  .registration__boxImgBtn {
+    width: 30%;
+    min-width: 120px;
+    input {
+      display: none;
+    }
+
+    p {
+      margin: 0px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    button {
+      width: 80%;
     }
   }
 `;

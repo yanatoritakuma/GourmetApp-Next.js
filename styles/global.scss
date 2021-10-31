@@ -392,12 +392,14 @@ header {
     margin: 0 20px;
     cursor: pointer;
     position: relative;
+
     &:hover {
       .header__hover {
         opacity: 1;
         visibility: visible;
         transition: 0.3s;
         top: 24px;
+        width: 150px;
       }
     }
   }

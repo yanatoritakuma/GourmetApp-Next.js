@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, useMemo, FC } from "react";
-import utilStyles from "../styles/categorypage.module.css";
+import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { ModalStaet } from "../components/ModalStaet";
 import { useAppSelector } from "../app/hooks";
@@ -95,21 +96,21 @@ const Categorypage: FC<Props> = ({ category }) => {
       ? categories
       : categories.filter((v) => v.category === category);
 
-  const activeTitle = () => {
-    if (category === "meat") {
-      return utilStyles.meat;
-    } else if (category === "fish") {
-      return utilStyles.fish;
-    } else if (category === "noodle") {
-      return utilStyles.noodle;
-    } else if (category === "salad") {
-      return utilStyles.salad;
-    } else if (category === "dessert") {
-      return utilStyles.dessert;
-    } else if (category === "coffee") {
-      return utilStyles.coffee;
-    }
-  };
+  // const activeTitle = () => {
+  //   if (category === "meat") {
+  //     return meat;
+  //   } else if (category === "fish") {
+  //     return fish;
+  //   } else if (category === "noodle") {
+  //     return noodle;
+  //   } else if (category === "salad") {
+  //     return salad;
+  //   } else if (category === "dessert") {
+  //     return dessert;
+  //   } else if (category === "coffee") {
+  //     return coffee;
+  //   }
+  // };
 
   // return useMemo(
   //   () => (
@@ -148,10 +149,10 @@ const Categorypage: FC<Props> = ({ category }) => {
 
   return (
     <Layout>
-      <section className={utilStyles.categoryPage}>
-        <h2 className={activeTitle()}>{category}Page</h2>
+      <section css={categoryPage}>
+        <h2>{category}Page</h2>
         {posts[0]?.id && (
-          <section className={utilStyles.categoryPage}>
+          <div className="categoryPage__box">
             {posts.map((post) => (
               <Post
                 key={post.id}
@@ -163,10 +164,93 @@ const Categorypage: FC<Props> = ({ category }) => {
                 username={post.username}
               />
             ))}
-          </section>
+          </div>
         )}
       </section>
     </Layout>
   );
 };
+
+const categoryPage = css`
+  margin: auto;
+  margin-top: 84px;
+  padding-bottom: 40px;
+  background-color: #e2dedb;
+  border-radius: 20px;
+  width: 90%;
+  height: auto;
+  max-width: 1200px;
+
+  h2 {
+    padding-top: 40px;
+    font-size: 32px;
+    text-align: center;
+    color: #f7a62e;
+  }
+
+  .meat {
+    color: #e2041b;
+  }
+
+  .fish {
+    color: #00afcc;
+  }
+
+  .noodle {
+    color: #fcc800;
+  }
+
+  .salad {
+    color: #00947a;
+  }
+
+  .dessert {
+    color: #eb6ea0;
+  }
+
+  .coffee {
+    color: #96514d;
+  }
+
+  ul {
+    margin: auto;
+    padding: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+  }
+
+  li {
+    margin: 14px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    width: 90%;
+    height: 160px;
+    border: 1px solid #000000;
+    box-shadow: 2px 4px 3px #000000;
+    transition: 0.3s;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:hover {
+      opacity: 0.7;
+      transform: translateY(-3px);
+      transition: 0.3s;
+    }
+  }
+
+  .categoryPage__box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    .categoryPage__box {
+      display: block;
+    }
+  }
+`;
+
 export default Categorypage;
