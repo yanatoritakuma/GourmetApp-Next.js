@@ -154,10 +154,30 @@ export const Layout: FC = ({ children }) => {
             <Link href="/coffee">
               <a>Coffee</a>
             </Link>
-            <Link href="/Login">
-              <button>LogIn</button>
-            </Link>
-            <button onClick={() => auth.signOut()}>LogOut；</button>
+
+            {user.uid === "" ? (
+              <Link href="/Login">
+                <button className="header__logIn">
+                  <FontAwesomeIcon
+                    className="header__logInIcon"
+                    icon={faSignInAlt}
+                  />
+                  LogIn
+                </button>
+              </Link>
+            ) : (
+              <button
+                onClick={() => auth.signOut()}
+                className="header__logIn header__logIn--logOut"
+              >
+                <FontAwesomeIcon
+                  className="header__logInIcon"
+                  icon={faSignOutAlt}
+                />
+                LogOut
+              </button>
+            )}
+
             <a
               className="header__boxIcon"
               href="https://www.instagram.com/gourmet126527/"
@@ -323,6 +343,11 @@ const headerBox = css`
 
     .header__logInIcon {
       margin-right: 6px;
+    }
+    @media screen and (max-width: 768px) {
+      margin: 0 auto;
+      display: block;
+      width: 50%;
     }
   }
 
