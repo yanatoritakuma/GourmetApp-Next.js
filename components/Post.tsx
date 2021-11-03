@@ -3,6 +3,8 @@ import React, { useState, useEffect, FC } from "react";
 import { css } from "@emotion/react";
 import { Avatar } from "@material-ui/core";
 import { ModalDishes } from "./ModalDishes";
+import NoImage from "../public/image/noimage.png";
+import Image from "next/image";
 
 interface PROPS {
   postId: string;
@@ -24,19 +26,21 @@ export const Post: FC<PROPS> = (props) => {
     <section onClick={() => setOpen(!open)} css={post}>
       <div css={post__contents}>
         <h3>{props.storeName}</h3>
-        <p>{props.storeTel}</p>
-        <p>{props.streetAddress}</p>
-        <p>{props.note}</p>
-        <p>{props.category}</p>
       </div>
-      {props.image && (
-        <div css={post__img}>
-          <img src={props.image} alt="img" />
-        </div>
+      {props.image === "" ? (
+        <Image src={NoImage} alt="NoImage" />
+      ) : (
+        props.image && (
+          <div css={post__img}>
+            <img src={props.image} alt="img" />
+          </div>
+        )
       )}
       <div css={post__contributor}>
-        <Avatar src={props.avatar} />
-        <h3>@{props.username}</h3>
+        <h3>
+          <Avatar src={props.avatar} />
+          {props.username}
+        </h3>
         <span>{new Date(props.timestamp?.toDate()).toLocaleString()}</span>
       </div>
       <ModalDishes
@@ -71,6 +75,12 @@ const post__contributor = css`
   margin: 10px 0;
   display: flex;
   align-items: center;
+
+  h3 {
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const post__img = css`

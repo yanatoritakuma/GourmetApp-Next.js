@@ -2,6 +2,8 @@
 import React from "react";
 import { css } from "@emotion/react";
 import { Box, Modal } from "@material-ui/core";
+import NoImage from "../public/image/noimage.png";
+import Image from "next/image";
 
 type Props = {
   open: boolean;
@@ -30,7 +32,13 @@ export const ModalDishes = (props: Props) => {
     <Modal open={open} onClose={() => setOpen(false)}>
       <Box css={ModalBox}>
         <h3>{storeName}</h3>
-        <img src={image} alt="image" />
+        {image === "" ? (
+          <div className="ModalBox__noImg">
+            <Image src={NoImage} alt="NoImage" />
+          </div>
+        ) : (
+          <img src={image} alt="image" />
+        )}
         <div className="ModalBox__in">
           <h4>StoreName</h4>
           <p>{storeName}</p>
@@ -75,7 +83,8 @@ const ModalBox = css`
     max-height: 100px;
   }
 
-  img {
+  img,
+  .ModalBox__noImg {
     margin: 0 auto;
     display: block;
     width: 100%;
@@ -96,7 +105,8 @@ const ModalBox = css`
     width: 90%;
     max-height: 700px;
 
-    img {
+    img,
+    .ModalBox__noImg {
       width: 90%;
     }
   }
