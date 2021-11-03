@@ -39,7 +39,16 @@ export const Post: FC<PROPS> = (props) => {
         <h3>@{props.username}</h3>
         <span>{new Date(props.timestamp?.toDate()).toLocaleString()}</span>
       </div>
-      <ModalDishes setOpen={setOpen} open={open} />
+      <ModalDishes
+        setOpen={setOpen}
+        open={open}
+        storeName={props.storeName}
+        storeTel={props.storeTel}
+        streetAddress={props.streetAddress}
+        note={props.note}
+        category={props.category}
+        image={props.image}
+      />
     </section>
   );
 };
@@ -77,7 +86,7 @@ const post__img = css`
 
 const post__contents = css`
   h3 {
-    margin: 10px 0;
+    margin: 10px auto;
     text-align: center;
     font-size: 26px;
     width: 100%;
