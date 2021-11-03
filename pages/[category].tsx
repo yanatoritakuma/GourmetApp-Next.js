@@ -95,28 +95,34 @@ const Categorypage: FC<Props> = ({ category }) => {
 
   return (
     <Layout>
-      <section css={categoryPage}>
-        <h2 style={activeTitle()}>{category}Page</h2>
-        {posts[0]?.id && (
-          <div className="categoryPage__box">
-            {categoryArray.map((post) => (
-              <Post
-                key={post.id}
-                postId={post.id}
-                avatar={post.avatar}
-                image={post.image}
-                storeName={post.storeName}
-                storeTel={post.storeTel}
-                streetAddress={post.streetAddress}
-                note={post.note}
-                category={post.category}
-                timestamp={post.timestamp}
-                username={post.username}
-              />
-            ))}
-          </div>
-        )}
-      </section>
+      {posts[0]?.id === "" ? (
+        <section css={categoryPage}>
+          <h2>Please Login</h2>
+        </section>
+      ) : (
+        <section css={categoryPage}>
+          <h2 style={activeTitle()}>{category}Page</h2>
+          {posts[0]?.id && (
+            <div className="categoryPage__box">
+              {categoryArray.map((post) => (
+                <Post
+                  key={post.id}
+                  postId={post.id}
+                  avatar={post.avatar}
+                  image={post.image}
+                  storeName={post.storeName}
+                  storeTel={post.storeTel}
+                  streetAddress={post.streetAddress}
+                  note={post.note}
+                  category={post.category}
+                  timestamp={post.timestamp}
+                  username={post.username}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </Layout>
   );
 };

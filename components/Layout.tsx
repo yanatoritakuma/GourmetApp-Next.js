@@ -78,6 +78,9 @@ export const Layout: FC = ({ children }) => {
                   </Link>
                 </div>
               </li>
+              <Link href="/Login">
+                <button>LogIn</button>
+              </Link>
               <li onClick={() => auth.signOut()}>
                 <button>LogOut</button>
               </li>
@@ -126,6 +129,9 @@ export const Layout: FC = ({ children }) => {
             </Link>
             <Link href="/coffee">
               <a>Coffee</a>
+            </Link>
+            <Link href="/Login">
+              <button>LogIn</button>
             </Link>
             <button onClick={() => auth.signOut()}>LogOut；</button>
             <a

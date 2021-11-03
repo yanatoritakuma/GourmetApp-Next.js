@@ -1,14 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect, FC } from "react";
 import { css } from "@emotion/react";
-import { db } from "../firebas/initFirebase";
-import firebase from "firebase/app";
-import { useSelector } from "react-redux";
-import { selectUser } from "../provider/userSlice";
 import { Avatar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import MessageIcon from "@material-ui/icons/Message";
-import SendIcon from "@material-ui/icons/Send";
+import { ModalDishes } from "./ModalDishes";
 
 interface PROPS {
   postId: string;
@@ -24,8 +18,10 @@ interface PROPS {
 }
 
 export const Post: FC<PROPS> = (props) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <section css={post}>
+    <section onClick={() => setOpen(!open)} css={post}>
       <div css={post__contents}>
         <h3>{props.storeName}</h3>
         <p>{props.storeTel}</p>
@@ -43,6 +39,7 @@ export const Post: FC<PROPS> = (props) => {
         <h3>@{props.username}</h3>
         <span>{new Date(props.timestamp?.toDate()).toLocaleString()}</span>
       </div>
+      <ModalDishes setOpen={setOpen} open={open} />
     </section>
   );
 };
