@@ -1,4 +1,6 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState, FC } from "react";
+import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import utilStyles from "../styles/Auth.module.css";
 import { useDispatch } from "react-redux";
@@ -87,7 +89,7 @@ export const Auth: FC = () => {
                 }}
               />
 
-              <IconButton>
+              <IconButton css={login__boxIcon}>
                 <label>
                   <AccountCircleIcon fontSize="large" />
                   <input type="file" onChange={onChangeImageHandler} />
@@ -171,3 +173,14 @@ export const Auth: FC = () => {
     </Layout>
   );
 };
+
+const login__boxIcon = css`
+  label {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+  }
+`;

@@ -1,102 +1,159 @@
-import React, { useState, useMemo, FC } from "react";
-import utilStyles from '../styles/categorypage.module.css';
+/** @jsxImportSource @emotion/react */
+import React, { useState, useEffect, useMemo, FC } from "react";
+import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import { ModalStaet } from '../components/ModalStaet';
-import { useAppSelector } from '../app/hooks';
-import { useSelect } from "../hooks/useSelectState";
+import { db } from "../firebas/initFirebase";
+import { Post } from "../components/Post";
 
 export async function getStaticPaths() {
   return {
-    paths:[
-      { params: { category: 'all'} },
-      { params: { category: 'meat'} },
-      { params: { category: 'fish'} },
-      { params: { category: 'noodle'} },
-      { params: { category: 'salad'} },
-      { params: { category: 'dessert'} },
-      { params: { category: 'coffee'} }
+    paths: [
+      { params: { category: "all" } },
+      { params: { category: "meat" } },
+      { params: { category: "fish" } },
+      { params: { category: "noodle" } },
+      { params: { category: "salad" } },
+      { params: { category: "dessert" } },
+      { params: { category: "coffee" } },
     ],
-    fallback: false
-  }
+    fallback: false,
+  };
 }
 
-export const getStaticProps = async (context: { params: { category: string; }; }) => {
-  const { category } = context.params
+export const getStaticProps = async (context: {
+  params: { category: string };
+}) => {
+  const { category } = context.params;
   return {
-    props: { category }
-  }
-}
-
-type Props = {
-  category: string
+    props: { category },
+  };
 };
 
-type CategoryValueType = {
+type Props = {
   category: string;
-  id: string;
-  name: string;
-  note: string;
-  photoUrl: string;
-  streetAddress: string;
 };
 
 const Categorypage: FC<Props> = ({ category }) => {
-  const { categories } = useAppSelector((state) => state.dishes);
-  const [modal, setModal] = useState(false);
-  const { onSelectState, selectedState } = useSelect();
+  const [posts, setPosts] = useState([
+    {
+      id: "",
+      avatar: "",
+      image: "",
+      storeName: "",
+      storeTel: "",
+      streetAddress: "",
+      note: "",
+      category: "",
+      timestamp: null,
+      username: "",
+    },
+  ]);
 
-  const onClickModal = () => {
-    setModal(!modal);
+  useEffect(() => {
+    const unSub = db
+      .collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            avatar: doc.data().avatar,
+            image: doc.data().image,
+            storeName: doc.data().storeName,
+            storeTel: doc.data().storeTel,
+            streetAddress: doc.data().streetAddress,
+            note: doc.data().note,
+            category: doc.data().category,
+            timestamp: doc.data().timestamp,
+            username: doc.data().username,
+          }))
+        )
+      );
+    return () => {
+      unSub();
+    };
+  }, []);
+
+  const categoryArray =
+    category === "all" ? posts : posts.filter((v) => v.category === category);
+
+  const activeTitle = () => {
+    if (category === "meat") {
+      return { color: "#e2041b" };
+    } else if (category === "fish") {
+      return { color: "#00afcc" };
+    } else if (category === "noodle") {
+      return { color: "#fcc800" };
+    } else if (category === "salad") {
+      return { color: "#00947a" };
+    } else if (category === "dessert") {
+      return { color: "#eb6ea0" };
+    } else if (category === "coffee") {
+      return { color: "#96514d" };
+    }
+  };
+
+  return (
+    <Layout>
+      {posts[0]?.id === "" ? (
+        <section css={categoryPage}>
+          <h2>Please Login</h2>
+        </section>
+      ) : (
+        <section css={categoryPage}>
+          <h2 style={activeTitle()}>{category}Page</h2>
+          {posts[0]?.id && (
+            <div className="categoryPage__box">
+              {categoryArray.map((post) => (
+                <Post
+                  key={post.id}
+                  postId={post.id}
+                  avatar={post.avatar}
+                  image={post.image}
+                  storeName={post.storeName}
+                  storeTel={post.storeTel}
+                  streetAddress={post.streetAddress}
+                  note={post.note}
+                  category={post.category}
+                  timestamp={post.timestamp}
+                  username={post.username}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+    </Layout>
+  );
+};
+
+const categoryPage = css`
+  margin: auto;
+  margin-top: 84px;
+  padding-bottom: 40px;
+  background-color: #e2dedb;
+  border-radius: 20px;
+  width: 90%;
+  height: auto;
+  max-width: 1200px;
+
+  h2 {
+    padding-top: 40px;
+    font-size: 32px;
+    text-align: center;
+    color: #f7a62e;
   }
 
-  const onClickOpen = (categoryValue: CategoryValueType) => {
-    onSelectState({ categories,categoryValue });
-    onClickModal();
+  .categoryPage__box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  const categoryArray = category === "all" ? categories : categories.filter((v) => v.category === category);
-
-  const activeTitle = () =>{
-    if(category === "meat"){
-      return utilStyles.meat
-    }else if(category === "fish"){
-      return utilStyles.fish
-    }else if(category === "noodle"){
-      return utilStyles.noodle
-    }else if(category === "salad"){
-      return utilStyles.salad
-    }else if(category === "dessert"){
-      return utilStyles.dessert
-    }else if(category === "coffee"){
-      return utilStyles.coffee
+  @media screen and (max-width: 768px) {
+    .categoryPage__box {
+      display: block;
     }
   }
+`;
 
-  return useMemo(() =>
-    <Layout>
-      <section className={utilStyles.categoryPage}>
-        <h2 className={activeTitle()}>{category}Page</h2>
-        <ul>
-          {
-            categoryArray.map((categoryValue) => {
-              if (categoryValue.name === "") {
-                return []
-              } else {
-                return(
-                  <li key={categoryValue.id} onClick={() => onClickOpen(categoryValue)}>
-                    <div className={utilStyles.categoryPage__img}>
-                      <img src={categoryValue.photoUrl} alt="" />
-                    </div>
-                    <h3>{categoryValue.name}</h3>
-                  </li>
-                )
-              }
-            })
-          }
-        </ul>
-      </section>
-      <ModalStaet selectedState={selectedState} modal={modal} setModal={setModal} />
-    </Layout>
-  ,[onClickOpen])
-}
-export default Categorypage
+export default Categorypage;
