@@ -8,6 +8,8 @@ import firebase from "firebase/app";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = () => {
   const [storeName, setStoreName] = useState("");
@@ -125,12 +127,27 @@ const Registration = () => {
               value={note}
               onChange={(e) => setNote(e.target.value)}
             ></textarea>
-            <IconButton className="registration__boxImgBtn">
-              <label>
-                <AddAPhotoIcon className="registration__boxImgBtnIcon" />
-                <input type="file" onChange={onChangeImageHandler} />
-              </label>
-            </IconButton>
+
+            {photoUrl?.name === undefined ? (
+              <IconButton className="registration__boxImgBtn">
+                <label>
+                  <AddAPhotoIcon className="registration__boxImgBtnIcon" />
+                  <input type="file" onChange={onChangeImageHandler} />
+                </label>
+              </IconButton>
+            ) : (
+              <div className="faCheckSquare__imgBox">
+                <label>
+                  <p>画像が設定されています</p>
+                  <input type="file" onChange={onChangeImageHandler} />
+                  <FontAwesomeIcon
+                    className="faCheckSquare__imgIcon"
+                    icon={faCheckSquare}
+                  />
+                </label>
+              </div>
+            )}
+
             <Button type="submit" disabled={!storeName}>
               Register
             </Button>
@@ -239,6 +256,29 @@ const registration__box = css`
     }
   }
 
+  .faCheckSquare__imgBox {
+    margin: 20px auto;
+    padding: 10px;
+    width: fit-content;
+    background-color: #e2dedb;
+    border-radius: 4px;
+    border: 1px solid #b3aca7;
+    color: #726659;
+
+    input {
+      display: none;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .faCheckSquare__imgIcon {
+      margin: 0 auto;
+      display: block;
+      font-size: 30px;
+    }
+  }
   @media screen and (max-width: 768px) {
     button {
       width: 80%;

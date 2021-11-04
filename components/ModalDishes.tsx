@@ -92,7 +92,7 @@ const ModalBox = css`
   }
 
   .ModalBox__in {
-    padding: 20px;
+    padding: 20px 20px 60px 20px;
 
     p {
       padding-bottom: 4px;

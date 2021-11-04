@@ -9,6 +9,8 @@ import { auth, storage } from "../firebas/initFirebase";
 import { IconButton, Modal, TextField } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const Auth: FC = () => {
   const [email, setEmail] = useState("");
@@ -89,12 +91,22 @@ export const Auth: FC = () => {
                 }}
               />
 
-              <IconButton css={login__boxIcon}>
-                <label>
-                  <AccountCircleIcon fontSize="large" />
-                  <input type="file" onChange={onChangeImageHandler} />
-                </label>
-              </IconButton>
+              {avatarImage?.name === undefined ? (
+                <IconButton css={login__boxIcon}>
+                  <label>
+                    <AccountCircleIcon fontSize="large" />
+                    <input type="file" onChange={onChangeImageHandler} />
+                  </label>
+                </IconButton>
+              ) : (
+                <IconButton css={login__boxIconSelected}>
+                  <label>
+                    <p>画像が設定されています</p>
+                    <input type="file" onChange={onChangeImageHandler} />
+                    <FontAwesomeIcon icon={faCheckSquare} />
+                  </label>
+                </IconButton>
+              )}
             </>
           )}
 
@@ -182,5 +194,19 @@ const login__boxIcon = css`
 
   input {
     display: none;
+  }
+`;
+
+const login__boxIconSelected = css`
+  margin: 0 auto;
+  display: block;
+
+  input {
+    display: none;
+  }
+
+  p {
+    margin: 10px;
+    font-size: 18px;
   }
 `;

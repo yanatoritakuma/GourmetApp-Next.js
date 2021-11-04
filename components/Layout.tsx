@@ -321,6 +321,7 @@ const headerBox = css`
     }
 
     .header__boxIcon {
+      display: block;
       font-size: 30px;
       color: #c13584;
     }
@@ -363,7 +364,7 @@ const headerBox = css`
   .hamMenu {
     display: none;
     width: 80%;
-    height: 100vh;
+    height: 100%;
     background-color: #fff;
     box-shadow: 4px 4px 4px #000000;
     position: fixed;
@@ -383,6 +384,12 @@ const headerBox = css`
       display: block;
       text-align: center;
       font-size: 24px;
+    }
+
+    @media screen and (max-width: 425px) {
+      a {
+        margin: 28px 0;
+      }
     }
   }
 
