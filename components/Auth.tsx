@@ -2,13 +2,14 @@
 import React, { useState, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import utilStyles from "../styles/Auth.module.css";
 import { useDispatch } from "react-redux";
 import { updeteUserProfile } from "../provider/userSlice";
 import { auth, storage } from "../firebas/initFirebase";
 import { IconButton, Modal, TextField } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const Auth: FC = () => {
   const [email, setEmail] = useState("");
@@ -73,10 +74,10 @@ export const Auth: FC = () => {
 
   return (
     <Layout>
-      <section className={utilStyles.login}>
+      <section css={authBox}>
         <h2>Welcome</h2>
         <h3>{isLogin ? "Login" : "Register"}</h3>
-        <div className={utilStyles.login__box}>
+        <div className="authBox__box">
           {!isLogin && (
             <>
               <input
@@ -89,12 +90,22 @@ export const Auth: FC = () => {
                 }}
               />
 
-              <IconButton css={login__boxIcon}>
-                <label>
-                  <AccountCircleIcon fontSize="large" />
-                  <input type="file" onChange={onChangeImageHandler} />
-                </label>
-              </IconButton>
+              {avatarImage?.name === undefined ? (
+                <IconButton className="authBox__boxIcon">
+                  <label>
+                    <AccountCircleIcon fontSize="large" />
+                    <input type="file" onChange={onChangeImageHandler} />
+                  </label>
+                </IconButton>
+              ) : (
+                <IconButton className="auth__boxIconSelected">
+                  <label>
+                    <p>画像が設定されています</p>
+                    <input type="file" onChange={onChangeImageHandler} />
+                    <FontAwesomeIcon icon={faCheckSquare} />
+                  </label>
+                </IconButton>
+              )}
             </>
           )}
 
@@ -139,19 +150,17 @@ export const Auth: FC = () => {
           >
             {isLogin ? "Login" : "Register"}
           </button>
-          <div className={utilStyles.login__boxIn}>
-            <p onClick={() => setOpenModal(true)}>For get passWord?</p>
-            <p onClick={() => setIsLogin(!isLogin)}>
-              {isLogin ? "Create new account ?" : "Back to Login"}
-            </p>
-          </div>
+          <p onClick={() => setOpenModal(true)}>For get passWord?</p>
+          <p onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? "Create new account ?" : "Back to Login"}
+          </p>
         </div>
         <Modal
-          className={utilStyles.Modal}
+          css={authBox__Modal}
           open={openModal}
           onClose={() => setOpenModal(false)}
         >
-          <div className={utilStyles.Modal__box}>
+          <div css={authBox__ModalIn}>
             <TextField
               InputLabelProps={{
                 shrink: true,
@@ -174,13 +183,98 @@ export const Auth: FC = () => {
   );
 };
 
-const login__boxIcon = css`
-  label {
-    width: 100%;
-    cursor: pointer;
+const authBox = css`
+  margin: 100px auto;
+  padding: 50px 0;
+  background-color: #e2dedb;
+  width: 100%;
+  max-width: 1200px;
+
+  h2 {
+    padding: 20px 0;
+    font-size: 26px;
+    text-align: center;
+    color: #b3aca7;
   }
 
-  input {
-    display: none;
+  h3 {
+    font-size: 24px;
+    text-align: center;
+    color: #b3aca7;
   }
+
+  .authBox__box {
+    input {
+      margin: 10px auto;
+      padding: 10px 10px;
+      display: block;
+      width: 260px;
+      border: none;
+      border-radius: 5px;
+      background-color: #fef4f4;
+      outline: none;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    button {
+      margin: 10px auto;
+      padding: 10px 10px;
+      display: block;
+      width: 280px;
+      background-color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .authBox__boxIcon {
+    label {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  .auth__boxIconSelected {
+    margin: 0 auto;
+    display: block;
+
+    input {
+      display: none;
+    }
+
+    p {
+      margin: 10px;
+      font-size: 18px;
+    }
+  }
+`;
+
+const authBox__Modal = css`
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+`;
+
+const authBox__ModalIn = css`
+  padding: 120px 0;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 100%;
+  text-align: center;
 `;
