@@ -8,6 +8,7 @@ import NoImage from "../public/image/noimage.png";
 import { Avatar } from "@material-ui/core";
 import { ModalDishes } from "../components/ModalDishes";
 import { useSelectPost } from "../hooks/useSelectPost";
+import { Post } from "../types/post";
 
 export async function getStaticPaths() {
   return {
@@ -56,18 +57,7 @@ const Categorypage: FC<Props> = ({ category }) => {
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelectPost();
 
-  const onClickOpen = (post: {
-    id: string;
-    avatar: string;
-    image: string;
-    storeName: string;
-    storeTel: string;
-    streetAddress: string;
-    note: string;
-    category: string;
-    timestamp: null;
-    username: string;
-  }) => {
+  const onClickOpen = (post: Post) => {
     onSelectState({ post, posts });
     setModal(!modal);
   };
