@@ -6,50 +6,50 @@ import NoImage from "../public/image/noimage.png";
 import Image from "next/image";
 
 type Props = {
-  open: boolean;
-  setOpen: (value: React.SetStateAction<boolean>) => void;
-  storeName: string;
-  storeTel: string;
-  streetAddress: string;
-  note: string;
-  category: string;
-  image: string;
+  modal: boolean;
+  setModal: (value: React.SetStateAction<boolean>) => void;
+  selectedState:
+    | {
+        id: string;
+        avatar: string;
+        image: string;
+        storeName: string;
+        storeTel: string;
+        streetAddress: string;
+        note: string;
+        category: string;
+        timestamp: null;
+        username: string;
+      }
+    | any;
 };
 
 export const ModalDishes = (props: Props) => {
-  const {
-    open,
-    setOpen,
-    storeName,
-    storeTel,
-    streetAddress,
-    note,
-    category,
-    image,
-  } = props;
+  console.log("ModalDishes");
+  const { modal, setModal, selectedState } = props;
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)}>
+    <Modal open={modal} onClose={() => setModal(false)}>
       <Box css={ModalBox}>
-        <h3>{storeName}</h3>
-        {image === "" ? (
+        <h3>{selectedState?.storeName}</h3>
+        {selectedState?.image === "" ? (
           <div className="ModalBox__noImg">
             <Image src={NoImage} alt="NoImage" />
           </div>
         ) : (
-          <img src={image} alt="image" />
+          <img src={selectedState?.image} alt="image" />
         )}
         <div className="ModalBox__in">
           <h4>StoreName</h4>
-          <p>{storeName}</p>
+          <p>{selectedState?.storeName}</p>
           <h4>PhoneNumber</h4>
-          <p>{storeTel}</p>
+          <p>{selectedState?.storeTel}</p>
           <h4>StreetAddress</h4>
-          <p>{streetAddress}</p>
+          <p>{selectedState?.streetAddress}</p>
           <h4>category</h4>
-          <p>{category}</p>
+          <p>{selectedState?.category}</p>
           <h4>Note</h4>
-          <p>{note}</p>
+          <p>{selectedState?.note}</p>
         </div>
       </Box>
     </Modal>

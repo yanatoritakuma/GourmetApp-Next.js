@@ -3,7 +3,11 @@ import React, { useState, useEffect, useMemo, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { db } from "../firebas/initFirebase";
-import { Post } from "../components/Post";
+import Image from "next/image";
+import NoImage from "../public/image/noimage.png";
+import { Avatar } from "@material-ui/core";
+import { ModalDishes } from "../components/ModalDishes";
+import { useSelectPost } from "../hooks/useSelectPost";
 
 export async function getStaticPaths() {
   return {
@@ -48,6 +52,25 @@ const Categorypage: FC<Props> = ({ category }) => {
       username: "",
     },
   ]);
+
+  const [modal, setModal] = useState(false);
+  const { onSelectState, selectedState } = useSelectPost();
+
+  const onClickOpen = (post: {
+    id: string;
+    avatar: string;
+    image: string;
+    storeName: string;
+    storeTel: string;
+    streetAddress: string;
+    note: string;
+    category: string;
+    timestamp: null;
+    username: string;
+  }) => {
+    onSelectState({ post, posts });
+    setModal(!modal);
+  };
 
   useEffect(() => {
     const unSub = db
@@ -105,22 +128,37 @@ const Categorypage: FC<Props> = ({ category }) => {
           {posts[0]?.id && (
             <div className="categoryPage__box">
               {categoryArray.map((post) => (
-                <Post
-                  key={post.id}
-                  postId={post.id}
-                  avatar={post.avatar}
-                  image={post.image}
-                  storeName={post.storeName}
-                  storeTel={post.storeTel}
-                  streetAddress={post.streetAddress}
-                  note={post.note}
-                  category={post.category}
-                  timestamp={post.timestamp}
-                  username={post.username}
-                />
+                <div css={postBox} onClick={() => onClickOpen(post)}>
+                  <div css={post__contents}>
+                    <h3>{post.storeName}</h3>
+                  </div>
+                  {post.image === "" ? (
+                    <Image src={NoImage} alt="NoImage" />
+                  ) : (
+                    post.image && (
+                      <div css={post__img}>
+                        <img src={post.image} alt="img" />
+                      </div>
+                    )
+                  )}
+                  <div css={post__contributor}>
+                    <h3>
+                      <Avatar src={post.avatar} />
+                      {post.username}
+                    </h3>
+                    {/* <span>
+                      {new Date(post.timestamp?.toDate).toLocaleString()}
+                    </span> */}
+                  </div>
+                </div>
               ))}
             </div>
           )}
+          <ModalDishes
+            selectedState={selectedState}
+            modal={modal}
+            setModal={setModal}
+          />
         </section>
       )}
     </Layout>
@@ -153,6 +191,61 @@ const categoryPage = css`
     .categoryPage__box {
       display: block;
     }
+  }
+`;
+
+const postBox = css`
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 4px 3px #000;
+  width: 95%;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+const post__contributor = css`
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+
+  h3 {
+    margin: 0 20px;
+    display: flex;
+    align-items: center;
+  }
+`;
+
+const post__img = css`
+  display: block;
+  img {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-height: 380px;
+    object-fit: cover;
+  }
+`;
+
+const post__contents = css`
+  h3 {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 26px;
+    width: 100%;
+    max-width: 320px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 320px;
   }
 `;
 
