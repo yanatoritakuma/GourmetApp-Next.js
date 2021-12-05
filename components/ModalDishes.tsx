@@ -31,8 +31,6 @@ type Props = {
 export const ModalDishes = (props: Props) => {
   const { modal, setModal, selectedState, deleteBtn } = props;
   const user = useSelector(selectUser);
-  console.log("user", user.uid);
-  console.log("selectedState", selectedState?.userID);
 
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
