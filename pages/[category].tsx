@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useMemo, FC } from "react";
+import React, { useState, useEffect, useCallback, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import { db } from "../firebas/initFirebase";
+import { db, storage } from "../firebas/initFirebase";
 import Image from "next/image";
 import NoImage from "../public/image/noimage.png";
 import { Avatar } from "@material-ui/core";
@@ -51,6 +51,7 @@ const Categorypage: FC<Props> = ({ category }) => {
       category: "",
       timestamp: null,
       username: "",
+      userID: "",
     },
   ]);
 
@@ -79,6 +80,7 @@ const Categorypage: FC<Props> = ({ category }) => {
             category: doc.data().category,
             timestamp: doc.data().timestamp,
             username: doc.data().username,
+            userID: doc.data().userID,
           }))
         )
       );
@@ -105,6 +107,26 @@ const Categorypage: FC<Props> = ({ category }) => {
       return { color: "#96514d" };
     }
   };
+
+  // カスタムフックにしたほうがよさそう
+  // 削除機能
+  const postsRef = db.collection("posts");
+
+  const deleteBtn = useCallback(
+    async (id) => {
+      const ret = window.confirm("削除しますか？");
+      if (!ret) {
+        return false;
+      } else {
+        const newPost = posts.filter((post: any) => post.id !== id);
+        setPosts(newPost);
+        console.log("storage", storage.ref("posts"));
+        setModal(false);
+        return postsRef.doc(id).delete();
+      }
+    },
+    [posts]
+  );
 
   return (
     <Layout>
@@ -148,6 +170,7 @@ const Categorypage: FC<Props> = ({ category }) => {
             selectedState={selectedState}
             modal={modal}
             setModal={setModal}
+            deleteBtn={deleteBtn}
           />
         </section>
       )}

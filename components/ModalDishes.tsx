@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import { css } from "@emotion/react";
-import { Box, Modal } from "@material-ui/core";
+import { Box, Modal, Button } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { selectUser } from "../provider/userSlice";
 import NoImage from "../public/image/noimage.png";
 import Image from "next/image";
 
@@ -20,13 +22,17 @@ type Props = {
         category: string;
         timestamp: null;
         username: string;
+        userID: string;
       }
     | any;
+  deleteBtn: any;
 };
 
 export const ModalDishes = (props: Props) => {
-  console.log("ModalDishes");
-  const { modal, setModal, selectedState } = props;
+  const { modal, setModal, selectedState, deleteBtn } = props;
+  const user = useSelector(selectUser);
+  console.log("user", user.uid);
+  console.log("selectedState", selectedState?.userID);
 
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
@@ -51,6 +57,17 @@ export const ModalDishes = (props: Props) => {
           <h4>Note</h4>
           <p>{selectedState?.note}</p>
         </div>
+        {user.uid === selectedState?.userID ||
+        user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+          <Button
+            className="deleteBtn"
+            onClick={() => deleteBtn(selectedState?.id)}
+          >
+            deleteBtn
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
     </Modal>
   );
@@ -89,6 +106,17 @@ const ModalBox = css`
     display: block;
     width: 100%;
     max-width: 500px;
+  }
+
+  .deleteBtn {
+    margin: 10px auto;
+    display: block;
+    background-color: #ea5549;
+    color: #fff;
+
+    &:hover {
+      background-color: #ea5549;
+    }
   }
 
   .ModalBox__in {
