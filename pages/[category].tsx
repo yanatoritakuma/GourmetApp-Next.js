@@ -120,13 +120,29 @@ const Categorypage: FC<Props> = ({ category }) => {
       } else {
         const newPost = posts.filter((post: any) => post.id !== id);
         setPosts(newPost);
-        console.log("storage", storage.ref("posts"));
         setModal(false);
         return postsRef.doc(id).delete();
       }
     },
     [posts]
   );
+  // 編集機能
+  const upDateBtn = useCallback(
+    async (id, storeNameUpDate) => {
+      const ret = window.confirm("この内容で編集しますか？");
+      if (!ret) {
+        return false;
+      } else {
+        const newPost = posts.filter((post: any) => post.id !== id);
+        setPosts(newPost);
+        setModal(false);
+        return postsRef.doc(id).update({ storeName: storeNameUpDate });
+      }
+    },
+    [posts]
+  );
+
+  // database.ref('users').child('-LRf1PVkwUIA5FakLojR').update({country: 'japan'});
 
   return (
     <Layout>
@@ -171,6 +187,7 @@ const Categorypage: FC<Props> = ({ category }) => {
             modal={modal}
             setModal={setModal}
             deleteBtn={deleteBtn}
+            upDateBtn={upDateBtn}
           />
         </section>
       )}

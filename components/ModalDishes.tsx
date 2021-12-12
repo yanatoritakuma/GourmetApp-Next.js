@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
 import { Box, Modal, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -25,12 +25,20 @@ type Props = {
         userID: string;
       }
     | any;
-  deleteBtn: any;
+  deleteBtn: (id: any) => Promise<false | void>;
+  upDateBtn: any;
 };
 
 export const ModalDishes = (props: Props) => {
-  const { modal, setModal, selectedState, deleteBtn } = props;
+  const { modal, setModal, selectedState, deleteBtn, upDateBtn } = props;
   const user = useSelector(selectUser);
+  const [storeNameUpDate, setStoreNameUpDate] = useState("");
+  const [change, setChange] = useState(false);
+
+  const resetUpDateContents = () => {
+    setStoreNameUpDate("");
+    setChange(false);
+  };
 
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
@@ -45,7 +53,21 @@ export const ModalDishes = (props: Props) => {
         )}
         <div className="ModalBox__in">
           <h4>StoreName</h4>
-          <p>{selectedState?.storeName}</p>
+          <div className="ModalBox__inTextBox">
+            <p style={change ? { display: "none" } : { display: "block" }}>
+              {selectedState?.storeName}
+            </p>
+            <input
+              type="text"
+              value={storeNameUpDate}
+              onChange={(e) => setStoreNameUpDate(e.target.value)}
+              style={change ? { display: "block" } : { display: "none" }}
+            />
+            <Button className="upDateBtn" onClick={() => setChange(!change)}>
+              編集
+            </Button>
+          </div>
+
           <h4>PhoneNumber</h4>
           <p>{selectedState?.storeTel}</p>
           <h4>StreetAddress</h4>
@@ -61,11 +83,20 @@ export const ModalDishes = (props: Props) => {
             className="deleteBtn"
             onClick={() => deleteBtn(selectedState?.id)}
           >
-            deleteBtn
+            delete
           </Button>
         ) : (
           ""
         )}
+        <Button
+          className="upDateBtn"
+          onClick={() => {
+            upDateBtn(selectedState?.id, storeNameUpDate);
+            resetUpDateContents();
+          }}
+        >
+          upDate
+        </Button>
       </Box>
     </Modal>
   );
@@ -117,12 +148,38 @@ const ModalBox = css`
     }
   }
 
+  .upDateBtn {
+    margin: 10px auto;
+    display: block;
+    background-color: #2cb4ad;
+    color: #fff;
+
+    &:hover {
+      background-color: #2cb4ad;
+    }
+  }
+
   .ModalBox__in {
     padding: 20px 20px 60px 20px;
 
     p {
       padding-bottom: 4px;
       border-bottom: 1px solid #aaa;
+    }
+  }
+
+  .ModalBox__inTextBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p,
+    input {
+      width: 90%;
+    }
+
+    input {
+      border: 1px solid #333;
     }
   }
 
