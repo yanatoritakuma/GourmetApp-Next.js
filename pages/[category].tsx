@@ -128,7 +128,7 @@ const Categorypage: FC<Props> = ({ category }) => {
   );
   // 編集機能
   const upDateBtn = useCallback(
-    async (id, storeNameUpDate) => {
+    async (id, upDateContents) => {
       const ret = window.confirm("この内容で編集しますか？");
       if (!ret) {
         return false;
@@ -136,7 +136,13 @@ const Categorypage: FC<Props> = ({ category }) => {
         const newPost = posts.filter((post: any) => post.id !== id);
         setPosts(newPost);
         setModal(false);
-        return postsRef.doc(id).update({ storeName: storeNameUpDate });
+        return postsRef.doc(id).update({
+          storeName: upDateContents.storeName,
+          storeTel: upDateContents.phoneNumber,
+          streetAddress: upDateContents.streetAddress,
+          note: upDateContents.note,
+          category: upDateContents.category,
+        });
       }
     },
     [posts]

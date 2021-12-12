@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 import { Box, Modal, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -26,18 +26,56 @@ type Props = {
       }
     | any;
   deleteBtn: (id: any) => Promise<false | void>;
-  upDateBtn: any;
+  upDateBtn: (id: any, upDateContents: any) => Promise<false | void>;
 };
 
 export const ModalDishes = (props: Props) => {
   const { modal, setModal, selectedState, deleteBtn, upDateBtn } = props;
   const user = useSelector(selectUser);
-  const [storeNameUpDate, setStoreNameUpDate] = useState("");
-  const [change, setChange] = useState(false);
+  const [upDateContents, setUpDateContents] = useState({
+    storeName: "",
+    phoneNumber: "",
+    streetAddress: "",
+    note: "",
+    category: "",
+  });
+
+  // 初期化がundefinedが入ってくるのでuseEffectで再代入
+  useEffect(() => {
+    setUpDateContents({
+      ...upDateContents,
+      storeName: selectedState?.storeName,
+      phoneNumber: selectedState?.storeTel,
+      streetAddress: selectedState?.streetAddress,
+      note: selectedState?.note,
+      category: selectedState?.category,
+    });
+  }, [selectedState]);
+
+  const [change, setChange] = useState({
+    storeName: false,
+    phoneNumber: false,
+    streetAddress: false,
+    note: false,
+    category: false,
+  });
 
   const resetUpDateContents = () => {
-    setStoreNameUpDate("");
-    setChange(false);
+    setUpDateContents({
+      storeName: "",
+      phoneNumber: "",
+      streetAddress: "",
+      note: "",
+      category: "",
+    });
+
+    setChange({
+      storeName: false,
+      phoneNumber: false,
+      streetAddress: false,
+      note: false,
+      category: false,
+    });
   };
 
   return (
@@ -51,52 +89,219 @@ export const ModalDishes = (props: Props) => {
         ) : (
           <img src={selectedState?.image} alt="image" />
         )}
+
         <div className="ModalBox__in">
           <h4>StoreName</h4>
           <div className="ModalBox__inTextBox">
-            <p style={change ? { display: "none" } : { display: "block" }}>
+            <p
+              style={
+                change.storeName ? { display: "none" } : { display: "block" }
+              }
+            >
               {selectedState?.storeName}
             </p>
             <input
               type="text"
-              value={storeNameUpDate}
-              onChange={(e) => setStoreNameUpDate(e.target.value)}
-              style={change ? { display: "block" } : { display: "none" }}
+              value={upDateContents.storeName}
+              onChange={(e) =>
+                setUpDateContents({
+                  ...upDateContents,
+                  storeName: e.target.value,
+                })
+              }
+              style={
+                change.storeName ? { display: "block" } : { display: "none" }
+              }
             />
-            <Button className="upDateBtn" onClick={() => setChange(!change)}>
-              編集
-            </Button>
+            {user.uid === selectedState?.userID ||
+            user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+              <Button
+                className="upDateBtn"
+                onClick={() =>
+                  setChange({ ...change, storeName: !change.storeName })
+                }
+              >
+                編集
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
 
           <h4>PhoneNumber</h4>
-          <p>{selectedState?.storeTel}</p>
+          <div className="ModalBox__inTextBox">
+            <p
+              style={
+                change.phoneNumber ? { display: "none" } : { display: "block" }
+              }
+            >
+              {selectedState?.storeTel}
+            </p>
+            <input
+              type="text"
+              value={upDateContents.phoneNumber}
+              onChange={(e) =>
+                setUpDateContents({
+                  ...upDateContents,
+                  phoneNumber: e.target.value,
+                })
+              }
+              style={
+                change.phoneNumber ? { display: "block" } : { display: "none" }
+              }
+            />
+            {user.uid === selectedState?.userID ||
+            user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+              <Button
+                className="upDateBtn"
+                onClick={() =>
+                  setChange({ ...change, phoneNumber: !change.phoneNumber })
+                }
+              >
+                編集
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+
           <h4>StreetAddress</h4>
-          <p>{selectedState?.streetAddress}</p>
+          <div className="ModalBox__inTextBox">
+            <p
+              style={
+                change.streetAddress
+                  ? { display: "none" }
+                  : { display: "block" }
+              }
+            >
+              {selectedState?.streetAddress}
+            </p>
+            <input
+              type="text"
+              value={upDateContents.streetAddress}
+              onChange={(e) =>
+                setUpDateContents({
+                  ...upDateContents,
+                  streetAddress: e.target.value,
+                })
+              }
+              style={
+                change.streetAddress
+                  ? { display: "block" }
+                  : { display: "none" }
+              }
+            />
+            {user.uid === selectedState?.userID ||
+            user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+              <Button
+                className="upDateBtn"
+                onClick={() =>
+                  setChange({ ...change, streetAddress: !change.streetAddress })
+                }
+              >
+                編集
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+
           <h4>category</h4>
-          <p>{selectedState?.category}</p>
+          <div className="ModalBox__inTextBox">
+            <p
+              style={
+                change.category ? { display: "none" } : { display: "block" }
+              }
+            >
+              {selectedState?.category}
+            </p>
+
+            <select
+              value={upDateContents.category}
+              onChange={(e) =>
+                setUpDateContents({
+                  ...upDateContents,
+                  category: e.target.value,
+                })
+              }
+              style={
+                change.category ? { display: "block" } : { display: "none" }
+              }
+            >
+              <option value="all">All</option>
+              <option value="meat">MeatDish</option>
+              <option value="fish">FishDish</option>
+              <option value="noodle">Noodles</option>
+              <option value="salad">Salad</option>
+              <option value="dessert">Dessert</option>
+              <option value="coffee">Coffee</option>
+            </select>
+
+            {user.uid === selectedState?.userID ||
+            user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+              <Button
+                className="upDateBtn"
+                onClick={() =>
+                  setChange({ ...change, category: !change.category })
+                }
+              >
+                編集
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+
           <h4>Note</h4>
-          <p>{selectedState?.note}</p>
+          <div className="ModalBox__inTextBox">
+            <p style={change.note ? { display: "none" } : { display: "block" }}>
+              {selectedState?.note}
+            </p>
+            <textarea
+              value={upDateContents.note}
+              onChange={(e) =>
+                setUpDateContents({
+                  ...upDateContents,
+                  note: e.target.value,
+                })
+              }
+              style={change.note ? { display: "block" } : { display: "none" }}
+            />
+            {user.uid === selectedState?.userID ||
+            user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+              <Button
+                className="upDateBtn"
+                onClick={() => setChange({ ...change, note: !change.note })}
+              >
+                編集
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         {user.uid === selectedState?.userID ||
         user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
-          <Button
-            className="deleteBtn"
-            onClick={() => deleteBtn(selectedState?.id)}
-          >
-            delete
-          </Button>
+          <>
+            <Button
+              className="deleteBtn"
+              onClick={() => deleteBtn(selectedState?.id)}
+            >
+              delete
+            </Button>
+            <Button
+              className="upDateBtn"
+              onClick={() => {
+                upDateBtn(selectedState?.id, upDateContents);
+                resetUpDateContents();
+              }}
+            >
+              upDate
+            </Button>
+          </>
         ) : (
           ""
         )}
-        <Button
-          className="upDateBtn"
-          onClick={() => {
-            upDateBtn(selectedState?.id, storeNameUpDate);
-            resetUpDateContents();
-          }}
-        >
-          upDate
-        </Button>
       </Box>
     </Modal>
   );
@@ -164,7 +369,6 @@ const ModalBox = css`
 
     p {
       padding-bottom: 4px;
-      border-bottom: 1px solid #aaa;
     }
   }
 
@@ -174,8 +378,13 @@ const ModalBox = css`
     align-items: center;
 
     p,
-    input {
+    input,
+    textarea {
       width: 90%;
+    }
+
+    p {
+      border-bottom: 1px solid #aaa;
     }
 
     input {
