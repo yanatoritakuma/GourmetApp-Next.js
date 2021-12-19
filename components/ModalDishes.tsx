@@ -40,6 +40,14 @@ export const ModalDishes = (props: Props) => {
     category: "",
   });
 
+  const initContents = {
+    storeName: selectedState?.storeName,
+    phoneNumber: selectedState?.storeTel,
+    streetAddress: selectedState?.streetAddress,
+    note: selectedState?.note,
+    category: selectedState?.category,
+  };
+
   // 初期化がundefinedが入ってくるのでuseEffectで再代入
   useEffect(() => {
     setUpDateContents({
@@ -61,14 +69,17 @@ export const ModalDishes = (props: Props) => {
   });
 
   const resetUpDateContents = () => {
-    setUpDateContents({
-      storeName: "",
-      phoneNumber: "",
-      streetAddress: "",
-      note: "",
-      category: "",
-    });
+    if (
+      upDateContents.storeName === initContents.storeName &&
+      upDateContents.phoneNumber === initContents.phoneNumber &&
+      upDateContents.streetAddress === initContents.streetAddress &&
+      upDateContents.category === initContents.category &&
+      upDateContents.note === initContents.note
+    ) {
+      return alert("変更がありません。");
+    }
 
+    upDateBtn(selectedState?.id, upDateContents);
     setChange({
       storeName: false,
       phoneNumber: false,
@@ -289,13 +300,7 @@ export const ModalDishes = (props: Props) => {
             >
               delete
             </Button>
-            <Button
-              className="upDateBtn"
-              onClick={() => {
-                upDateBtn(selectedState?.id, upDateContents);
-                resetUpDateContents();
-              }}
-            >
+            <Button className="upDateBtn" onClick={() => resetUpDateContents()}>
               upDate
             </Button>
           </>
