@@ -25,7 +25,7 @@ type Props = {
         userID: string;
       }
     | any;
-  deleteBtn: (id: any) => Promise<false | void>;
+  deleteBtn: (id: any, img: any) => Promise<false | void>;
   upDateBtn: (id: any, upDateContents: any) => Promise<false | void>;
 };
 
@@ -88,6 +88,11 @@ export const ModalDishes = (props: Props) => {
       category: false,
     });
   };
+
+  const targetImg = selectedState?.image.substring(
+    84,
+    selectedState?.image.indexOf("?")
+  );
 
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
@@ -296,7 +301,7 @@ export const ModalDishes = (props: Props) => {
           <>
             <Button
               className="deleteBtn"
-              onClick={() => deleteBtn(selectedState?.id)}
+              onClick={() => deleteBtn(selectedState?.id, targetImg)}
             >
               delete
             </Button>
@@ -313,6 +318,7 @@ export const ModalDishes = (props: Props) => {
 };
 
 const ModalBox = css`
+  padding-bottom: 80px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -323,12 +329,12 @@ const ModalBox = css`
   width: 100%;
   max-width: 1000px;
   height: auto;
-  max-height: 900px;
+  max-height: 750px;
   overflow-wrap: break-word;
   overflow: scroll;
 
   h3 {
-    margin-top: 0px;
+    margin: 0;
     padding: 20px;
     text-align: center;
     font-size: 24px;

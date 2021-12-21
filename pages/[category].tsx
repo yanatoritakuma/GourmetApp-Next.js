@@ -113,7 +113,7 @@ const Categorypage: FC<Props> = ({ category }) => {
   const postsRef = db.collection("posts");
 
   const deleteBtn = useCallback(
-    async (id) => {
+    async (id, img) => {
       const ret = window.confirm("削除しますか？");
       if (!ret) {
         return false;
@@ -121,6 +121,7 @@ const Categorypage: FC<Props> = ({ category }) => {
         const newPost = posts.filter((post: any) => post.id !== id);
         setPosts(newPost);
         setModal(false);
+        storage.ref().child(`images/${img}`).delete();
         return postsRef.doc(id).delete();
       }
     },
@@ -147,8 +148,6 @@ const Categorypage: FC<Props> = ({ category }) => {
     },
     [posts]
   );
-
-  // database.ref('users').child('-LRf1PVkwUIA5FakLojR').update({country: 'japan'});
 
   return (
     <Layout>
