@@ -347,7 +347,7 @@ const ModalBox = css`
 
   img,
   .ModalBox__noImg {
-    margin: 0 auto;
+    margin: 20px auto;
     display: block;
     width: 100%;
     max-width: 500px;
