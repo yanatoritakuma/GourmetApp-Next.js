@@ -60,6 +60,7 @@ const Registration = () => {
                 category: category,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 username: user.dispalayName,
+                userID: user.uid,
               });
             });
         }
@@ -75,6 +76,7 @@ const Registration = () => {
         category: category,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         username: user.dispalayName,
+        userID: user.uid,
       });
     }
     setStoreName("");
