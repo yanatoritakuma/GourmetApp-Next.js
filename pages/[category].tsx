@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import { db, storage } from "../firebas/initFirebase";
+import { db } from "../firebas/initFirebase";
 import Image from "next/image";
 import NoImage from "../public/image/noimage.png";
 import { Avatar } from "@material-ui/core";
@@ -108,47 +108,6 @@ const Categorypage: FC<Props> = ({ category }) => {
     }
   };
 
-  // カスタムフックにしたほうがよさそう
-  // 削除機能
-  const postsRef = db.collection("posts");
-
-  const deleteBtn = useCallback(
-    async (id, img) => {
-      const ret = window.confirm("削除しますか？");
-      if (!ret) {
-        return false;
-      } else {
-        const newPost = posts.filter((post: any) => post.id !== id);
-        setPosts(newPost);
-        setModal(false);
-        storage.ref().child(`images/${img}`).delete();
-        return postsRef.doc(id).delete();
-      }
-    },
-    [posts]
-  );
-  // 編集機能
-  const upDateBtn = useCallback(
-    async (id, upDateContents) => {
-      const ret = window.confirm("この内容で編集しますか？");
-      if (!ret) {
-        return false;
-      } else {
-        const newPost = posts.filter((post: any) => post.id !== id);
-        setPosts(newPost);
-        setModal(false);
-        return postsRef.doc(id).update({
-          storeName: upDateContents.storeName,
-          storeTel: upDateContents.phoneNumber,
-          streetAddress: upDateContents.streetAddress,
-          note: upDateContents.note,
-          category: upDateContents.category,
-        });
-      }
-    },
-    [posts]
-  );
-
   return (
     <Layout>
       {posts[0]?.id === "" ? (
@@ -191,8 +150,6 @@ const Categorypage: FC<Props> = ({ category }) => {
             selectedState={selectedState}
             modal={modal}
             setModal={setModal}
-            deleteBtn={deleteBtn}
-            upDateBtn={upDateBtn}
           />
         </section>
       )}

@@ -4,6 +4,8 @@ import { css } from "@emotion/react";
 import { Box, Modal, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
+import { useDeletePost } from "../hooks/useDeletePost";
+import { useUpDatePost } from "../hooks/useUpDatePost";
 import NoImage from "../public/image/noimage.png";
 import Image from "next/image";
 
@@ -25,12 +27,10 @@ type Props = {
         userID: string;
       }
     | any;
-  deleteBtn: (id: any, img: any) => Promise<false | void>;
-  upDateBtn: (id: any, upDateContents: any) => Promise<false | void>;
 };
 
 export const ModalDishes = (props: Props) => {
-  const { modal, setModal, selectedState, deleteBtn, upDateBtn } = props;
+  const { modal, setModal, selectedState } = props;
   const user = useSelector(selectUser);
   const [upDateContents, setUpDateContents] = useState({
     storeName: "",
@@ -87,12 +87,16 @@ export const ModalDishes = (props: Props) => {
       note: false,
       category: false,
     });
+    setModal(false);
   };
 
   const targetImg = selectedState?.image.substring(
     84,
     selectedState?.image.indexOf("?")
   );
+
+  const { deleteBtn } = useDeletePost();
+  const { upDateBtn } = useUpDatePost();
 
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
@@ -301,7 +305,9 @@ export const ModalDishes = (props: Props) => {
           <>
             <Button
               className="deleteBtn"
-              onClick={() => deleteBtn(selectedState?.id, targetImg)}
+              onClick={() => {
+                deleteBtn(selectedState?.id, targetImg), setModal(false);
+              }}
             >
               delete
             </Button>
