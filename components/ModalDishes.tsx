@@ -1,13 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
 import { css } from "@emotion/react";
-import { Box, Modal, Button } from "@material-ui/core";
+import { Box, Modal, Button, TextField } from "@material-ui/core";
+import firebase from "firebase/app";
+import { db } from "../firebas/initFirebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
 import { useDeletePost } from "../hooks/useDeletePost";
 import { useUpDatePost } from "../hooks/useUpDatePost";
 import NoImage from "../public/image/noimage.png";
+import { Avatar } from "@material-ui/core";
 import Image from "next/image";
+import SendIcon from "@material-ui/icons/Send";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 
 type Props = {
   modal: boolean;
@@ -29,6 +35,14 @@ type Props = {
     | any;
 };
 
+type TypeComment = {
+  avatar: string;
+  text: string;
+  username: string;
+  timestamp: any;
+  rating: number | null;
+};
+
 export const ModalDishes = (props: Props) => {
   const { modal, setModal, selectedState } = props;
   const user = useSelector(selectUser);
@@ -39,6 +53,45 @@ export const ModalDishes = (props: Props) => {
     note: "",
     category: "",
   });
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState<number | null>(1);
+  const [comments, setComments] = useState<TypeComment[]>([
+    {
+      avatar: user.photoUrl,
+      text: comment,
+      username: user.dispalayName,
+      timestamp: null,
+      rating: rating,
+    },
+  ]);
+  console.log(comments);
+
+  const [openComment, setOpenComment] = useState(false);
+
+  useEffect(() => {
+    const unSub = db
+      .collection("posts")
+      .doc(selectedState?.id)
+      .collection("comments")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setComments(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            avatar: doc.data().avatar,
+            text: doc.data().text,
+            username: doc.data().username,
+            timestamp: doc.data().timestamp,
+            userId: doc.data().userId,
+            rating: doc.data().rating,
+          }))
+        );
+      });
+
+    return () => {
+      unSub();
+    };
+  }, [selectedState?.id]);
 
   const initContents = {
     storeName: selectedState?.storeName,
@@ -98,6 +151,19 @@ export const ModalDishes = (props: Props) => {
   const { deleteBtn } = useDeletePost();
   const { upDateBtn } = useUpDatePost();
 
+  const newComment = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    db.collection("posts").doc(selectedState?.id).collection("comments").add({
+      avatar: user.photoUrl,
+      text: comment,
+      username: user.dispalayName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      userId: user.uid,
+      rating: rating,
+    });
+    setComment("");
+  };
+
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
       <Box css={ModalBox}>
@@ -147,7 +213,6 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-
           <h4>PhoneNumber</h4>
           <div className="ModalBox__inTextBox">
             <p
@@ -184,7 +249,6 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-
           <h4>StreetAddress</h4>
           <div className="ModalBox__inTextBox">
             <p
@@ -225,7 +289,6 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-
           <h4>category</h4>
           <div className="ModalBox__inTextBox">
             <p
@@ -271,7 +334,6 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-
           <h4>Note</h4>
           <div className="ModalBox__inTextBox">
             <p style={change.note ? { display: "none" } : { display: "block" }}>
@@ -299,6 +361,54 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
+          <form onSubmit={newComment}>
+            <div>
+              <Typography component="legend">評価</Typography>
+              <Rating
+                name="simple-controlled"
+                value={rating}
+                onChange={(e: any) => {
+                  setRating(e.target.value);
+                }}
+              />
+            </div>
+            <div css={commentInputBox}>
+              <TextField
+                id="filled-multiline-static"
+                label="コメント"
+                multiline
+                rows={0}
+                variant="filled"
+                value={comment}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setComment(e.target.value)
+                }
+              />
+              <Button disabled={!comment} type="submit">
+                <SendIcon />
+              </Button>
+            </div>
+          </form>
+          <Button
+            css={openCommentBtn}
+            onClick={() => setOpenComment(!openComment)}
+          >
+            {openComment ? "コメントを非表示にする" : "コメントを表示する"}
+          </Button>
+
+          {openComment
+            ? comments.map((v, i) => (
+                <div css={commentBox} key={i}>
+                  <Typography component="legend">コメント</Typography>
+                  <Rating name="read-only" value={v.rating} readOnly />
+                  <p className="commentBox__text">{v.text}</p>
+                  <div className="commentBox__user">
+                    <p>{v.username}</p>
+                    <Avatar src={v.avatar} />
+                  </div>
+                </div>
+              ))
+            : ""}
         </div>
         {user.uid === selectedState?.userID ||
         user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
@@ -419,4 +529,47 @@ const ModalBox = css`
       width: 90%;
     }
   }
+`;
+
+const commentInputBox = css`
+  display: flex;
+  align-items: flex-end;
+
+  .MuiFormControl-root {
+    width: 30%;
+    min-width: 200px;
+  }
+
+  button {
+    background-color: #d3d0d0;
+  }
+`;
+
+const commentBox = css`
+  margin: 20px 0;
+  padding: 6px;
+  display: block;
+  box-shadow: 0 0 8px #aaa;
+  border-radius: 10px;
+
+  .commentBox__text {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .commentBox__user {
+    display: flex;
+    align-items: center;
+
+    .MuiAvatar-root {
+      width: 100%;
+      height: 100%;
+      max-width: 30px;
+    }
+  }
+`;
+
+const openCommentBtn = css`
+  margin: 10px 0 !important;
+  background-color: #d3d0d0 !important;
 `;
