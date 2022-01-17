@@ -413,14 +413,14 @@ const headerBox = css`
       background-color: #000000;
       transition: 0.3s;
 
-      &:first-child {
+      &:first-of-type {
         transform: translateY(6px) rotate(150deg);
       }
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         transform: translateY(-6px) rotate(-150deg);
         margin-bottom: 0;
       }
-      &:nth-child(3) {
+      &:nth-of-type(3) {
         display: none;
         transition: 0.3s;
       }
