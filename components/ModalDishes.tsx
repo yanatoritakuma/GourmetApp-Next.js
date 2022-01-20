@@ -14,6 +14,8 @@ import Image from "next/image";
 import SendIcon from "@material-ui/icons/Send";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 type Props = {
   modal: boolean;
@@ -66,7 +68,6 @@ export const ModalDishes = (props: Props) => {
       userId: user.uid,
     },
   ]);
-  console.log(comments);
 
   const [openComment, setOpenComment] = useState(false);
 
@@ -180,7 +181,14 @@ export const ModalDishes = (props: Props) => {
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
       <Box css={ModalBox}>
-        <h3>{selectedState?.storeName}</h3>
+        <h3>
+          <FontAwesomeIcon
+            className="closeBtn"
+            icon={faTimesCircle}
+            onClick={() => setModal(false)}
+          />
+          {selectedState?.storeName}
+        </h3>
         {selectedState?.image === "" ? (
           <div className="ModalBox__noImg">
             <Image src={NoImage} alt="NoImage" />
@@ -483,6 +491,14 @@ const ModalBox = css`
     overflow-wrap: break-word;
     overflow: scroll;
     max-height: 100px;
+    position: relative;
+
+    .closeBtn {
+      position: absolute;
+      left: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
   }
 
   img,
