@@ -14,6 +14,8 @@ import Image from "next/image";
 import SendIcon from "@material-ui/icons/Send";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 type Props = {
   modal: boolean;
@@ -39,6 +41,7 @@ type TypeComment = {
   avatar: string;
   text: string;
   username: string;
+  userId: string;
   timestamp: any;
   rating: number | null;
 };
@@ -62,9 +65,9 @@ export const ModalDishes = (props: Props) => {
       username: user.dispalayName,
       timestamp: null,
       rating: rating,
+      userId: user.uid,
     },
   ]);
-  console.log(comments);
 
   const [openComment, setOpenComment] = useState(false);
 
@@ -164,10 +167,28 @@ export const ModalDishes = (props: Props) => {
     setComment("");
   };
 
+  const commentRef = db.collection(`posts/${selectedState?.id}/comments`);
+
+  const deleteComment = (comment: any) => {
+    const ret = window.confirm("削除しますか？");
+    if (!ret) {
+      return false;
+    } else {
+      return commentRef.doc(comment.id).delete();
+    }
+  };
+
   return (
     <Modal open={modal} onClose={() => setModal(false)}>
       <Box css={ModalBox}>
-        <h3>{selectedState?.storeName}</h3>
+        <h3>
+          <FontAwesomeIcon
+            className="closeBtn"
+            icon={faTimesCircle}
+            onClick={() => setModal(false)}
+          />
+          {selectedState?.storeName}
+        </h3>
         {selectedState?.image === "" ? (
           <div className="ModalBox__noImg">
             <Image src={NoImage} alt="NoImage" />
@@ -406,6 +427,17 @@ export const ModalDishes = (props: Props) => {
                     <p>{v.username}</p>
                     <Avatar src={v.avatar} />
                   </div>
+                  {user.uid === v?.userId ||
+                  user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+                    <Button
+                      className="deleteBtn"
+                      onClick={() => deleteComment(v)}
+                    >
+                      削除
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ))
             : ""}
@@ -459,6 +491,14 @@ const ModalBox = css`
     overflow-wrap: break-word;
     overflow: scroll;
     max-height: 100px;
+    position: relative;
+
+    .closeBtn {
+      position: absolute;
+      left: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
   }
 
   img,
