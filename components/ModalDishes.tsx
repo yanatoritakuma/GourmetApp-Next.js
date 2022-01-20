@@ -39,6 +39,7 @@ type TypeComment = {
   avatar: string;
   text: string;
   username: string;
+  userId: string;
   timestamp: any;
   rating: number | null;
 };
@@ -62,6 +63,7 @@ export const ModalDishes = (props: Props) => {
       username: user.dispalayName,
       timestamp: null,
       rating: rating,
+      userId: user.uid,
     },
   ]);
   console.log(comments);
@@ -162,6 +164,17 @@ export const ModalDishes = (props: Props) => {
       rating: rating,
     });
     setComment("");
+  };
+
+  const commentRef = db.collection(`posts/${selectedState?.id}/comments`);
+
+  const deleteComment = (comment: any) => {
+    const ret = window.confirm("削除しますか？");
+    if (!ret) {
+      return false;
+    } else {
+      return commentRef.doc(comment.id).delete();
+    }
   };
 
   return (
@@ -406,6 +419,17 @@ export const ModalDishes = (props: Props) => {
                     <p>{v.username}</p>
                     <Avatar src={v.avatar} />
                   </div>
+                  {user.uid === v?.userId ||
+                  user.uid === "8c6Z46nQleTRI16dqRgtQUiDt1X2" ? (
+                    <Button
+                      className="deleteBtn"
+                      onClick={() => deleteComment(v)}
+                    >
+                      削除
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ))
             : ""}

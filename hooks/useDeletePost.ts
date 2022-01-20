@@ -10,7 +10,9 @@ export const useDeletePost = () => {
       if (!ret) {
         return false;
       } else {
-        storage.ref().child(`images/${img}`).delete();
+        if (img) {
+          storage.ref().child(`images/${img}`).delete();
+        }
         return postsRef.doc(id).delete();
       }
     },
