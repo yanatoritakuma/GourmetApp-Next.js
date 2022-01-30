@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useCallback, FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { db } from "../firebas/initFirebase";
@@ -138,9 +138,6 @@ const Categorypage: FC<Props> = ({ category }) => {
                       <Avatar src={post.avatar} />
                       {post.username}
                     </h3>
-                    {/* <span>
-                      {new Date(post.timestamp?.toDate).toLocaleString()}
-                    </span> */}
                   </div>
                 </div>
               ))}

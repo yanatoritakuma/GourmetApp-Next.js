@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 import { useDispatch } from "react-redux";
 import { updeteUserProfile } from "../provider/userSlice";
 import { auth, storage } from "../firebas/initFirebase";
-import { IconButton, Modal, TextField } from "@material-ui/core";
+import { IconButton, Modal, TextField, Box, Button } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SendIcon from "@material-ui/icons/Send";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -80,15 +80,16 @@ export const Auth: FC = () => {
         <div className="authBox__box">
           {!isLogin && (
             <>
-              <input
-                id="userName"
-                name="userName"
-                placeholder="userName"
-                value={userName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setUserName(e.target.value);
-                }}
-              />
+              <Box css={inputBox}>
+                <TextField
+                  id="userName"
+                  label="userName"
+                  value={userName}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setUserName(e.target.value);
+                  }}
+                />
+              </Box>
 
               {avatarImage?.name === undefined ? (
                 <IconButton className="authBox__boxIcon">
@@ -106,25 +107,31 @@ export const Auth: FC = () => {
                   </label>
                 </IconButton>
               )}
+              {console.log(avatarImage)}
             </>
           )}
-
-          <input
-            placeholder="EmailAddress"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <input
-            placeholder="PassWord"
-            value={passWord}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setPassWord(e.target.value);
-            }}
-          />
-          <button
-            type="button"
+          <Box css={inputBox}>
+            <TextField
+              id="outlined-basic"
+              label="EmailAddress"
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Box>
+          <Box css={inputBox}>
+            <TextField
+              id="outlined-basic"
+              label="PassWord"
+              type="password"
+              value={passWord}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPassWord(e.target.value);
+              }}
+            />
+          </Box>
+          <Button
             disabled={
               isLogin
                 ? !email || passWord.length < 6
@@ -149,10 +156,10 @@ export const Auth: FC = () => {
             }
           >
             {isLogin ? "Login" : "Register"}
-          </button>
-          <p onClick={() => setOpenModal(true)}>For get passWord?</p>
+          </Button>
+          <p onClick={() => setOpenModal(true)}>パスワードを忘れた場合</p>
           <p onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? "Create new account ?" : "Back to Login"}
+            {isLogin ? "アカウントを作成" : "ログイン画面に戻る"}
           </p>
         </div>
         <Modal
@@ -204,19 +211,9 @@ const authBox = css`
   }
 
   .authBox__box {
-    input {
-      margin: 10px auto;
-      padding: 10px 10px;
-      display: block;
-      width: 260px;
-      border: none;
-      border-radius: 5px;
-      background-color: #fef4f4;
-      outline: none;
-    }
-
     p {
       text-align: center;
+      cursor: pointer;
     }
 
     button {
@@ -259,6 +256,17 @@ const authBox = css`
       margin: 10px;
       font-size: 18px;
     }
+  }
+`;
+
+const inputBox = css`
+  margin: 0 auto;
+  /* background-color: skyblue; */
+  width: fit-content;
+
+  input {
+    width: 260px;
+    border: none;
   }
 `;
 

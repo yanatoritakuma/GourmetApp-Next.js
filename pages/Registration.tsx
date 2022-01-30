@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useMemo, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-import { storage, db, auth } from "../firebas/initFirebase";
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { storage, db } from "../firebas/initFirebase";
+import { Button, IconButton, TextField, Box } from "@material-ui/core";
 import firebase from "firebase/app";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { useSelector } from "react-redux";
@@ -28,64 +28,69 @@ const Registration = () => {
   };
 
   const onClickRegistration = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (photoUrl) {
-      const S =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      const N = 16;
-      const randomChar = Array.from(crypto.getRandomValues(new Uint32Array(N)))
-        .map((n) => S[n % S.length])
-        .join("");
-      const fileName = randomChar + "_" + photoUrl.name;
-      const uploadImg = storage.ref(`images/${fileName}`).put(photoUrl);
-      uploadImg.on(
-        firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {},
-        (err) => {
-          alert(err.message);
-        },
-        async () => {
-          await storage
-            .ref("images")
-            .child(fileName)
-            .getDownloadURL()
-            .then(async (url) => {
-              await db.collection("posts").add({
-                avatar: user.photoUrl,
-                image: url,
-                storeName: storeName,
-                storeTel: storeTel,
-                streetAddress: streetAddress,
-                note: note,
-                category: category,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                username: user.dispalayName,
-                userID: user.uid,
+    const ret = window.confirm("この内容で登録しますか？");
+    if (ret) {
+      e.preventDefault();
+      if (photoUrl) {
+        const S =
+          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const N = 16;
+        const randomChar = Array.from(
+          crypto.getRandomValues(new Uint32Array(N))
+        )
+          .map((n) => S[n % S.length])
+          .join("");
+        const fileName = randomChar + "_" + photoUrl.name;
+        const uploadImg = storage.ref(`images/${fileName}`).put(photoUrl);
+        uploadImg.on(
+          firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {},
+          (err) => {
+            alert(err.message);
+          },
+          async () => {
+            await storage
+              .ref("images")
+              .child(fileName)
+              .getDownloadURL()
+              .then(async (url) => {
+                await db.collection("posts").add({
+                  avatar: user.photoUrl,
+                  image: url,
+                  storeName: storeName,
+                  storeTel: storeTel,
+                  streetAddress: streetAddress,
+                  note: note,
+                  category: category,
+                  timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                  username: user.dispalayName,
+                  userID: user.uid,
+                });
               });
-            });
-        }
-      );
-    } else {
-      db.collection("posts").add({
-        avatar: user.photoUrl,
-        image: "",
-        storeName: storeName,
-        storeTel: storeTel,
-        streetAddress: streetAddress,
-        note: note,
-        category: category,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        username: user.dispalayName,
-        userID: user.uid,
-      });
+          }
+        );
+      } else {
+        db.collection("posts").add({
+          avatar: user.photoUrl,
+          image: "",
+          storeName: storeName,
+          storeTel: storeTel,
+          streetAddress: streetAddress,
+          note: note,
+          category: category,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          username: user.dispalayName,
+          userID: user.uid,
+        });
+      }
+      setStoreName("");
+      setPhotoUrl(null);
+      setStoreTel("");
+      setStreetAddress("");
+      setCategory("");
+      setNote("");
+      alert("登録完了しました。");
     }
-    setStoreName("");
-    setPhotoUrl(null);
-    setStoreTel("");
-    setStreetAddress("");
-    setCategory("");
-    setNote("");
-    alert("登録完了しました。");
   };
 
   return (
@@ -94,38 +99,46 @@ const Registration = () => {
         <h2>Registration</h2>
         <form onSubmit={onClickRegistration}>
           <div css={registration__box}>
-            <input
-              placeholder="StoreName"
-              type="text"
-              autoFocus
-              value={storeName}
-              onChange={(e) => setStoreName(e.target.value)}
-            />
-            <input
-              placeholder="PhoneNumber"
-              value={storeTel}
-              onChange={(e) => setStoreTel(e.target.value)}
-            />
-            <input
-              placeholder="StreetAddress"
-              value={streetAddress}
-              onChange={(e) => setStreetAddress(e.target.value)}
-            />
+            <Box>
+              <TextField
+                fullWidth
+                label="店名"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <TextField
+                fullWidth
+                label="電話番号"
+                value={storeTel}
+                onChange={(e) => setStoreTel(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <TextField
+                fullWidth
+                label="住所"
+                value={streetAddress}
+                onChange={(e) => setStreetAddress(e.target.value)}
+              />
+            </Box>
             <select
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="all">Category</option>
-              <option value="meat">MeatDish</option>
-              <option value="fish">FishDish</option>
-              <option value="noodle">Noodles</option>
-              <option value="salad">Salad</option>
-              <option value="dessert">Dessert</option>
-              <option value="coffee">Coffee</option>
+              <option value="all">カテゴリー</option>
+              <option value="meat">肉</option>
+              <option value="fish">魚</option>
+              <option value="noodle">麺</option>
+              <option value="salad">サラダ</option>
+              <option value="dessert">デザート</option>
+              <option value="coffee">飲み物</option>
             </select>
+
             <textarea
-              placeholder="Note"
+              placeholder="メモ"
               value={note}
               onChange={(e) => setNote(e.target.value)}
             ></textarea>
@@ -151,7 +164,7 @@ const Registration = () => {
             )}
 
             <Button type="submit" disabled={!storeName}>
-              Register
+              登録
             </Button>
           </div>
         </form>
@@ -194,13 +207,13 @@ const registration__box = css`
   input {
     padding: 10px 0;
     display: block;
-    background-color: #e2dedb;
     width: 100%;
     border: 1px solid #b3aca7;
     font-size: 12px;
   }
 
   select {
+    margin: 10px 0;
     padding: 10px 0;
     display: block;
     background-color: #e2dedb;

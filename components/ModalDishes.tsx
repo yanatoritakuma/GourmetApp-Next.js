@@ -198,7 +198,7 @@ export const ModalDishes = (props: Props) => {
         )}
 
         <div className="ModalBox__in">
-          <h4>StoreName</h4>
+          <h4>店名</h4>
           <div className="ModalBox__inTextBox">
             <p
               style={
@@ -234,7 +234,7 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-          <h4>PhoneNumber</h4>
+          <h4>電話番号</h4>
           <div className="ModalBox__inTextBox">
             <p
               style={
@@ -270,7 +270,7 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-          <h4>StreetAddress</h4>
+          <h4>住所</h4>
           <div className="ModalBox__inTextBox">
             <p
               style={
@@ -310,7 +310,7 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-          <h4>category</h4>
+          <h4>カテゴリー</h4>
           <div className="ModalBox__inTextBox">
             <p
               style={
@@ -355,7 +355,7 @@ export const ModalDishes = (props: Props) => {
               ""
             )}
           </div>
-          <h4>Note</h4>
+          <h4>メモ</h4>
           <div className="ModalBox__inTextBox">
             <p style={change.note ? { display: "none" } : { display: "block" }}>
               {selectedState?.note}
@@ -451,10 +451,10 @@ export const ModalDishes = (props: Props) => {
                 deleteBtn(selectedState?.id, targetImg), setModal(false);
               }}
             >
-              delete
+              削除
             </Button>
             <Button className="upDateBtn" onClick={() => resetUpDateContents()}>
-              upDate
+              更新
             </Button>
           </>
         ) : (
