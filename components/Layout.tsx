@@ -11,6 +11,7 @@ import Link from "next/link";
 import { auth } from "../firebas/initFirebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
+import { Button } from "@material-ui/core";
 
 export const siteTitle = "GourmetApp";
 
@@ -84,6 +85,9 @@ export const Layout: FC = ({ children }) => {
                     </a>
                   </Link>
                 </div>
+              </li>
+              <li>
+                <Link href="/MyPage">Myページ</Link>
               </li>
 
               {user.uid === "" ? (
