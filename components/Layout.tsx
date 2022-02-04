@@ -102,13 +102,15 @@ export const Layout: FC = ({ children }) => {
                 </Link>
               ) : (
                 <li onClick={() => auth.signOut()}>
-                  <button className="header__logIn header__logIn--logOut">
-                    <FontAwesomeIcon
-                      className="header__logInIcon"
-                      icon={faSignOutAlt}
-                    />
-                    LogOut
-                  </button>
+                  <Link href="/Login">
+                    <button className="header__logIn header__logIn--logOut">
+                      <FontAwesomeIcon
+                        className="header__logInIcon"
+                        icon={faSignOutAlt}
+                      />
+                      LogOut
+                    </button>
+                  </Link>
                 </li>
               )}
 
