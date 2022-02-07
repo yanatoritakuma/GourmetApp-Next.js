@@ -160,6 +160,7 @@ export const Layout: FC = ({ children }) => {
             <Link href="/coffee">
               <a>Coffee</a>
             </Link>
+            <Link href="/MyPage">Myページ</Link>
 
             {user.uid === "" ? (
               <Link href="/Login">
@@ -172,16 +173,18 @@ export const Layout: FC = ({ children }) => {
                 </button>
               </Link>
             ) : (
-              <button
-                onClick={() => auth.signOut()}
-                className="header__logIn header__logIn--logOut"
-              >
-                <FontAwesomeIcon
-                  className="header__logInIcon"
-                  icon={faSignOutAlt}
-                />
-                LogOut
-              </button>
+              <Link href="/Login">
+                <button
+                  onClick={() => auth.signOut()}
+                  className="header__logIn header__logIn--logOut"
+                >
+                  <FontAwesomeIcon
+                    className="header__logInIcon"
+                    icon={faSignOutAlt}
+                  />
+                  LogOut
+                </button>
+              </Link>
             )}
 
             <a

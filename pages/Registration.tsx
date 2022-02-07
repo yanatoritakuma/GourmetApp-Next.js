@@ -95,80 +95,92 @@ const Registration = () => {
 
   return (
     <Layout>
-      <section css={registration}>
-        <h2>Registration</h2>
-        <form onSubmit={onClickRegistration}>
-          <div css={registration__box}>
-            <Box>
-              <TextField
-                fullWidth
-                label="店名"
-                value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
-              />
-            </Box>
-            <Box>
-              <TextField
-                fullWidth
-                label="電話番号"
-                value={storeTel}
-                onChange={(e) => setStoreTel(e.target.value)}
-              />
-            </Box>
-            <Box>
-              <TextField
-                fullWidth
-                label="住所"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
-              />
-            </Box>
-            <select
-              id="category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="all">カテゴリー</option>
-              <option value="meat">肉</option>
-              <option value="fish">魚</option>
-              <option value="noodle">麺</option>
-              <option value="salad">サラダ</option>
-              <option value="dessert">デザート</option>
-              <option value="coffee">飲み物</option>
-            </select>
+      {user.uid === "" || "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+        <section css={registration}>
+          {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+            <h2 className="guestLogin">
+              Guestでログインしている方は登録はできません。
+            </h2>
+          ) : (
+            <h2>ログインしてください</h2>
+          )}
+        </section>
+      ) : (
+        <section css={registration}>
+          <h2>Registration</h2>
+          <form onSubmit={onClickRegistration}>
+            <div css={registration__box}>
+              <Box>
+                <TextField
+                  fullWidth
+                  label="店名"
+                  value={storeName}
+                  onChange={(e) => setStoreName(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  fullWidth
+                  label="電話番号"
+                  value={storeTel}
+                  onChange={(e) => setStoreTel(e.target.value)}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  fullWidth
+                  label="住所"
+                  value={streetAddress}
+                  onChange={(e) => setStreetAddress(e.target.value)}
+                />
+              </Box>
+              <select
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="all">カテゴリー</option>
+                <option value="meat">肉</option>
+                <option value="fish">魚</option>
+                <option value="noodle">麺</option>
+                <option value="salad">サラダ</option>
+                <option value="dessert">デザート</option>
+                <option value="coffee">飲み物</option>
+              </select>
 
-            <textarea
-              placeholder="メモ"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            ></textarea>
+              <textarea
+                placeholder="メモ"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              ></textarea>
 
-            {photoUrl?.name === undefined ? (
-              <IconButton className="registration__boxImgBtn">
-                <label>
-                  <AddAPhotoIcon className="registration__boxImgBtnIcon" />
-                  <input type="file" onChange={onChangeImageHandler} />
-                </label>
-              </IconButton>
-            ) : (
-              <div className="faCheckSquare__imgBox">
-                <label>
-                  <p>画像が設定されています</p>
-                  <input type="file" onChange={onChangeImageHandler} />
-                  <FontAwesomeIcon
-                    className="faCheckSquare__imgIcon"
-                    icon={faCheckSquare}
-                  />
-                </label>
-              </div>
-            )}
+              {photoUrl?.name === undefined ? (
+                <IconButton className="registration__boxImgBtn">
+                  <label>
+                    <AddAPhotoIcon className="registration__boxImgBtnIcon" />
+                    <input type="file" onChange={onChangeImageHandler} />
+                  </label>
+                </IconButton>
+              ) : (
+                <div className="faCheckSquare__imgBox">
+                  <label>
+                    <p>画像が設定されています</p>
+                    <input type="file" onChange={onChangeImageHandler} />
+                    <FontAwesomeIcon
+                      className="faCheckSquare__imgIcon"
+                      icon={faCheckSquare}
+                    />
+                  </label>
+                </div>
+              )}
 
-            <Button type="submit" disabled={!storeName}>
-              登録
-            </Button>
-          </div>
-        </form>
-      </section>
+              <Button type="submit" disabled={!storeName}>
+                登録
+              </Button>
+            </div>
+          </form>
+        </section>
+      )}
     </Layout>
   );
 };
@@ -195,6 +207,10 @@ const registration = css`
     height: auto;
     max-height: 300px;
     object-fit: cover;
+  }
+
+  .guestLogin {
+    text-align: center;
   }
 `;
 

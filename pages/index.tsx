@@ -13,12 +13,13 @@ export default function Home() {
   const signInGuest = async () => {
     await auth.signInWithEmailAndPassword("guest@gmail.com", "guest1996");
   };
+
   return (
     <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className="index">
+      <section css={main} className="index">
         <div className="index__imgBox">
           <h1 className="index__logo" />
           {user.uid ? (
@@ -36,7 +37,7 @@ export default function Home() {
           ) : (
             <Link href="/Login">
               <Button
-                css={signInGuestBtn}
+                className="signInGuestBtn"
                 onClick={async () => {
                   try {
                     await signInGuest();
@@ -62,20 +63,56 @@ export default function Home() {
   );
 }
 
-const signInGuestBtn = css`
-  padding: 12px 0;
-  position: absolute;
-  z-index: 99;
-  top: 67%;
-  left: 39%;
-  width: 20%;
-  background-color: #ffa500 !important;
-  box-shadow: 0 5px 0 #aa6a03;
-  border-radius: 8px;
-  display: block;
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
+const main = css`
+  .signInGuestBtn {
+    padding: 12px 0;
+    position: absolute;
+    z-index: 99;
+    top: 67%;
+    left: 39%;
+    width: 20%;
+    background-color: #ffa500 !important;
+    box-shadow: 0 5px 0 #aa6a03;
+    border-radius: 8px;
+    display: block;
+
+    span {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .signInGuestBtn {
+      span {
+        font-size: 20px;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .signInGuestBtn {
+      span {
+        font-size: 16px;
+      }
+    }
+  }
+  @media screen and (max-width: 425px) {
+    .signInGuestBtn {
+      width: 150px;
+      left: 33%;
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .signInGuestBtn {
+      width: 128px;
+      top: 56%;
+      left: 29%;
+    }
+  }
 `;
