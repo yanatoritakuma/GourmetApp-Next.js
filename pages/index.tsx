@@ -28,7 +28,7 @@ export default function Home() {
             </Link>
           ) : (
             <Link href="/Login">
-              <a className="index__link">ログインする</a>
+              <a className="index__link">ログイン</a>
             </Link>
           )}
 
@@ -92,27 +92,26 @@ const main = css`
       }
     }
   }
+
   @media screen and (max-width: 768px) {
     .signInGuestBtn {
-      span {
-        font-size: 16px;
-      }
-    }
-  }
-  @media screen and (max-width: 425px) {
-    .signInGuestBtn {
-      width: 150px;
-      left: 33%;
       span {
         font-size: 14px;
       }
     }
   }
+
+  @media screen and (max-width: 425px) {
+    .signInGuestBtn {
+      top: 66%;
+      left: 29%;
+      width: 42%;
+    }
+  }
+
   @media screen and (max-width: 320px) {
     .signInGuestBtn {
-      width: 128px;
       top: 56%;
-      left: 29%;
     }
   }
 `;

@@ -11,13 +11,9 @@ const Login = () => {
 
   return (
     <Layout>
-      {user.uid === "" || "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+      {user.uid === "" || user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
         <section css={myPage}>
-          {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
-            <h2>GuestはMyページを利用できません。</h2>
-          ) : (
-            <h2>ログインしていません。</h2>
-          )}
+          <h2>Guest、ログインしていない方はMyページを利用できません。</h2>
         </section>
       ) : (
         <section css={myPage}>
@@ -32,7 +28,7 @@ const Login = () => {
 
 const myPage = css`
   margin: auto;
-  padding: 20px 0;
+  padding: 20px 12px;
   margin-top: 84px;
   padding-bottom: 40px;
   background-color: #e2dedb;

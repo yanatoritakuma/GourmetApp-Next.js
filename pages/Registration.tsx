@@ -95,15 +95,11 @@ const Registration = () => {
 
   return (
     <Layout>
-      {user.uid === "" || "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+      {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" || user.uid === "" ? (
         <section css={registration}>
-          {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
-            <h2 className="guestLogin">
-              Guestでログインしている方は登録はできません。
-            </h2>
-          ) : (
-            <h2>ログインしてください</h2>
-          )}
+          <h2 className="guestLogin">
+            ログインしていない方、Guestでログインしている方は登録はできません。
+          </h2>
         </section>
       ) : (
         <section css={registration}>
@@ -188,7 +184,7 @@ const Registration = () => {
 const registration = css`
   margin: auto;
   margin-top: 84px;
-  padding-bottom: 20px;
+  padding: 20px 12px;
   background-color: #e2dedb;
   border-radius: 20px;
   width: 100%;
@@ -196,8 +192,7 @@ const registration = css`
   max-width: 1200px;
 
   h2 {
-    padding-top: 40px;
-    font-size: 32px;
+    font-size: 26px;
     text-align: center;
     color: #b3aca7;
   }
@@ -211,6 +206,12 @@ const registration = css`
 
   .guestLogin {
     text-align: center;
+  }
+
+  @media screen and (max-width: 425px) {
+    h2 {
+      font-size: 20px;
+    }
   }
 `;
 
