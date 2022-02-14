@@ -8,6 +8,9 @@ import { Avatar } from "@material-ui/core";
 import { db } from "../firebas/initFirebase";
 import Image from "next/image";
 import NoImage from "../public/image/noimage.png";
+import { ModalDishes } from "../components/ModalDishes";
+import { useSelectPost } from "../hooks/useSelectPost";
+import { Post } from "../types/post";
 
 const Login = () => {
   const user = useSelector(selectUser);
@@ -29,6 +32,13 @@ const Login = () => {
   ]);
 
   const [tab, setTab] = useState(true);
+  const [modal, setModal] = useState(false);
+  const { onSelectState, selectedState } = useSelectPost();
+
+  const onClickOpen = (post: Post) => {
+    onSelectState({ post, posts });
+    setModal(!modal);
+  };
 
   useEffect(() => {
     const unSub = db
@@ -57,6 +67,7 @@ const Login = () => {
   }, []);
 
   const postUserId = posts.filter((v) => v.userID === user.uid);
+  console.log(postUserId.length);
 
   return (
     <Layout>
@@ -73,12 +84,17 @@ const Login = () => {
             <h3 onClick={() => setTab(true)}>投稿一覧</h3>
             <h3 onClick={() => setTab(false)}>お気に入り</h3>
           </div>
+          {tab ? <p>投稿数{postUserId.length}件</p> : <p>お気に入り数</p>}
           <section css={postListMain}>
             {tab
               ? postUserId.length === 0
                 ? "まだ投稿がありません"
                 : postUserId.map((v) => (
-                    <div css={postList}>
+                    <div
+                      css={postList}
+                      key={v.id}
+                      onClick={() => onClickOpen(v)}
+                    >
                       <p>{v.storeName}</p>
                       {v.image !== "" ? (
                         <img src={v.image} alt="image" />
@@ -95,6 +111,11 @@ const Login = () => {
                     <p>仮のお気に入り</p>
                   </div>
                 ))}
+            <ModalDishes
+              selectedState={selectedState}
+              modal={modal}
+              setModal={setModal}
+            />
           </section>
         </section>
       )}
@@ -178,6 +199,7 @@ const postListName = css`
 
 const postList = css`
   padding: 10px 0;
+  cursor: pointer;
 
   @media screen and (max-width: 765px) {
     margin: 20px 0;
