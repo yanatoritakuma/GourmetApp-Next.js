@@ -7,5 +7,8 @@ export type Post = {
   streetAddress: string;
   note: string;
   category: string;
+  favo: number;
+  favoList: string[];
+  postId: string;
   timestamp: null;
 };

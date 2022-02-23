@@ -27,6 +27,15 @@ const Registration = () => {
     }
   };
 
+  const getUniqueStr = (myStrong?: number): string => {
+    let strong = 1000;
+    if (myStrong) strong = myStrong;
+    return (
+      new Date().getTime().toString(16) +
+      Math.floor(strong * Math.random()).toString(16)
+    );
+  };
+
   const onClickRegistration = (e: React.FormEvent<HTMLFormElement>) => {
     const ret = window.confirm("この内容で登録しますか？");
     if (ret) {
@@ -62,6 +71,9 @@ const Registration = () => {
                   streetAddress: streetAddress,
                   note: note,
                   category: category,
+                  favo: 0,
+                  favoList: [],
+                  postId: getUniqueStr(),
                   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                   username: user.dispalayName,
                   userID: user.uid,
@@ -78,6 +90,9 @@ const Registration = () => {
           streetAddress: streetAddress,
           note: note,
           category: category,
+          favo: 0,
+          favoList: [],
+          postId: getUniqueStr(),
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           username: user.dispalayName,
           userID: user.uid,
