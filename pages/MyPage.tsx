@@ -10,7 +10,7 @@ import Image from "next/image";
 import NoImage from "../public/image/noimage.png";
 import { ModalDishes } from "../components/ModalDishes";
 import { useSelectPost } from "../hooks/useSelectPost";
-import { Post } from "../types/post";
+import { MyPost } from "../types/post";
 
 const Login = () => {
   const user = useSelector(selectUser);
@@ -26,6 +26,7 @@ const Login = () => {
       note: "",
       category: "",
       favo: 0,
+      favoList: [""],
       timestamp: null,
       username: "",
       userID: "",
@@ -36,7 +37,7 @@ const Login = () => {
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelectPost();
 
-  const onClickOpen = (post: Post) => {
+  const onClickOpen = (post: MyPost) => {
     onSelectState({ post, posts });
     setModal(!modal);
   };
@@ -57,6 +58,7 @@ const Login = () => {
             note: doc.data().note,
             category: doc.data().category,
             favo: doc.data().favo,
+            favoList: doc.data().favoList,
             timestamp: doc.data().timestamp,
             username: doc.data().username,
             userID: doc.data().userID,
@@ -69,7 +71,10 @@ const Login = () => {
   }, []);
 
   const postUserId = posts.filter((v) => v.userID === user.uid);
-  console.log(postUserId.length);
+  const checkFavo = posts.map((v) =>
+    v.favoList.map((vf) => (vf === user.uid ? v.id : "なし"))
+  );
+  console.log("checkFavo", checkFavo);
 
   return (
     <Layout>
