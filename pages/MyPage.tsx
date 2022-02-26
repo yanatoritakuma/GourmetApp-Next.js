@@ -71,10 +71,11 @@ const Login = () => {
   }, []);
 
   const postUserId = posts.filter((v) => v.userID === user.uid);
-  const checkFavo = posts.map((v) =>
-    v.favoList.map((vf) => (vf === user.uid ? v.id : "なし"))
-  );
+  const checkFavo = posts.map((v) => v.favoList.some((f) => f === user.uid));
+  const myFavo = checkFavo.flatMap((v, i) => (v === true ? i : []));
+
   console.log("checkFavo", checkFavo);
+  console.log("myFavo", myFavo);
 
   return (
     <Layout>
@@ -91,7 +92,11 @@ const Login = () => {
             <h3 onClick={() => setTab(true)}>投稿一覧</h3>
             <h3 onClick={() => setTab(false)}>お気に入り</h3>
           </div>
-          {tab ? <p>投稿数{postUserId.length}件</p> : <p>お気に入り数</p>}
+          {tab ? (
+            <p>投稿数{postUserId.length}件</p>
+          ) : (
+            <p>お気に入り数{myFavo.length}件</p>
+          )}
           <section css={postListMain}>
             {tab
               ? postUserId.length === 0
@@ -110,12 +115,20 @@ const Login = () => {
                       )}
                     </div>
                   ))
-              : postUserId.length === 0
+              : myFavo.length === 0
               ? "まだお気に入りがありません"
-              : postUserId.map((v) => (
-                  <div css={postList}>
-                    <p>{v.username}</p>
-                    <p>仮のお気に入り</p>
+              : myFavo.map((v) => (
+                  <div
+                    css={postList}
+                    key={v}
+                    onClick={() => onClickOpen(posts[v])}
+                  >
+                    <p>{posts[v].storeName}</p>
+                    {posts[v].image !== "" ? (
+                      <img src={posts[v].image} alt="image" />
+                    ) : (
+                      <Image src={NoImage} alt="NoImage" />
+                    )}
                   </div>
                 ))}
             <ModalDishes

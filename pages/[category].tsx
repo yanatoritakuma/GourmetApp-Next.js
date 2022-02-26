@@ -140,6 +140,9 @@ const Categorypage: FC<Props> = ({ category }) => {
     }
   };
 
+  const checkFavo = posts.map((v) => v.favoList.some((f) => f === user.uid));
+  const myFavo = checkFavo.flatMap((v, i) => (v === true ? i : []));
+
   return (
     <Layout>
       {posts[0]?.id === "" ? (
@@ -171,19 +174,28 @@ const Categorypage: FC<Props> = ({ category }) => {
                       <h3>{post.username}</h3>
                     </div>
                   </div>
-                  <IconButton
-                    onClick={() => {
-                      setFavoFlag(!favoFlag);
-                      onClickFav(post.id);
-                    }}
-                  >
-                    {posts[i].favoList.some((v) => v === user.uid) ? (
-                      <FavoriteIcon color={"secondary"} />
-                    ) : (
+                  {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+                    <IconButton
+                      onClick={() => alert("Guestの方はいいねできません。")}
+                    >
                       <FavoriteBorderIcon />
-                    )}
-                    {post.favo}
-                  </IconButton>
+                      {post.favo}
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => {
+                        setFavoFlag(!favoFlag);
+                        onClickFav(post.id);
+                      }}
+                    >
+                      {posts[i].favoList.some((v) => v === user.uid) ? (
+                        <FavoriteIcon color={"secondary"} />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
+                      {post.favo}
+                    </IconButton>
+                  )}
                 </div>
               ))}
             </div>
