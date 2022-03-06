@@ -140,9 +140,6 @@ const Categorypage: FC<Props> = ({ category }) => {
     }
   };
 
-  const checkFavo = posts.map((v) => v.favoList.some((f) => f === user.uid));
-  const myFavo = checkFavo.flatMap((v, i) => (v === true ? i : []));
-
   return (
     <Layout>
       {posts[0]?.id === "" ? (
@@ -188,7 +185,7 @@ const Categorypage: FC<Props> = ({ category }) => {
                         onClickFav(post.id);
                       }}
                     >
-                      {posts[i].favoList.some((v) => v === user.uid) ? (
+                      {categoryArray[i].favoList.some((v) => v === user.uid) ? (
                         <FavoriteIcon color={"secondary"} />
                       ) : (
                         <FavoriteBorderIcon />

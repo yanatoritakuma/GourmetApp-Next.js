@@ -74,9 +74,6 @@ const Login = () => {
   const checkFavo = posts.map((v) => v.favoList.some((f) => f === user.uid));
   const myFavo = checkFavo.flatMap((v, i) => (v === true ? i : []));
 
-  console.log("checkFavo", checkFavo);
-  console.log("myFavo", myFavo);
-
   return (
     <Layout>
       {user.uid === "" || user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
@@ -89,8 +86,18 @@ const Login = () => {
           <p className="userName">{user.dispalayName}</p>
           <Avatar className="userIcon" src={user.photoUrl} />
           <div css={postListName}>
-            <h3 onClick={() => setTab(true)}>投稿一覧</h3>
-            <h3 onClick={() => setTab(false)}>お気に入り</h3>
+            <h3
+              onClick={() => setTab(true)}
+              style={!tab ? { opacity: ".3" } : { opacity: "1" }}
+            >
+              投稿一覧
+            </h3>
+            <h3
+              onClick={() => setTab(false)}
+              style={tab ? { opacity: ".3" } : { opacity: "1" }}
+            >
+              お気に入り
+            </h3>
           </div>
           {tab ? (
             <p>投稿数{postUserId.length}件</p>
