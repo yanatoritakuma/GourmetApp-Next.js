@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import Head from "next/head";
 import Link from "next/link";
-import { Layout, siteTitle } from "../components/Layout";
+import { Layout } from "../components/Layout";
 import { Button } from "@material-ui/core";
 import { auth } from "../firebas/initFirebase";
 import { css } from "@emotion/react";
@@ -16,9 +16,6 @@ export default function Home() {
 
   return (
     <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
       <section css={main} className="index">
         <div className="index__imgBox">
           <h1 className="index__logo" />
