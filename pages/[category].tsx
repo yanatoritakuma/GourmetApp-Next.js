@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState, useEffect, useCallback, FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { db } from "../firebas/initFirebase";
@@ -9,6 +9,12 @@ import { Avatar } from "@material-ui/core";
 import { ModalDishes } from "../components/ModalDishes";
 import { useSelectPost } from "../hooks/useSelectPost";
 import { Post } from "../types/post";
+import { IconButton } from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { useSelector } from "react-redux";
+import { selectUser } from "../provider/userSlice";
+import firebase from "firebase";
 
 export async function getStaticPaths() {
   return {
@@ -39,6 +45,7 @@ type Props = {
 };
 
 const Categorypage: FC<Props> = ({ category }) => {
+  const user = useSelector(selectUser);
   const [posts, setPosts] = useState([
     {
       id: "",
@@ -49,6 +56,9 @@ const Categorypage: FC<Props> = ({ category }) => {
       streetAddress: "",
       note: "",
       category: "",
+      favo: 0,
+      favoList: [""],
+      postId: "",
       timestamp: null,
       username: "",
       userID: "",
@@ -57,6 +67,7 @@ const Categorypage: FC<Props> = ({ category }) => {
 
   const [modal, setModal] = useState(false);
   const { onSelectState, selectedState } = useSelectPost();
+  const [favoFlag, setFavoFlag] = useState(false);
 
   const onClickOpen = (post: Post) => {
     onSelectState({ post, posts });
@@ -78,6 +89,9 @@ const Categorypage: FC<Props> = ({ category }) => {
             streetAddress: doc.data().streetAddress,
             note: doc.data().note,
             category: doc.data().category,
+            favo: doc.data().favo,
+            favoList: doc.data().favoList,
+            postId: doc.data().postId,
             timestamp: doc.data().timestamp,
             username: doc.data().username,
             userID: doc.data().userID,
@@ -108,6 +122,24 @@ const Categorypage: FC<Props> = ({ category }) => {
     }
   };
 
+  const onClickFav = (id: string) => {
+    const postsRef = db.collection("posts");
+    const slectedPost = posts.filter((v) => v.id === id);
+    const checkUser = slectedPost[0].favoList.some((v) => v === user.uid);
+
+    if (checkUser) {
+      postsRef.doc(id).update({
+        favo: slectedPost[0].favo - 1,
+        favoList: firebase.firestore.FieldValue.arrayRemove(user.uid),
+      });
+    } else {
+      postsRef.doc(id).update({
+        favo: slectedPost[0].favo + 1,
+        favoList: firebase.firestore.FieldValue.arrayUnion(user.uid),
+      });
+    }
+  };
+
   return (
     <Layout>
       {posts[0]?.id === "" ? (
@@ -119,29 +151,48 @@ const Categorypage: FC<Props> = ({ category }) => {
           <h2 style={activeTitle()}>{category}Page</h2>
           {posts[0]?.id && (
             <div className="categoryPage__box">
-              {categoryArray.map((post) => (
-                <div css={postBox} onClick={() => onClickOpen(post)}>
-                  <div css={post__contents}>
-                    <h3>{post.storeName}</h3>
-                  </div>
-                  {post.image === "" ? (
-                    <Image src={NoImage} alt="NoImage" />
-                  ) : (
-                    post.image && (
-                      <div css={post__img}>
-                        <img src={post.image} alt="img" />
-                      </div>
-                    )
-                  )}
-                  <div css={post__contributor}>
-                    <h3>
+              {categoryArray.map((post, i) => (
+                <div key={post.id} css={postBox}>
+                  <div onClick={() => onClickOpen(post)}>
+                    <div css={post__contents}>
+                      <h3>{post.storeName}</h3>
+                    </div>
+                    {post.image === "" ? (
+                      <Image src={NoImage} alt="NoImage" />
+                    ) : (
+                      post.image && (
+                        <div css={post__img}>
+                          <img src={post.image} alt="img" />
+                        </div>
+                      )
+                    )}
+                    <div css={post__contributor}>
                       <Avatar src={post.avatar} />
-                      {post.username}
-                    </h3>
-                    {/* <span>
-                      {new Date(post.timestamp?.toDate).toLocaleString()}
-                    </span> */}
+                      <h3>{post.username}</h3>
+                    </div>
                   </div>
+                  {user.uid === "YF2wQAnshNTklD0P0rUgGlo2P2v2" ? (
+                    <IconButton
+                      onClick={() => alert("Guestの方はいいねできません。")}
+                    >
+                      <FavoriteBorderIcon />
+                      {post.favo}
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => {
+                        setFavoFlag(!favoFlag);
+                        onClickFav(post.id);
+                      }}
+                    >
+                      {categoryArray[i].favoList.some((v) => v === user.uid) ? (
+                        <FavoriteIcon color={"secondary"} />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
+                      {post.favo}
+                    </IconButton>
+                  )}
                 </div>
               ))}
             </div>
@@ -195,20 +246,21 @@ const postBox = css`
   width: 95%;
   cursor: pointer;
   transition: 0.3s;
+
   &:hover {
     opacity: 0.7;
   }
 `;
 
 const post__contributor = css`
-  margin: 10px 0;
+  margin: 10px auto;
   display: flex;
   align-items: center;
+  width: 98%;
 
   h3 {
     margin: 0 20px;
-    display: flex;
-    align-items: center;
+    overflow-wrap: break-word;
   }
 `;
 

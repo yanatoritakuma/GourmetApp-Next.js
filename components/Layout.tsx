@@ -11,6 +11,7 @@ import Link from "next/link";
 import { auth } from "../firebas/initFirebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../provider/userSlice";
+import { Button } from "@material-ui/core";
 
 export const siteTitle = "GourmetApp";
 
@@ -85,6 +86,9 @@ export const Layout: FC = ({ children }) => {
                   </Link>
                 </div>
               </li>
+              <li>
+                <Link href="/MyPage">Myページ</Link>
+              </li>
 
               {user.uid === "" ? (
                 <Link href="/Login">
@@ -98,13 +102,15 @@ export const Layout: FC = ({ children }) => {
                 </Link>
               ) : (
                 <li onClick={() => auth.signOut()}>
-                  <button className="header__logIn header__logIn--logOut">
-                    <FontAwesomeIcon
-                      className="header__logInIcon"
-                      icon={faSignOutAlt}
-                    />
-                    LogOut
-                  </button>
+                  <Link href="/Login">
+                    <button className="header__logIn header__logIn--logOut">
+                      <FontAwesomeIcon
+                        className="header__logInIcon"
+                        icon={faSignOutAlt}
+                      />
+                      LogOut
+                    </button>
+                  </Link>
                 </li>
               )}
 
@@ -154,6 +160,7 @@ export const Layout: FC = ({ children }) => {
             <Link href="/coffee">
               <a>Coffee</a>
             </Link>
+            <Link href="/MyPage">Myページ</Link>
 
             {user.uid === "" ? (
               <Link href="/Login">
@@ -166,16 +173,18 @@ export const Layout: FC = ({ children }) => {
                 </button>
               </Link>
             ) : (
-              <button
-                onClick={() => auth.signOut()}
-                className="header__logIn header__logIn--logOut"
-              >
-                <FontAwesomeIcon
-                  className="header__logInIcon"
-                  icon={faSignOutAlt}
-                />
-                LogOut
-              </button>
+              <Link href="/Login">
+                <button
+                  onClick={() => auth.signOut()}
+                  className="header__logIn header__logIn--logOut"
+                >
+                  <FontAwesomeIcon
+                    className="header__logInIcon"
+                    icon={faSignOutAlt}
+                  />
+                  LogOut
+                </button>
+              </Link>
             )}
 
             <a
