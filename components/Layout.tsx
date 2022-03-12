@@ -346,6 +346,8 @@ const headerBox = css`
     color: #fff;
     cursor: pointer;
     transition: 0.1s;
+    display: flex;
+    align-items: center;
     &:hover {
       box-shadow: 0px 0px 0px #075707;
       transform: translateY(3px);
@@ -354,6 +356,7 @@ const headerBox = css`
 
     .header__logInIcon {
       margin-right: 6px;
+      width: 20px;
     }
     @media screen and (max-width: 768px) {
       margin: 0 auto;
