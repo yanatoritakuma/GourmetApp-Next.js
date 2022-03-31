@@ -10,7 +10,8 @@ const Hotpepper = () => {
   console.log("jsonData", jsonData?.data.results.shop);
   const [keyword, setKeyword] = useState("yakiniku");
   const [flag, setFlag] = useState(false);
-  const params = { keyword: keyword };
+  const utf8str = encodeURIComponent(keyword);
+  const params = { keyword: utf8str };
   const query = new URLSearchParams(params);
 
   const onClickSearch = () => {
