@@ -3,17 +3,33 @@ import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
-
-function fetcher(url: any) {
-  return fetch(url).then((r) => r.json());
-}
+import { HotpepperResponseType } from "../types/hotpepper";
 
 const Hotpepper = () => {
-  const { data, error } = useSWR("/api/hotpepperApi", fetcher);
-  if (error) console.log("error", error);
-  if (data) console.log("data", data);
+  const [jsonData, setJsonData] = useState<HotpepperResponseType>();
+  console.log("jsonData", jsonData?.data.results.shop);
+  const [keyword, setKeyword] = useState("yakiniku");
+  const [flag, setFlag] = useState(false);
+  const params = { keyword: keyword };
+  const query = new URLSearchParams(params);
 
-  const [search, setSearch] = useState("");
+  const onClickSearch = () => {
+    setFlag(true);
+  };
+  console.log(flag);
+
+  useEffect(() => {
+    if (flag) {
+      const request = async () => {
+        const res = await fetch(`/api/hotpepperApi?${query}`);
+        const data = await res.json();
+        console.log("api", data);
+        setJsonData(data);
+      };
+      setFlag(false);
+      request();
+    }
+  }, [flag]);
 
   return (
     <Layout>
@@ -21,10 +37,15 @@ const Hotpepper = () => {
         <h2>Hotpepper</h2>
         <input
           type="text"
-          value={search}
-          onChange={(e: any) => setSearch(e.target.value)}
+          value={keyword}
+          onChange={(e: any) => setKeyword(e.target.value)}
         />
-        <button>検索</button>
+        <button onClick={() => onClickSearch()}>検索</button>
+        <section>
+          {jsonData?.data.results.shop?.map((v) => (
+            <h2>{v.name}</h2>
+          ))}
+        </section>
       </main>
     </Layout>
   );
