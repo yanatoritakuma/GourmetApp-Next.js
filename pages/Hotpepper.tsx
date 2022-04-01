@@ -1,14 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import React, { useState, useEffect } from "react";
-import useSWR from "swr";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { HotpepperResponseType } from "../types/hotpepper";
+import { Button, IconButton, TextField, Box } from "@material-ui/core";
+import SearchIcon from "@mui/icons-material/Search";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Link from "next/link";
 
 const Hotpepper = () => {
   const [jsonData, setJsonData] = useState<HotpepperResponseType>();
-  console.log("jsonData", jsonData?.data.results.shop);
-  const [keyword, setKeyword] = useState("yakiniku");
+  console.log("jsonData", jsonData);
+  const [keyword, setKeyword] = useState("");
   const [flag, setFlag] = useState(false);
   const utf8str = encodeURIComponent(keyword);
   const params = { keyword: utf8str };
@@ -36,17 +41,44 @@ const Hotpepper = () => {
     <Layout>
       <main css={hotpepper}>
         <h2>Hotpepper</h2>
-        <input
-          type="text"
+        <TextField
+          label="検索"
           value={keyword}
           onChange={(e: any) => setKeyword(e.target.value)}
         />
-        <button onClick={() => onClickSearch()}>検索</button>
-        <section>
+        <Button onClick={() => onClickSearch()}>
+          <SearchIcon />
+        </Button>
+        <section css={shopBox}>
           {jsonData?.data.results.shop?.map((v) => (
-            <h2>{v.name}</h2>
+            <Card key={v.id} sx={{ maxWidth: 400 }} style={{ margin: "10px" }}>
+              <Link href={v.urls.pc}>
+                <a>
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    image={v.photo.mobile.l}
+                    alt="green iguana"
+                  />
+                </a>
+              </Link>
+              <CardContent>
+                <h3>{v.name}</h3>
+                <p>{v.catch}</p>
+                <p>{v.address}</p>
+                <p>{v.access}</p>
+                <p>予算: {v.budget.average}</p>
+                <p>定休日: {v.close}</p>
+              </CardContent>
+            </Card>
           ))}
         </section>
+        <footer style={{ margin: "10px 0", textAlign: "center" }}>
+          Powered by
+          <a href="http://webservice.recruit.co.jp/">
+            ホットペッパー Webサービス
+          </a>
+        </footer>
       </main>
     </Layout>
   );
@@ -65,6 +97,16 @@ const hotpepper = css`
 
   h2 {
     text-align: center;
+  }
+`;
+
+const shopBox = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  h3,
+  p {
+    color: #333;
   }
 `;
 
