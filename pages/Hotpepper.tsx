@@ -15,16 +15,21 @@ const Hotpepper = () => {
   console.log("jsonData", jsonData);
   const [keyword, setKeyword] = useState("");
   const [flag, setFlag] = useState(false);
-  const utf8str = encodeURIComponent(keyword);
-  const params = { keyword: utf8str };
-  const query = new URLSearchParams(params);
+  const [page, setPage] = useState({
+    available: 0,
+    start: 0,
+    returned: "0",
+  });
+  console.log(page);
 
   const onClickSearch = () => {
     setFlag(true);
   };
-  console.log(flag);
 
   useEffect(() => {
+    const utf8str = encodeURIComponent(keyword);
+    const params = { start: String(page.start + 1), keyword: utf8str };
+    const query = new URLSearchParams(params);
     if (flag) {
       const request = async () => {
         const res = await fetch(`/api/hotpepperApi?${query}`);
@@ -36,6 +41,36 @@ const Hotpepper = () => {
       request();
     }
   }, [flag]);
+
+  const [initFlag, setInitFlag] = useState(true);
+  useEffect(() => {
+    if (jsonData !== undefined && initFlag) {
+      setPage({
+        available: jsonData.data.results.results_available,
+        start: jsonData.data.results.results_start,
+        returned: jsonData.data.results.results_returned,
+      });
+      console.log("初期値ページ");
+      setInitFlag(false);
+    }
+  }, [jsonData]);
+
+  const onClickNextPage = () => {
+    setPage({
+      ...page,
+      start: page.start + 1,
+    });
+    setFlag(true);
+  };
+
+  const onClickBackPage = () => {
+    if (page.start === 1) return;
+    setPage({
+      ...page,
+      start: page.start - 1,
+    });
+    setFlag(true);
+  };
 
   return (
     <Layout>
@@ -72,6 +107,8 @@ const Hotpepper = () => {
               </CardContent>
             </Card>
           ))}
+          <Button onClick={() => onClickNextPage()}>次のページ</Button>
+          <Button onClick={() => onClickBackPage()}>前のページ</Button>
         </section>
         <footer style={{ margin: "10px 0", textAlign: "center" }}>
           Powered by

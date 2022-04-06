@@ -31,6 +31,9 @@ type ShopObj = {
 export type HotpepperResponseType = {
   data: {
     results: {
+      results_available: number;
+      results_start: number;
+      results_returned: string;
       shop: ShopObj[];
     };
   };
