@@ -15,6 +15,7 @@ const Hotpepper = () => {
   console.log("jsonData", jsonData);
   const [keyword, setKeyword] = useState("");
   const [flag, setFlag] = useState(false);
+  const [initFlag, setInitFlag] = useState(true);
   const [page, setPage] = useState({
     available: 0,
     start: 0,
@@ -24,11 +25,16 @@ const Hotpepper = () => {
 
   const onClickSearch = () => {
     setFlag(true);
+    setInitFlag(true);
+    setPage({
+      ...page,
+      start: 0,
+    });
   };
 
   useEffect(() => {
     const utf8str = encodeURIComponent(keyword);
-    const params = { start: String(page.start + 1), keyword: utf8str };
+    const params = { start: String(page.start), keyword: utf8str };
     const query = new URLSearchParams(params);
     if (flag) {
       const request = async () => {
@@ -42,7 +48,6 @@ const Hotpepper = () => {
     }
   }, [flag]);
 
-  const [initFlag, setInitFlag] = useState(true);
   useEffect(() => {
     if (jsonData !== undefined && initFlag) {
       setPage({
@@ -107,8 +112,15 @@ const Hotpepper = () => {
               </CardContent>
             </Card>
           ))}
-          <Button onClick={() => onClickNextPage()}>次のページ</Button>
-          <Button onClick={() => onClickBackPage()}>前のページ</Button>
+          <Button
+            onClick={() => onClickNextPage()}
+            disabled={page.available < page.start * 10}
+          >
+            次のページ
+          </Button>
+          <Button onClick={() => onClickBackPage()} disabled={page.start === 1}>
+            前のページ
+          </Button>
         </section>
         <footer style={{ margin: "10px 0", textAlign: "center" }}>
           Powered by
