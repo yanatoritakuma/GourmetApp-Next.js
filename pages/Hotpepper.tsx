@@ -77,7 +77,7 @@ const Hotpepper = () => {
         </Button>
         <section css={shopBox}>
           {jsonData?.data.results.shop?.map((v) => (
-            <Card key={v.id} sx={{ maxWidth: 400 }} style={{ margin: "10px" }}>
+            <Card key={v.id} css={shopCard}>
               <Link href={v.urls.pc}>
                 <a>
                   <CardMedia
@@ -100,7 +100,7 @@ const Hotpepper = () => {
           ))}
         </section>
         {pages.start !== 0 && pages.start !== undefined && (
-          <Stack style={{ margin: "20px auto", width: "300px" }} spacing={2}>
+          <Stack css={pageBox} spacing={2}>
             <Pagination
               count={Math.ceil(pages.available / 10)}
               color="secondary"
@@ -117,7 +117,7 @@ const Hotpepper = () => {
           </Stack>
         )}
 
-        <footer style={{ margin: "10px 0", textAlign: "center" }}>
+        <footer css={footerBox} style={{}}>
           Powered by
           <a href="http://webservice.recruit.co.jp/">
             ホットペッパー Webサービス
@@ -151,6 +151,41 @@ const shopBox = css`
   h3,
   p {
     color: #333;
+  }
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const shopCard = css`
+  margin: 10px;
+  max-width: 400px;
+
+  @media screen and (max-width: 768px) {
+    margin: 24px auto;
+  }
+`;
+
+const pageBox = css`
+  margin: 20px auto;
+  width: 300px;
+
+  @media screen and (max-width: 375px) {
+    width: 260px;
+  }
+`;
+
+const footerBox = css`
+  margin: 10px 0;
+  text-align: center;
+
+  @media screen and (max-width: 320px) {
+    font-size: 12px;
   }
 `;
 
