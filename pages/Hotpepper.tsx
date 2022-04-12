@@ -15,7 +15,10 @@ import Link from "next/link";
 const Hotpepper = () => {
   const [jsonData, setJsonData] = useState<HotpepperResponseType>();
   console.log("jsonData", jsonData);
-  const [keyword, setKeyword] = useState("");
+  const [search, setSearch] = useState({
+    keyword: "",
+    area: "",
+  });
   const [flag, setFlag] = useState(false);
   const [initFlag, setInitFlag] = useState(true);
   const scrollTop = useRef<HTMLDivElement>(null);
@@ -36,14 +39,24 @@ const Hotpepper = () => {
   };
 
   useEffect(() => {
-    const utf8str = encodeURIComponent(keyword);
-    const params = { start: String(pages.start), keyword: utf8str };
+    const utf8Keyword = encodeURIComponent(search.keyword);
+    const utf8Area = encodeURIComponent(search.area);
+    const params = {
+      start: String(pages.start),
+      keyword: utf8Keyword,
+      area: utf8Area,
+    };
     const query = new URLSearchParams(params);
     if (flag) {
       const request = async () => {
         const res = await fetch(`/api/hotpepperApi?${query}`);
         const data = await res.json();
         console.log("api", data);
+        console.log("res", data.data.results.shop);
+        if (data.data.results.shop === undefined) {
+          alert("検索結果が0件です");
+          return setJsonData(undefined);
+        }
         setJsonData(data);
       };
       setFlag(false);
@@ -68,9 +81,24 @@ const Hotpepper = () => {
       <main css={hotpepper} ref={scrollTop}>
         <h2>Hotpepper</h2>
         <TextField
-          label="検索"
-          value={keyword}
-          onChange={(e: any) => setKeyword(e.target.value)}
+          label="ジャンル・店名"
+          value={search.keyword}
+          onChange={(e: any) =>
+            setSearch({
+              ...search,
+              keyword: e.target.value,
+            })
+          }
+        />
+        <TextField
+          label="エリア"
+          value={search.area}
+          onChange={(e: any) =>
+            setSearch({
+              ...search,
+              area: e.target.value,
+            })
+          }
         />
         <Button onClick={() => onClickSearch()}>
           <SearchIcon />
