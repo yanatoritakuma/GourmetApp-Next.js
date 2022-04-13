@@ -79,30 +79,35 @@ const Hotpepper = () => {
   return (
     <Layout>
       <main css={hotpepper} ref={scrollTop}>
-        <h2>Hotpepper</h2>
-        <TextField
-          label="ジャンル・店名"
-          value={search.keyword}
-          onChange={(e: any) =>
-            setSearch({
-              ...search,
-              keyword: e.target.value,
-            })
-          }
-        />
-        <TextField
-          label="エリア"
-          value={search.area}
-          onChange={(e: any) =>
-            setSearch({
-              ...search,
-              area: e.target.value,
-            })
-          }
-        />
-        <Button onClick={() => onClickSearch()}>
-          <SearchIcon />
-        </Button>
+        <h2>検索</h2>
+        <Box css={searchBox}>
+          <Box css={textBox}>
+            <TextField
+              label="ジャンル・店名"
+              value={search.keyword}
+              onChange={(e: any) =>
+                setSearch({
+                  ...search,
+                  keyword: e.target.value,
+                })
+              }
+            />
+            <TextField
+              label="エリア"
+              value={search.area}
+              onChange={(e: any) =>
+                setSearch({
+                  ...search,
+                  area: e.target.value,
+                })
+              }
+            />
+          </Box>
+          <Button css={searchBtn} onClick={() => onClickSearch()}>
+            <SearchIcon />
+            検索
+          </Button>
+        </Box>
         <section css={shopBox}>
           {jsonData?.data.results.shop?.map((v) => (
             <Card key={v.id} css={shopCard}>
@@ -169,6 +174,7 @@ const hotpepper = css`
 
   h2 {
     text-align: center;
+    color: #646262;
   }
 `;
 
@@ -214,6 +220,45 @@ const footerBox = css`
 
   @media screen and (max-width: 320px) {
     font-size: 12px;
+  }
+`;
+
+const searchBox = css`
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const textBox = css`
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+
+  @media screen and (max-width: 1024px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    width: 240px;
+    .MuiFormControl-root {
+      margin: 10px 0;
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 180px;
+  }
+`;
+
+const searchBtn = css`
+  background-color: #fff !important;
+
+  @media screen and (max-width: 768px) {
+    padding: 20px 12px !important;
   }
 `;
 
