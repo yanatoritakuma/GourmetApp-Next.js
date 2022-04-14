@@ -91,7 +91,7 @@ export const Layout: FC = ({ children }) => {
                 <Link href="/MyPage">Myページ</Link>
               </li>
               <li>
-                <Link href="/Hotpepper">ホットペッパー</Link>
+                <Link href="/Hotpepper">検索</Link>
               </li>
 
               {user.uid === "" ? (
@@ -165,6 +165,8 @@ export const Layout: FC = ({ children }) => {
               <a>Coffee</a>
             </Link>
             <Link href="/MyPage">Myページ</Link>
+
+            <Link href="/Hotpepper">検索</Link>
 
             {user.uid === "" ? (
               <Link href="/Login">
