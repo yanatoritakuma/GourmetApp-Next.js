@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
 import { Layout } from "../components/Layout";
 import { HotpepperResponseType } from "../types/hotpepper";
-import { Button, TextField, Box } from "@material-ui/core";
+import { Button, IconButton, TextField, Box } from "@material-ui/core";
+import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import SearchIcon from "@mui/icons-material/Search";
@@ -129,6 +130,7 @@ const Hotpepper = () => {
                 <p>予算: {v.budget.average}</p>
                 <p>定休日: {v.close}</p>
               </CardContent>
+              <DirectionsWalkIcon css={walkIcon} fontSize="large" />
             </Card>
           ))}
         </section>
@@ -198,7 +200,12 @@ const shopBox = css`
 
 const shopCard = css`
   margin: 10px;
+  padding: 20px 10px;
   max-width: 400px;
+  position: relative;
+  .MuiCardContent-root {
+    padding: 0 0 20px 0;
+  }
 
   @media screen and (max-width: 768px) {
     margin: 24px auto;
@@ -260,6 +267,13 @@ const searchBtn = css`
   @media screen and (max-width: 768px) {
     padding: 20px 12px !important;
   }
+`;
+
+const walkIcon = css`
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  cursor: pointer;
 `;
 
 export default Hotpepper;
