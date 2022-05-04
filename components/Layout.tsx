@@ -33,8 +33,8 @@ export const Layout: FC = ({ children }) => {
             <a>
               <Image
                 src="/image/logoTop.jpg"
-                height={50}
-                width={50}
+                height={30}
+                width={30}
                 alt="icon"
               />
             </a>
@@ -336,7 +336,9 @@ const headerBox = css`
     }
 
     .header__boxIcon {
+      margin: 20px auto;
       display: block;
+      width: 30px;
       font-size: 30px;
       color: #c13584;
     }
