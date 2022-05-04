@@ -496,8 +496,15 @@ const ModalBox = css`
     .closeBtn {
       position: absolute;
       left: 20px;
-      font-size: 28px;
+      width: 30px;
       cursor: pointer;
+    }
+
+    @media screen and (max-width: 375px) {
+      .closeBtn {
+        left: 8px;
+        width: 26px;
+      }
     }
   }
 
