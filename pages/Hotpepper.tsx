@@ -15,7 +15,6 @@ import Link from "next/link";
 
 const Hotpepper = () => {
   const [jsonData, setJsonData] = useState<HotpepperResponseType>();
-  console.log("jsonData", jsonData);
   const [search, setSearch] = useState({
     keyword: "",
     area: "",
@@ -28,7 +27,6 @@ const Hotpepper = () => {
     start: 0,
     returned: "0",
   });
-  console.log(pages);
 
   const onClickSearch = () => {
     setFlag(true);
@@ -52,8 +50,6 @@ const Hotpepper = () => {
       const request = async () => {
         const res = await fetch(`/api/hotpepperApi?${query}`);
         const data = await res.json();
-        console.log("api", data);
-        console.log("res", data.data.results.shop);
         if (data.data.results.shop === undefined) {
           alert("検索結果が0件です");
           return setJsonData(undefined);
@@ -72,7 +68,6 @@ const Hotpepper = () => {
         start: jsonData.data.results.results_start,
         returned: jsonData.data.results.results_returned,
       });
-      console.log("初期値ページ");
       setInitFlag(false);
     }
   }, [jsonData]);
